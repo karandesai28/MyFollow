@@ -16,7 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyFollowOwin.Controllers
-{
+{    
     [Authorize]
     public class AccountController : Controller
     {
@@ -73,29 +73,47 @@ namespace MyFollowOwin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            var user = await UserManager.FindAsync(model.Email, model.Password);
             if (!ModelState.IsValid)
-            {
-                var user = await UserManager.FindAsync(model.Email, model.Password); if (user != null)
+            {                
+                if (user != null)
                 {
                     if (user.EmailConfirmed == true)
                     {
-                        await SignInAsync(user, model.RememberMe); return RedirectToLocal(returnUrl);
+                         await SignInAsync(user, model.RememberMe); return RedirectToLocal(returnUrl);                     
+             
                     }
                     else
                     {
                         ModelState.AddModelError("", "Confirm Email Address.");
+                        return RedirectToAction("Confirm");
                     }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
                 }
-                return View(model);
+                return View("Confirm");
             }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+          
+                
+            if (UserManager.IsInRole(user.Id, "EndUsers"))
+            {
+                var userid = UserManager.FindByEmail(model.Email).Id;
+                if (!UserManager.IsEmailConfirmed(userid))
+                {
+                    return View("Confirm");
+                }
+            }
+            else if (UserManager.IsInRole(user.Id, "Administrator"))
+            {
+                return View("AdminView");
+            }
+
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -103,7 +121,7 @@ namespace MyFollowOwin.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("Confirm", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -179,7 +197,7 @@ namespace MyFollowOwin.Controllers
              {
                 var roleresult = UserManager.AddToRole(user.Id, "EndUsers");
                 //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                int i = SendMail(user);
+                SendMail(user);
                 return RedirectToAction("Confirm", "Account", new { Email = user.Email });                       
              }
                     AddErrors(result);                
@@ -188,20 +206,27 @@ namespace MyFollowOwin.Controllers
             return View(model);
         }
 
-        public int SendMail(ApplicationUser user)
+        public void SendMail(ApplicationUser user)
         {
             if (ModelState.IsValid)
-            {                              
-                MailMessage m = new MailMessage(
-                new MailAddress("karan.desai@promactinfo.com", "MyFollow"),
-                new MailAddress(user.Email));
+            {
+                MailMessage m = new MailMessage(new MailAddress("karan.desai@promactinfo.com", "MyFollow"), new MailAddress(user.Email));               
                 m.Subject = "Confirmation Mail";
                 m.Body = string.Format("Dear {0}<BR/>Thank you for your registration,Click to Confirm Email <a href=\"{1}\" title=\"User Email Confirm\">{1}</a>", user.UserName, Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Url.Scheme));
                 m.IsBodyHtml = true;            
-                SmtpClient smtp = new SmtpClient();               
-                smtp.Send(m);                
+                SmtpClient smtp = new SmtpClient();
+                try
+                {
+                    smtp.Send(m);
+                }
+                catch(Exception ex)
+                {
+                    String errorString = "";
+                    errorString += ex.Message + ";" + ex.InnerException;
+                }
+                     
+                           
             }
-            return 0;
         }
 
         [AllowAnonymous]

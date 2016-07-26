@@ -182,7 +182,6 @@
     <Compile Include="Models\ProductOwners.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductUpdates.cs" />
-    <Compile Include="Roles\SeedIdentities.cs" />
     <Compile Include="View Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressInfo.cs" />
     <Compile Include="Models\CommonProperty.cs" />
@@ -247,6 +246,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\Account\AdminView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

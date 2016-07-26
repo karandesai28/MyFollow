@@ -64,6 +64,6 @@ C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\b
 C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\obj\Debug\MyFollowOwin.csprojResolveAssemblyReference.cache
 C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\obj\Debug\MyFollowOwin.dll
 C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\obj\Debug\MyFollowOwin.pdb
+C:\Users\karan\Documents\Visual Studio 2015\Projects\MyFollowOwin\MyFollowOwin\obj\Debug\MyFollowOwin.csprojResolveAssemblyReference.cache
