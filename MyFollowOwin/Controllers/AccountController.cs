@@ -168,33 +168,22 @@ namespace MyFollowOwin.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                if (ModelState.IsValid)
-                {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, BirthDate = model.BirthDate, Name = model.Name };
-                    
-                    user.Email = model.Email;
-                    user.EmailConfirmed = false;
-                    var roleStore = new RoleStore<IdentityRole>(context);
-                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                    var role = new IdentityRole();
-                    role.Name = "EndUsers";
-                    roleManager.Create(role);
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        var roleresult = UserManager.AddToRole(user.Id, "EndUsers");
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        int i = SendMail(user);
-                        return RedirectToAction("Confirm", "Account", new { Email = user.Email });
-                        //return RedirectToAction("Index", "Home");
-                    }
-                    AddErrors(result);
-                }
-            }
+        {            
+          if (ModelState.IsValid)
+          {
+             var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Users.Address, BirthDate = model.Users.BirthDate, Name = model.Users.Name };                    
+             user.Email = model.Email;
+             user.EmailConfirmed = false;
+             var result = await UserManager.CreateAsync(user, model.Password);
+             if (result.Succeeded)
+             {
+                var roleresult = UserManager.AddToRole(user.Id, "EndUsers");
+                //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                int i = SendMail(user);
+                return RedirectToAction("Confirm", "Account", new { Email = user.Email });                       
+             }
+                    AddErrors(result);                
+           }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -209,10 +198,7 @@ namespace MyFollowOwin.Controllers
                 m.Subject = "Confirmation Mail";
                 m.Body = string.Format("Dear {0}<BR/>Thank you for your registration,Click to Confirm Email <a href=\"{1}\" title=\"User Email Confirm\">{1}</a>", user.UserName, Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Url.Scheme));
                 m.IsBodyHtml = true;            
-                SmtpClient smtp = new SmtpClient("webmail.promactinfo.com");
-                smtp.Credentials = new NetworkCredential("karan.desai@promactinfo.com", "Ibx(mAMZs_6zY+_q");            
-                smtp.EnableSsl = false;
-                smtp.Port = 25;
+                SmtpClient smtp = new SmtpClient();               
                 smtp.Send(m);                
             }
             return 0;

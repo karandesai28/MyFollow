@@ -8,7 +8,10 @@ using System.Web;
 namespace MyFollowOwin.Models
 {
     public abstract class CommonProperty
-    {        
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

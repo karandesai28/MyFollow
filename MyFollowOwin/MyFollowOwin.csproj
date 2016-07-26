@@ -170,15 +170,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Enums\ProductMedia.cs" />
+    <Compile Include="Enums\ProductPlatform.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Followers.cs" />
+    <Compile Include="Models\OwnerProductMapping.cs" />
+    <Compile Include="Models\ProductOwners.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\ProductUpdates.cs" />
+    <Compile Include="Roles\SeedIdentities.cs" />
+    <Compile Include="View Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressInfo.cs" />
     <Compile Include="Models\CommonProperty.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="View Models\IdentityModels.cs" />
+    <Compile Include="View Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

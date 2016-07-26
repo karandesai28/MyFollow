@@ -65,41 +65,7 @@ namespace MyFollowOwin
             //    ClientSecret = ""
             //});
         }
-        private void createRolesandUsers()
-        {
-            ApplicationDbContext context = new ApplicationDbContext();
-
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-            if (!roleManager.RoleExists("Admin"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Administrator";
-                roleManager.Create(role);
-
-                var user = new ApplicationUser();
-                user.UserName = "Karan";
-                user.Email = "karan.desai@promactinfo.com";
-                user.BirthDate = new DateTime(1994, 09, 28);
-                user.Name = "Karan Desai";
-                user.Address.Street1 = "C/2 Bhavana Park Soc";
-                user.Address.Street2 = "Karelibaug";
-                user.Address.City = "Vadodara";
-                user.Address.State = "Gujarat";
-                user.Address.Country = "India";
-                user.Address.ContactNo = "9924815850";
-                user.Address.Pin = 390022;
-
-                string userPWD = "A.a1234";
-                var Admin = UserManager.Create(user, userPWD);
-
-                //Add default User to Role Admin    
-                if (Admin.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Administrator");
-                }
-            }
-        }
-    }
+        
+   }
 }
+
