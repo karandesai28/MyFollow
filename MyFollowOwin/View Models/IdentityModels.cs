@@ -17,7 +17,7 @@ namespace MyFollowOwin.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
         }
 
         public static ApplicationDbContext Create()
@@ -30,5 +30,6 @@ namespace MyFollowOwin.Models
         public DbSet<OwnerProductMapping> AddedProducts { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductUpdates> ProductUpdates { get; set; }
+        public object AspNetUsers { get; internal set; }
     }
 }

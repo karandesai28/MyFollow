@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var MyApp = (function () {
     function MyApp() {
-        this.people = ["Product1", "Product2", "Product3"];
+        this.products = ["Product1", "Product2", "Product3"];
     }
     MyApp.prototype.ngOnInit = function () { };
     MyApp = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Find And Follow Products You Like</h1> <ul><li li *ngFor="let product of products"> {{product}} </li></ul>'
+            template: '<h1>Find And Follow Products You Like <br/> <ul> <li *ngFor="let product of products"> {{product}} </li></ul> </h1>'
         }), 
         __metadata('design:paramtypes', [])
     ], MyApp);

@@ -74,14 +74,27 @@ namespace MyFollowOwin.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             var user = await UserManager.FindAsync(model.Email, model.Password);
-            if (!ModelState.IsValid)
-            {                
+
+            var userid = UserManager.FindByEmail(model.Email).Id;
+           
+            if (ModelState.IsValid)
+            {
                 if (user != null)
                 {
-                    if (user.EmailConfirmed == true)
+                    if(UserManager.IsInRole(user.Id,"Admin"))
                     {
-                         await SignInAsync(user, model.RememberMe); return RedirectToLocal(returnUrl);                     
-             
+                        return View("AdminView");
+                    }
+                                     
+
+                    if (UserManager.IsInRole(user.Id, "EndUsers") && (!UserManager.IsEmailConfirmed(userid)))
+                    {
+                        return View("Confirm");
+                    }
+                    else if (user.EmailConfirmed == true)
+                    {
+                        await SignInAsync(user, model.RememberMe); return RedirectToLocal(returnUrl);
+
                     }
                     else
                     {
@@ -89,46 +102,38 @@ namespace MyFollowOwin.Controllers
                         return RedirectToAction("Confirm");
                     }
                 }
+
                 else
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
                 }
-                return View("Confirm");
             }
+                return View("Confirm");
+            
+
+
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-          
-                
-            if (UserManager.IsInRole(user.Id, "EndUsers"))
-            {
-                var userid = UserManager.FindByEmail(model.Email).Id;
-                if (!UserManager.IsEmailConfirmed(userid))
-                {
-                    return View("Confirm");
-                }
-            }
-            else if (UserManager.IsInRole(user.Id, "Administrator"))
-            {
-                return View("AdminView");
-            }
 
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("Confirm", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+
+
+           //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+           // switch (result)
+           // {
+           //     case SignInStatus.Success:
+           //         return RedirectToLocal(returnUrl);
+           //     case SignInStatus.LockedOut:
+           //         return View("Lockout");
+           //     case SignInStatus.RequiresVerification:
+           //         return RedirectToAction("Confirm", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+           //     case SignInStatus.Failure:
+           //     default:
+           //         ModelState.AddModelError("", "Invalid login attempt.");
+           //         return View(model);
+           // }
         }
-
+        
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -198,7 +203,7 @@ namespace MyFollowOwin.Controllers
                 var roleresult = UserManager.AddToRole(user.Id, "EndUsers");
                 //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 SendMail(user);
-                return RedirectToAction("Confirm", "Account", new { Email = user.Email });                       
+                return RedirectToAction("Confirm", "Account");                       
              }
                     AddErrors(result);                
            }
@@ -230,9 +235,9 @@ namespace MyFollowOwin.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Confirm(string Email)
-        {
-            ViewBag.Email = Email; return View();
+        public ActionResult Confirm()
+        {            
+            return View();
         }
 
 

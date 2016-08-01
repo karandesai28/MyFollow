@@ -13,57 +13,64 @@ namespace MyFollowOwin.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+           
         }
 
-        protected override void Seed(MyFollowOwin.Models.ApplicationDbContext context)
+
+        protected override void Seed(ApplicationDbContext context)
         {
-            if (!context.Roles.Any(r => r.Name == "Administrator"))
+            var store = new RoleStore<IdentityRole>(context);
+            var manager = new RoleManager<IdentityRole>(store);
+
+            if (!context.Roles.Any(r => r.Name == "Admin"))
             {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "Administrator" };
-
+                var role = new IdentityRole { Name = "Admin" };
                 manager.Create(role);
-
-                //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                //UserManager.Create(new ApplicationUser() { UserName = "karan.desai@promactinfo.com" });
-                //var user = new ApplicationUser();
-                //user.Email = "karan.desai@promactinfo.com";
-                //user.BirthDate = new DateTime(1994, 09, 28);
-                //user.Name = "Karan Desai";
-                //user.Address.Street1 = "C/2 Bhavana Park";
-                //user.Address.Street2 = "Karelibaug";
-                //user.Address.City = "Vadodara";
-                //user.Address.State = "Gujarat";
-                //user.Address.Country = "India";
-                //user.Address.ContactNo = "9924815850";
-                //user.Address.Pin = 390022;
-                //var adminresult = UserManager.Create(user, "A.a1234");
-                //if (adminresult.Succeeded)
-                //{
-                //    var result = UserManager.AddToRole(user.Id, "Administrator");
-                //}
             }
-            
 
             if (!context.Roles.Any(r => r.Name == "EndUsers"))
             {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "EndUsers" };
-
                 manager.Create(role);
             }
 
             if (!context.Roles.Any(r => r.Name == "ProductOwners"))
             {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "ProductOwners" };
-
                 manager.Create(role);
             }
 
+            //Adding a default admin user
+            var user = new ApplicationUser
+            {
+                Email = "karan.desai@promactinfo.com",
+                EmailConfirmed = true,
+                BirthDate = new DateTime(1994, 09, 28),
+                Name = "Karan",
+                UserName = "karan",
+                Address = new AddressInfo
+                {
+                    Street1 = "C/2 Bhavana Park",
+                    Street2 = "Karelibaug",
+                    City = "Vadodara",
+                    State = "Gujarat",
+                    Country = "India",
+                    ContactNo = "9924815850",
+                    Pin = 390022
+                }
+            };
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            string pwd = "A.a1234";
+            //if (user == null)
+            //{
+                context.Users.Add(user);
+                var result = UserManager.Create(user, pwd);
+
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Admin");
+                }
+            //}
         }
     }
 }
