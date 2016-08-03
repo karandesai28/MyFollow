@@ -18,7 +18,7 @@ namespace MyFollowOwin.Migrations
 
 
         protected override void Seed(ApplicationDbContext context)
-        {
+        {           
             var store = new RoleStore<IdentityRole>(context);
             var manager = new RoleManager<IdentityRole>(store);
 
@@ -46,8 +46,7 @@ namespace MyFollowOwin.Migrations
                 Email = "karan.desai@promactinfo.com",
                 EmailConfirmed = true,
                 BirthDate = new DateTime(1994, 09, 28),
-                Name = "Karan",
-                UserName = "karan",
+                Name = "Karan",                                             
                 Address = new AddressInfo
                 {
                     Street1 = "C/2 Bhavana Park",
@@ -58,19 +57,18 @@ namespace MyFollowOwin.Migrations
                     ContactNo = "9924815850",
                     Pin = 390022
                 }
-            };
+            };            
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            user.UserName = user.Email;
             string pwd = "A.a1234";
-            //if (user == null)
-            //{
-                context.Users.Add(user);
-                var result = UserManager.Create(user, pwd);
-
-                if (result.Succeeded)
-                {
-                    UserManager.AddToRole(user.Id, "Admin");
-                }
-            //}
+            
+            context.Users.Add(user);
+            var result = UserManager.Create(user, pwd);
+            if (result.Succeeded)
+            {
+               UserManager.AddToRole(user.Id, "Admin");
+            }
+            
         }
     }
 }

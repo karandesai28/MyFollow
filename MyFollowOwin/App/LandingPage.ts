@@ -1,14 +1,20 @@
-﻿import { Component,OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import {OwnerForm} from './OwnerForm';
+import {ProductList} from './ProductComponent';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>Find And Follow Products You Like <br/> <ul> <li *ngFor="let product of products"> {{product}} </li></ul> </h1>'
+    directives: [OwnerForm, ProductList],      
+    template: `<button (click)="clicked()">Become Owner</button>
+<owner-form *ngIf="Click"></owner-form>
+<product-list></product-list>`
     
 })
 export class MyApp implements OnInit {
-
-
-    products: Array<string> = ["Product1", "Product2", "Product3"];
+    Click: Boolean=false;
+    clicked() {
+        this.Click = true;
+    }
     constructor() { }
     ngOnInit() { }
 }

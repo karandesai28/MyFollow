@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var OwnerForm_1 = require('./OwnerForm');
+var ProductComponent_1 = require('./ProductComponent');
 var MyApp = (function () {
     function MyApp() {
-        this.products = ["Product1", "Product2", "Product3"];
+        this.Click = false;
     }
+    MyApp.prototype.clicked = function () {
+        this.Click = true;
+    };
     MyApp.prototype.ngOnInit = function () { };
     MyApp = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Find And Follow Products You Like <br/> <ul> <li *ngFor="let product of products"> {{product}} </li></ul> </h1>'
+            directives: [OwnerForm_1.OwnerForm, ProductComponent_1.ProductList],
+            template: "<button (click)=\"clicked()\">Become Owner</button>\n<owner-form *ngIf=\"Click\"></owner-form>\n<product-list></product-list>"
         }), 
         __metadata('design:paramtypes', [])
     ], MyApp);
