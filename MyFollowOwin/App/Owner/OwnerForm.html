@@ -1,10 +1,10 @@
 ﻿<h1>Become Owner</h1>
 
-<form id="form1" method="post" action="Api Controllers/OwnerController/Owner">
-    Company Name:<input type="text" /><br/>
-    Description:<input type="text"/><br/>
-   FoundedYear:<input type="text"/><br/>
-    WebsiteUrl:<input type="text"/><br/>
-    <input type="submit" value="Submit" />
+<form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+    Company Name:<input ngControl="CompanyName" type="text" /><br/>
+    Description:<input ngControl="Description" type="text"/><br/>
+   FoundedYear:<input ngControl="Year" type="text"/><br/>
+    WebsiteUrl:<input ngControl="Url" type="text"/><br/>
+    <input type="submit" value="Submit"/>
 </form>
 

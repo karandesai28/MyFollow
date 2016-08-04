@@ -176,7 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api Controllers\OwnerController.cs" />
+    <Compile Include="App\Controller\OwnerController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -279,6 +279,7 @@
     <Content Include="App\Owner\OwnerForm.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Api Controllers\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

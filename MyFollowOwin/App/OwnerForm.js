@@ -9,12 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/Rx');
+require('rxjs/add/operator/map');
 var OwnerForm = (function () {
     function OwnerForm() {
     }
+    OwnerForm.prototype.onSubmit = function (form) {
+        var body = JSON.stringify({ form: form });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        console.log(form);
+        return this.http.post("http://localhost:55099/api/Owner/PostProductOwners", body)
+            .map(function (res) { return res.json; });
+    };
     OwnerForm = __decorate([
         core_1.Component({
             selector: 'owner-form',
+            providers: [http_1.HTTP_PROVIDERS],
             templateUrl: 'App/Owner/OwnerForm.html'
         }), 
         __metadata('design:paramtypes', [])
