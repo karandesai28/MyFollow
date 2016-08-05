@@ -1,9 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {OwnerForm} from './OwnerForm';
 import {ProductList} from './ProductComponent';
-import {ControlGroup} from "@angular/common";
-
-
 
 @Component({
     selector: 'my-app',
@@ -19,6 +16,5 @@ export class MyApp implements OnInit {
         this.Click = true;
     }
     constructor() { }
-    ngOnInit() { }
-    
+    ngOnInit() { }    
 }

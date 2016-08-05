@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var ProductList = (function () {
     function ProductList() {
     }
-    ProductList.prototype.ngOnInit = function () { };
     ProductList = __decorate([
         core_1.Component({
             selector: 'product-list',

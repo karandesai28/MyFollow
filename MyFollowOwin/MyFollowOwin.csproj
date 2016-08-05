@@ -176,7 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Controller\OwnerController.cs" />
+    <Compile Include="Api Controllers\OwnerController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -207,11 +207,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\LandingPage.js" />
-    <Content Include="App\main.js" />
+    <Content Include="App\Owner\OwnerForm.html" />
     <Content Include="App\Products\ProductList.html" />
-    <Content Include="Index.html" />
-    <Content Include="style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -221,8 +218,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
-    <Content Include="App\LandingPage.js.map" />
-    <Content Include="App\main.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -276,10 +271,8 @@
     <Content Include="typings\globals\node\typings.json" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="App\Owner\OwnerForm.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api Controllers\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
