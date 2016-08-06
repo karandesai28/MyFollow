@@ -269,7 +269,6 @@
     <Content Include="typings\globals\core-js\typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
     <Content Include="typings\globals\node\typings.json" />
-    <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -286,8 +285,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\LandingPage.ts" />
     <TypeScriptCompile Include="App\main.ts" />
+    <TypeScriptCompile Include="App\Models.ts" />
     <TypeScriptCompile Include="App\OwnerForm.ts" />
     <TypeScriptCompile Include="App\ProductComponent.ts" />
+    <TypeScriptCompile Include="App\Routes.ts" />
+    <TypeScriptCompile Include="App\Service.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />

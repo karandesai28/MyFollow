@@ -1,20 +1,15 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {OwnerForm} from './OwnerForm';
 import {ProductList} from './ProductComponent';
-
+import { ROUTER_DIRECTIVES } from '@angular/router';
 @Component({
     selector: 'my-app',
-    directives: [OwnerForm, ProductList],      
-    template: `<button (click)="clicked()">Become Owner</button>
-<owner-form *ngIf="Click"></owner-form>
-<product-list></product-list>`
-    
+    directives: [OwnerForm, ProductList, ROUTER_DIRECTIVES],       
+    template: `<button routerLink="Home/Index/Owner" routerLinkActive="active">Become Owner</button>
+<router-outlet></router-outlet>
+<product-list></product-list>`    
 })
-export class MyApp implements OnInit {
-    Click: Boolean=false;
-    clicked() {
-        this.Click = true;
-    }
+export class MyApp implements OnInit {    
     constructor() { }
     ngOnInit() { }    
 }

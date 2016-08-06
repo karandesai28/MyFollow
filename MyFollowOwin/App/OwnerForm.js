@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+require('rxjs/add/operator/map');
 var OwnerForm = (function () {
     function OwnerForm() {
     }
     OwnerForm.prototype.onSubmit = function (form) {
-        console.log(form);
+        console.log(this.obj);
     };
     OwnerForm = __decorate([
         core_1.Component({

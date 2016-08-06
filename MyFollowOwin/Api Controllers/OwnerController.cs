@@ -10,21 +10,20 @@ using System.Web.Http.Description;
 
 namespace MyFollowOwin.Api_Controllers
 {
-    public class OwnerController : ApiController
-    {
+    [RoutePrefix("api/[controller]")]
+    public class OwnerController : ApiController   {
 
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        [ActionName("Owner")]
+        private ApplicationDbContext db = new ApplicationDbContext();       
         [HttpGet]
-        // GET: api/ProductOwners
+        // GET: api/Owner
         public IQueryable<ProductOwners> GetOwners()
         {
             return db.Owners;
         }
 
-        // POST: api/ProductOwners
+        // POST: api/Owner
         [ResponseType(typeof(ProductOwners))]
+        [Route]
         public IHttpActionResult PostProductOwners(ProductOwners productOwners)
         {
             if (!ModelState.IsValid)

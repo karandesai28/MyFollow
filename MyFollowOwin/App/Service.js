@@ -9,22 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var OwnerForm_1 = require('./OwnerForm');
-var ProductComponent_1 = require('./ProductComponent');
-var router_1 = require('@angular/router');
-var MyApp = (function () {
-    function MyApp() {
+var http_1 = require('@angular/http');
+var OwnerService = (function () {
+    function OwnerService(http) {
+        this.http = http;
+        this.ownerUrl = 'api/Owner';
     }
-    MyApp.prototype.ngOnInit = function () { };
-    MyApp = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            directives: [OwnerForm_1.OwnerForm, ProductComponent_1.ProductList, router_1.ROUTER_DIRECTIVES],
-            template: "<button routerLink=\"Home/Index/Owner\" routerLinkActive=\"active\">Become Owner</button>\n<router-outlet></router-outlet>\n<product-list></product-list>"
-        }), 
-        __metadata('design:paramtypes', [])
-    ], MyApp);
-    return MyApp;
+    OwnerService.prototype.AddOwner = function () {
+        return this.http.post(this.ownerUrl, console.log("Finish!")).map(function (res) { return res.json(); });
+    };
+    OwnerService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], OwnerService);
+    return OwnerService;
 }());
-exports.MyApp = MyApp;
-//# sourceMappingURL=LandingPage.js.map
+exports.OwnerService = OwnerService;
+//# sourceMappingURL=Service.js.map
