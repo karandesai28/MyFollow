@@ -1,21 +1,41 @@
-﻿import { Component,Injectable } from '@angular/core';
-import {ControlGroup} from '@angular/common';
-import {Http, Response} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+﻿import { Component, Injectable,Input } from '@angular/core';
+import {ControlGroup, FORM_DIRECTIVES} from '@angular/common';
+import {OwnerModel} from './Models';
 import {OwnerService} from './Service';
-import {Owner} from './Models';
 
 
 @Component({
-    selector: 'owner-form',    
-    templateUrl: 'App/Owner/OwnerForm.html'    
+    selector: 'owner-form',
+    directives: [FORM_DIRECTIVES],
+    providers: [OwnerService],
+    templateUrl: 'App/Owner/OwnerForm.html'
 })
 
 export class OwnerForm {
-    obj: Owner;    
-    constructor() { }
-    onSubmit(form: ControlGroup) {         
-        console.log(this.obj);       
-    }  
+    //public obj = new OwnerModel()    
+
+    owners: Array<OwnerModel>;
+    owner: OwnerModel;
+    ownerservice: OwnerService;
+    errorMessage: string;
+    constructor() {
+    }
+    
+
+    onSubmit(obj) {
+
+        alert(`saved!!! ${JSON.stringify(obj)}`);
+        obj = new OwnerModel();       
+        console.log(obj);
+        console.log(obj.CompanyName);   
+        var postOwner = this.ownerservice.AddOwner(obj)
+            .subscribe((owners) => {
+                this.owners = owners
+            },
+            err => {
+                this.errorMessage = err;
+                console.log(this.errorMessage);
+            });
+
+    }
 }

@@ -15,8 +15,11 @@ var OwnerService = (function () {
         this.http = http;
         this.ownerUrl = 'api/Owner';
     }
-    OwnerService.prototype.AddOwner = function () {
-        return this.http.post(this.ownerUrl, console.log("Finish!")).map(function (res) { return res.json(); });
+    OwnerService.prototype.AddOwner = function (ownerobj) {
+        console.log("I'm here");
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/json');
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj)).map(function (res) { return res.json(); });
     };
     OwnerService = __decorate([
         core_1.Injectable(), 

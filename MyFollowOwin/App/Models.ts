@@ -1,8 +1,6 @@
-﻿import {OwnerForm} from './OwnerForm';
-
-export class Owner {
-    CompanyName: string;
-    Description: string;
-    FoundedYear: number;
-    WebsiteUrl: string;
+﻿export class OwnerModel {
+    public CompanyName: string="Promact";
+    public Description: string="xyz";
+    public FoundedYear: number=1888;
+    public WebsiteUrl: string="tyu";   
 }

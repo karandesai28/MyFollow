@@ -1,10 +1,10 @@
 ﻿<h1>Become Owner</h1>
 
-<form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
-    Company Name:<input ngControl="CompanyName" type="text" /><br/>
-    Description:<input ngControl="Description" type="text"/><br/>
-   FoundedYear:<input ngControl="Year" type="text"/><br/>
-    WebsiteUrl:<input ngControl="Url" type="text"/><br/>
+<form role="form" #f="ngForm" (ngSubmit)="onSubmit(obj)">       
+    Company Name:<input #CompanyName="ngForm" type="text" [(ngModel)]="obj.CompanyName" ngControl="CompanyName"/><br/>
+    Description:<input #Description="ngForm" type="text" [(ngModel)]="obj.Description" ngControl="Description"/><br/>
+   FoundedYear:<input #FoundedYear="ngForm" type="text" [(ngModel)]="obj.FoundedYear" ngControl="FoundedYear"/><br/>
+    WebsiteUrl:<input #WebsiteUrl="ngForm" type="text" [(ngModel)]="obj.WebsiteUrl" ngControl="WebsiteUrl"/><br/>
     <input type="submit" value="Submit"/>
 </form>
 

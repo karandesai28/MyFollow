@@ -22,6 +22,7 @@ namespace MyFollowOwin.Api_Controllers
         }
 
         // POST: api/Owner
+        [HttpPost]
         [ResponseType(typeof(ProductOwners))]
         [Route]
         public IHttpActionResult PostProductOwners(ProductOwners productOwners)
