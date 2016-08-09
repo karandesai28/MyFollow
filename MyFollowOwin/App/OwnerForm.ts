@@ -1,41 +1,46 @@
-﻿import { Component, Injectable,Input } from '@angular/core';
-import {ControlGroup, FORM_DIRECTIVES} from '@angular/common';
+﻿import { Component, Injectable, OnInit} from '@angular/core';
 import {OwnerModel} from './Models';
 import {OwnerService} from './Service';
-
+import {ProductList} from './ProductComponent';
 
 @Component({
-    selector: 'owner-form',
-    directives: [FORM_DIRECTIVES],
+    selector: 'my-app',    
     providers: [OwnerService],
-    templateUrl: 'App/Owner/OwnerForm.html'
+    directives: [ProductList],
+    templateUrl: 'App/Owner/OwnerForm.html'     
 })
 
-export class OwnerForm {
-    //public obj = new OwnerModel()    
+export class OwnerComponent implements OnInit {   
+    owners: Array<OwnerModel>;     
+    errorMessage: string;      
+   owner: OwnerModel;
+   constructor(private ownerservice: OwnerService) {
+       this.owners = new Array<OwnerModel>();     
+       this.owner = new OwnerModel();
+   }
 
-    owners: Array<OwnerModel>;
-    owner: OwnerModel;
-    ownerservice: OwnerService;
-    errorMessage: string;
-    constructor() {
-    }
+   Click: Boolean = false;
+   clicked() {
+       this.Click = true;
+   }
+
+   ngOnInit() {
+       var getId = this.ownerservice.getUserId();
+       console.log(getId);
+   }
     
+    onSubmit(owner: OwnerModel) {
+        console.log(owner.CompanyName);
+        console.log(owner.Description);
+        console.log(owner.FoundedYear);
+        console.log(owner.WebsiteUrl);
 
-    onSubmit(obj) {
-
-        alert(`saved!!! ${JSON.stringify(obj)}`);
-        obj = new OwnerModel();       
-        console.log(obj);
-        console.log(obj.CompanyName);   
-        var postOwner = this.ownerservice.AddOwner(obj)
+        this.ownerservice.AddOwner(this.owner)
             .subscribe((owners) => {
                 this.owners = owners
             },
             err => {
-                this.errorMessage = err;
-                console.log(this.errorMessage);
+                this.errorMessage = err;               
             });
-
     }
 }

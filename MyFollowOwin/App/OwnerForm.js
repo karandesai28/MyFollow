@@ -9,36 +9,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
 var Models_1 = require('./Models');
 var Service_1 = require('./Service');
-var OwnerForm = (function () {
-    function OwnerForm() {
+var ProductComponent_1 = require('./ProductComponent');
+var OwnerComponent = (function () {
+    function OwnerComponent(ownerservice) {
+        this.ownerservice = ownerservice;
+        this.Click = false;
+        this.owners = new Array();
+        this.owner = new Models_1.OwnerModel();
     }
-    OwnerForm.prototype.onSubmit = function (obj) {
+    OwnerComponent.prototype.clicked = function () {
+        this.Click = true;
+    };
+    OwnerComponent.prototype.ngOnInit = function () {
+        var getId = this.ownerservice.getUserId();
+        console.log(getId);
+    };
+    OwnerComponent.prototype.onSubmit = function (owner) {
         var _this = this;
-        alert("saved!!! " + JSON.stringify(obj));
-        obj = new Models_1.OwnerModel();
-        console.log(obj);
-        console.log(obj.CompanyName);
-        var postOwner = this.ownerservice.AddOwner(obj)
+        console.log(owner.CompanyName);
+        console.log(owner.Description);
+        console.log(owner.FoundedYear);
+        console.log(owner.WebsiteUrl);
+        this.ownerservice.AddOwner(this.owner)
             .subscribe(function (owners) {
             _this.owners = owners;
         }, function (err) {
             _this.errorMessage = err;
-            console.log(_this.errorMessage);
         });
     };
-    OwnerForm = __decorate([
+    OwnerComponent = __decorate([
         core_1.Component({
-            selector: 'owner-form',
-            directives: [common_1.FORM_DIRECTIVES],
+            selector: 'my-app',
             providers: [Service_1.OwnerService],
+            directives: [ProductComponent_1.ProductList],
             templateUrl: 'App/Owner/OwnerForm.html'
         }), 
-        __metadata('design:paramtypes', [])
-    ], OwnerForm);
-    return OwnerForm;
+        __metadata('design:paramtypes', [Service_1.OwnerService])
+    ], OwnerComponent);
+    return OwnerComponent;
 }());
-exports.OwnerForm = OwnerForm;
+exports.OwnerComponent = OwnerComponent;
 //# sourceMappingURL=OwnerForm.js.map

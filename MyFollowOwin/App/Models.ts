@@ -1,6 +1,6 @@
 ﻿export class OwnerModel {
-    public CompanyName: string="Promact";
-    public Description: string="xyz";
-    public FoundedYear: number=1888;
-    public WebsiteUrl: string="tyu";   
+    public CompanyName: string;
+    public Description: string;
+    public FoundedYear: number;
+    public WebsiteUrl: string;   
 }

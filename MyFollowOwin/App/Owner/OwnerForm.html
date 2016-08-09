@@ -1,10 +1,13 @@
-﻿<h1>Become Owner</h1>
+﻿<button (click)="clicked()">Become Owner</button>
 
-<form role="form" #f="ngForm" (ngSubmit)="onSubmit(obj)">       
-    Company Name:<input #CompanyName="ngForm" type="text" [(ngModel)]="obj.CompanyName" ngControl="CompanyName"/><br/>
-    Description:<input #Description="ngForm" type="text" [(ngModel)]="obj.Description" ngControl="Description"/><br/>
-   FoundedYear:<input #FoundedYear="ngForm" type="text" [(ngModel)]="obj.FoundedYear" ngControl="FoundedYear"/><br/>
-    WebsiteUrl:<input #WebsiteUrl="ngForm" type="text" [(ngModel)]="obj.WebsiteUrl" ngControl="WebsiteUrl"/><br/>
-    <input type="submit" value="Submit"/>
+<h1 *ngIf="Click">Become Owner</h1>
+<form *ngIf="Click" role="form" #AddForm="ngForm">       
+    Company Name:<input #CompanyName="ngForm" type="text" [(ngModel)]="owner.CompanyName" ngControl="CompanyName"/><br/>
+    Description:<input #Description="ngForm" type="text" [(ngModel)]="owner.Description" ngControl="Description"/><br/>
+   FoundedYear:<input #FoundedYear="ngForm" type="text" [(ngModel)]="owner.FoundedYear" ngControl="FoundedYear"/><br/>
+    WebsiteUrl:<input #WebsiteUrl="ngForm" type="text" [(ngModel)]="owner.WebsiteUrl" ngControl="WebsiteUrl"/><br/>
+    <input type="submit" (click)="onSubmit(owner)" value="Submit"/>
 </form>
+<product-list></product-list>
+
 

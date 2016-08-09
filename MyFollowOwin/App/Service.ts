@@ -2,17 +2,27 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import {OwnerModel} from './Models';
-import {OwnerForm} from './OwnerForm';
+import {OwnerComponent} from './OwnerForm';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OwnerService {
-    ownerobj: Array<OwnerModel>;
-    private ownerUrl = 'api/Owner';
+   
+    private ownerUrl = 'api/ProductOwners/';
+    private userUrl = 'api/ApplicationUsers/';
     constructor(private http: Http) { }
-    AddOwner(ownerobj: OwnerModel) {
-        console.log("I'm here");
-        var header = new Headers();
-        header.append('Content-Type', 'application/json');
-        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj)).map(res => res.json());           
+
+
+    getUserId() {
+        return this.http.get(this.userUrl)
+            .map(response => response.json());
+    }
+
+
+    AddOwner(ownerobj: OwnerModel) {       
+        let headers = new Headers({
+            'Content-Type': 'application/json',           
+        });              
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), {headers: headers}).map(res => res.json());           
     }
 }

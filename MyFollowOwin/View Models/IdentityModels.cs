@@ -8,6 +8,7 @@ using static MyFollowOwin.Models.RegisterViewModel;
 using System;
 using MyFollowOwin.Models;
 using MyFolllowOwin.Models;
+using MyFollowOwin.Migrations;
 
 namespace MyFollowOwin.Models
 {   
@@ -17,7 +18,8 @@ namespace MyFollowOwin.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            //Database.SetInitializer<ApplicationDbContext>(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            //Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public static ApplicationDbContext Create()
@@ -31,5 +33,6 @@ namespace MyFollowOwin.Models
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductUpdates> ProductUpdates { get; set; }
         public object AspNetUsers { get; internal set; }
+        
     }
 }

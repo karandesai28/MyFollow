@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api Controllers\OwnerController.cs" />
+    <Compile Include="Api Controllers\ProductOwnersController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -283,12 +284,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\LandingPage.ts" />
     <TypeScriptCompile Include="App\main.ts" />
     <TypeScriptCompile Include="App\Models.ts" />
     <TypeScriptCompile Include="App\OwnerForm.ts" />
     <TypeScriptCompile Include="App\ProductComponent.ts" />
-    <TypeScriptCompile Include="App\Routes.ts" />
     <TypeScriptCompile Include="App\Service.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />

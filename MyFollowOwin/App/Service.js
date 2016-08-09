@@ -10,16 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
 var OwnerService = (function () {
     function OwnerService(http) {
         this.http = http;
-        this.ownerUrl = 'api/Owner';
+        this.ownerUrl = 'api/ProductOwners/';
+        this.userUrl = 'api/ApplicationUsers/';
     }
+    OwnerService.prototype.getUserId = function () {
+        return this.http.get(this.userUrl)
+            .map(function (response) { return response.json(); });
+    };
     OwnerService.prototype.AddOwner = function (ownerobj) {
-        console.log("I'm here");
-        var header = new http_1.Headers();
-        header.append('Content-Type', 'application/json');
-        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj)).map(function (res) { return res.json(); });
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json(); });
     };
     OwnerService = __decorate([
         core_1.Injectable(), 

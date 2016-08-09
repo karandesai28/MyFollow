@@ -56,7 +56,7 @@ namespace MyFollowOwin.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = returnUrl;            
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace MyFollowOwin.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             var user = await UserManager.FindAsync(model.Email, model.Password);            
-
+            
             if (ModelState.IsValid)
             {
                 if (user != null)

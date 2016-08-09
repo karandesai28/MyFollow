@@ -10,9 +10,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MyFolllowOwin.Models;
 using MyFollowOwin.Models;
+using System.Web.Http.ModelBinding;
 
 namespace MyFollowOwin.Api_Controllers
 {
+    [RoutePrefix("api/[controller]")]
     public class ProductOwnersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -22,59 +24,15 @@ namespace MyFollowOwin.Api_Controllers
         {
             return db.Owners;
         }
-
-        // GET: api/ProductOwners/5
-        [ResponseType(typeof(ProductOwners))]
-        public IHttpActionResult GetProductOwners(int id)
-        {
-            ProductOwners productOwners = db.Owners.Find(id);
-            if (productOwners == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(productOwners);
-        }
-
-        // PUT: api/ProductOwners/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProductOwners(int id, ProductOwners productOwners)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != productOwners.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(productOwners).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductOwnersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+               
 
         // POST: api/ProductOwners
         [ResponseType(typeof(ProductOwners))]
+        [HttpPost]
+        [Route]
         public IHttpActionResult PostProductOwners(ProductOwners productOwners)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -86,22 +44,7 @@ namespace MyFollowOwin.Api_Controllers
             return CreatedAtRoute("DefaultApi", new { id = productOwners.Id }, productOwners);
         }
 
-        // DELETE: api/ProductOwners/5
-        [ResponseType(typeof(ProductOwners))]
-        public IHttpActionResult DeleteProductOwners(int id)
-        {
-            ProductOwners productOwners = db.Owners.Find(id);
-            if (productOwners == null)
-            {
-                return NotFound();
-            }
-
-            db.Owners.Remove(productOwners);
-            db.SaveChanges();
-
-            return Ok(productOwners);
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
