@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using static MyFollowOwin.Models.OwnerRequestStates;
 
 namespace MyFolllowOwin.Models
 {
@@ -23,6 +24,9 @@ namespace MyFolllowOwin.Models
         [Required]
         [Url]
         public string WebsiteUrl { get; set; }
+
+        [Required]
+        public States OwnerStates { get; set; }
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]

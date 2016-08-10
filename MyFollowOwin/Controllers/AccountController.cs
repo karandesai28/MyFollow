@@ -85,8 +85,8 @@ namespace MyFollowOwin.Controllers
                     }
                     else if (UserManager.IsInRole(user.Id, "Admin"))
                     {
-                        await SignInAsync(user, model.RememberMe);                       
-                        return View("AdminView");
+                        await SignInAsync(user, model.RememberMe); return RedirectToLocalAdmin(returnUrl);
+                        //return View("AdminView");
                     }
                 }
 
@@ -97,6 +97,15 @@ namespace MyFollowOwin.Controllers
             }
             return View(model);
            }
+
+        public ActionResult RedirectToLocalAdmin(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index","Admin");
+        }
         ////
         //// GET: /Account/VerifyCode
         //[AllowAnonymous]

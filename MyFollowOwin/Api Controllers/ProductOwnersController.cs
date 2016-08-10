@@ -11,6 +11,8 @@ using System.Web.Http.Description;
 using MyFolllowOwin.Models;
 using MyFollowOwin.Models;
 using System.Web.Http.ModelBinding;
+using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace MyFollowOwin.Api_Controllers
 {
@@ -20,19 +22,24 @@ namespace MyFollowOwin.Api_Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/ProductOwners
+        [Route]
         public IQueryable<ProductOwners> GetOwners()
-        {
+        {           
             return db.Owners;
-        }
-               
+        }        
 
         // POST: api/ProductOwners
         [ResponseType(typeof(ProductOwners))]
         [HttpPost]
-        [Route]
+        [Route]        
         public IHttpActionResult PostProductOwners(ProductOwners productOwners)
         {
-
+            var id = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.Find(id);
+            productOwners.UserId = User.Identity.GetUserId();
+            productOwners.CreateDate = DateTime.Today;
+            productOwners.ModifiedDate = DateTime.Today;
+          
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

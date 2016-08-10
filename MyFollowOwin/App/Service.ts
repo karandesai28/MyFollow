@@ -4,17 +4,17 @@ import { Observable }     from 'rxjs/Observable';
 import {OwnerModel} from './Models';
 import {OwnerComponent} from './OwnerForm';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class OwnerService {
    
     private ownerUrl = 'api/ProductOwners/';
-    private userUrl = 'api/ApplicationUsers/';
+   
     constructor(private http: Http) { }
 
-
-    getUserId() {
-        return this.http.get(this.userUrl)
+    getOwner() {
+        return this.http.get(this.ownerUrl)
             .map(response => response.json());
     }
 

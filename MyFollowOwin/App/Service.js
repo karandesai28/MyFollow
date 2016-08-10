@@ -11,14 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
+require('rxjs/add/operator/do');
 var OwnerService = (function () {
     function OwnerService(http) {
         this.http = http;
         this.ownerUrl = 'api/ProductOwners/';
-        this.userUrl = 'api/ApplicationUsers/';
     }
-    OwnerService.prototype.getUserId = function () {
-        return this.http.get(this.userUrl)
+    OwnerService.prototype.getOwner = function () {
+        return this.http.get(this.ownerUrl)
             .map(function (response) { return response.json(); });
     };
     OwnerService.prototype.AddOwner = function (ownerobj) {

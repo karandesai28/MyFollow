@@ -176,7 +176,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api Controllers\OwnerController.cs" />
     <Compile Include="Api Controllers\ProductOwnersController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -185,8 +184,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Enums\OwnerRequestStates.cs" />
     <Compile Include="Enums\ProductMedia.cs" />
     <Compile Include="Enums\ProductPlatform.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +209,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Owner\ListForAdmin.html" />
     <Content Include="App\Owner\OwnerForm.html" />
     <Content Include="App\Products\ProductList.html" />
     <Content Include="Content\bootstrap.css" />
@@ -264,13 +266,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
-    <Content Include="Views\Account\AdminView.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="typings\globals\core-js\typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
     <Content Include="typings\globals\node\typings.json" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,6 +289,7 @@
     <TypeScriptCompile Include="App\main.ts" />
     <TypeScriptCompile Include="App\Models.ts" />
     <TypeScriptCompile Include="App\OwnerForm.ts" />
+    <TypeScriptCompile Include="App\OwnerRequest.ts" />
     <TypeScriptCompile Include="App\ProductComponent.ts" />
     <TypeScriptCompile Include="App\Service.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
