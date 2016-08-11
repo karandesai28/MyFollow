@@ -1,6 +1,6 @@
-﻿
-<button (click)="clicked()">Become Owner</button>
-
+﻿<br/>
+<br/>
+<button (click)="clicked()">Become Owner</button><br/>
 <h1 *ngIf="Click">Become Owner</h1>
 <form *ngIf="Click" (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">       
     Company Name:<input #CompanyName="ngForm" type="text" [(ngModel)]="owner.CompanyName" ngControl="CompanyName"/><br/>
@@ -10,5 +10,7 @@
     <input type="submit" value="Submit"/>
 </form>
 <product-list></product-list>
+
+
 
 

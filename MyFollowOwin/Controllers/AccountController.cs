@@ -51,6 +51,11 @@ namespace MyFollowOwin.Controllers
             }
         }
 
+        public void ChangeRole(int Id)
+        {
+
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]

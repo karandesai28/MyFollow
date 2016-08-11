@@ -48,8 +48,25 @@
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>
-    System.import('app').catch(function(err){ console.error(err); });
+    System.config({    
+       
+        //
+        // We need to define a package for each of the applications we want to
+        //  run on the page
+        //
+        packages: {
+            'app': { main: 'main.js', defaultExtension: 'js' },
+            'appadmin': { main: 'main.js', defaultExtension: 'js' },
+        }
+      });
+
+      // Now that the SystemJS configuration is ready we can import the
+      //  code and let them start up independently
+      //
+      System.import('app/main').then(null, console.error.bind(console));
+      System.import('appadmin/main').then(null, console.error.bind(console));
     </script>
+    
 
 
 </head>
@@ -75,8 +92,7 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-       @*<my-app>Loading...</my-app>*@
+        @RenderBody()     
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Developed By Karan Desai</p>

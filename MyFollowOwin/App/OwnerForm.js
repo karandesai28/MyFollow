@@ -10,9 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Models_1 = require('./Models');
-var Service_1 = require('./Service');
+var OwnerService_1 = require('./OwnerService');
 var ProductComponent_1 = require('./ProductComponent');
-var OwnerRequest_1 = require('./OwnerRequest');
 var OwnerComponent = (function () {
     function OwnerComponent(ownerservice) {
         this.ownerservice = ownerservice;
@@ -45,11 +44,11 @@ var OwnerComponent = (function () {
     OwnerComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            providers: [Service_1.OwnerService],
-            directives: [ProductComponent_1.ProductList, OwnerRequest_1.OwnerRequest],
+            providers: [OwnerService_1.OwnerService],
+            directives: [ProductComponent_1.ProductList],
             templateUrl: 'App/Owner/OwnerForm.html'
         }), 
-        __metadata('design:paramtypes', [Service_1.OwnerService])
+        __metadata('design:paramtypes', [OwnerService_1.OwnerService])
     ], OwnerComponent);
     return OwnerComponent;
 }());

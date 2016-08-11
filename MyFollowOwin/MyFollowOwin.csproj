@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api Controllers\ProductOwnersController.cs" />
+    <Compile Include="Api Controllers\ProductsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -209,8 +210,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\Owner\ListForAdmin.html" />
+    <Content Include="AppAdmin\AdminView.html" />
     <Content Include="App\Owner\OwnerForm.html" />
+    <Content Include="App\Products\AddProduct.html" />
     <Content Include="App\Products\ProductList.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -286,12 +288,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="AppAdmin\main.ts" />
+    <TypeScriptCompile Include="AppAdmin\Models.ts" />
+    <TypeScriptCompile Include="AppAdmin\Service.ts" />
+    <TypeScriptCompile Include="App\AddProduct.ts" />
     <TypeScriptCompile Include="App\main.ts" />
     <TypeScriptCompile Include="App\Models.ts" />
     <TypeScriptCompile Include="App\OwnerForm.ts" />
-    <TypeScriptCompile Include="App\OwnerRequest.ts" />
+    <TypeScriptCompile Include="AppAdmin\OwnerRequest.ts" />
     <TypeScriptCompile Include="App\ProductComponent.ts" />
-    <TypeScriptCompile Include="App\Service.ts" />
+    <TypeScriptCompile Include="App\OwnerService.ts" />
+    <TypeScriptCompile Include="App\ProductService.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />

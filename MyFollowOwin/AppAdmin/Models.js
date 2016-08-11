@@ -1,16 +1,10 @@
 "use strict";
-var OwnerRequestStates;
 (function (OwnerRequestStates) {
     OwnerRequestStates[OwnerRequestStates["Pending"] = 0] = "Pending";
     OwnerRequestStates[OwnerRequestStates["Approved"] = 1] = "Approved";
     OwnerRequestStates[OwnerRequestStates["Rejected"] = 2] = "Rejected";
-})(OwnerRequestStates || (OwnerRequestStates = {}));
-var Platform;
-(function (Platform) {
-    Platform[Platform["Mobile"] = 0] = "Mobile";
-    Platform[Platform["Web"] = 1] = "Web";
-    Platform[Platform["IOT"] = 2] = "IOT";
-})(Platform || (Platform = {}));
+})(exports.OwnerRequestStates || (exports.OwnerRequestStates = {}));
+var OwnerRequestStates = exports.OwnerRequestStates;
 var OwnerModel = (function () {
     function OwnerModel() {
         this.OwnerStates = OwnerRequestStates.Pending;
@@ -18,10 +12,4 @@ var OwnerModel = (function () {
     return OwnerModel;
 }());
 exports.OwnerModel = OwnerModel;
-var Product = (function () {
-    function Product() {
-    }
-    return Product;
-}());
-exports.Product = Product;
 //# sourceMappingURL=Models.js.map

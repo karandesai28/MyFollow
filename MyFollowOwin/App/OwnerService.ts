@@ -13,12 +13,6 @@ export class OwnerService {
    
     constructor(private http: Http) { }
 
-    getOwner() {
-        return this.http.get(this.ownerUrl)
-            .map(response => response.json());
-    }
-
-
     AddOwner(ownerobj: OwnerModel) {       
         let headers = new Headers({
             'Content-Type': 'application/json',           

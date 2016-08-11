@@ -1,15 +1,13 @@
 ﻿import { Component, Injectable, OnInit} from '@angular/core';
 import {OwnerModel} from './Models';
-import {OwnerService} from './Service';
+import {OwnerService} from './OwnerService';
 import {ProductList} from './ProductComponent';
-import {OwnerRequest} from './OwnerRequest';
-
 
 @Component({
     selector: 'my-app',    
     providers: [OwnerService],
-    directives: [ProductList, OwnerRequest],
-    templateUrl: 'App/Owner/OwnerForm.html'     
+    directives: [ProductList],
+    templateUrl:'App/Owner/OwnerForm.html'    
 })
 
 export class OwnerComponent implements OnInit {   

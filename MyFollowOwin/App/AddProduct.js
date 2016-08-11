@@ -9,41 +9,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AddProduct_1 = require('./AddProduct');
-var ProductService_1 = require('./ProductService');
 var Models_1 = require('./Models');
-var ProductList = (function () {
-    function ProductList(productservice) {
+var ProductService_1 = require('./ProductService');
+var AddProduct = (function () {
+    function AddProduct(productservice) {
         this.productservice = productservice;
         this.Click = false;
         this.products = new Array();
         this.product = new Models_1.Product();
     }
-    ProductList.prototype.clicked = function () {
+    AddProduct.prototype.clicked = function () {
         this.Click = true;
     };
-    ProductList.prototype.ngOnInit = function () {
-        this.getProducts();
+    AddProduct.prototype.ngOnInit = function () {
     };
-    ProductList.prototype.getProducts = function () {
+    AddProduct.prototype.onSubmit = function (product) {
+        console.log(product.Name);
+        console.log(product.Description);
+        console.log(product.HomePageUrl);
+        console.log(product.PlayStoreUrl);
+        console.log(product.AppStoreUrl);
+        this.AddProductData();
+    };
+    AddProduct.prototype.AddProductData = function () {
         var _this = this;
-        var displayOwner = this.productservice.getProduct()
+        this.productservice.AddProduct(this.product)
             .subscribe(function (products) {
             _this.products = products;
         }, function (err) {
             _this.errorMessage = err;
         });
     };
-    ProductList = __decorate([
+    AddProduct = __decorate([
         core_1.Component({
-            selector: 'product-list',
-            directives: [AddProduct_1.AddProduct],
+            selector: 'add-product',
             providers: [ProductService_1.ProductService],
-            templateUrl: 'App/Products/ProductList.html',
+            templateUrl: 'App/Products/AddProduct.html'
         }), 
         __metadata('design:paramtypes', [ProductService_1.ProductService])
-    ], ProductList);
-    return ProductList;
+    ], AddProduct);
+    return AddProduct;
 }());
-exports.ProductList = ProductList;
-//# sourceMappingURL=ProductComponent.js.map
+exports.AddProduct = AddProduct;
+//# sourceMappingURL=AddProduct.js.map

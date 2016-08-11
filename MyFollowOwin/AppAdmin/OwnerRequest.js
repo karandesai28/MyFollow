@@ -14,11 +14,13 @@ var Models_1 = require('./Models');
 var OwnerRequest = (function () {
     function OwnerRequest(ownerservice) {
         this.ownerservice = ownerservice;
+        this.Click = false;
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
     }
     OwnerRequest.prototype.ngOnInit = function () {
         this.getOwners();
+        console.log(this.owner.Id);
     };
     OwnerRequest.prototype.getOwners = function () {
         var _this = this;
@@ -29,11 +31,32 @@ var OwnerRequest = (function () {
             _this.errorMessage = err;
         });
     };
+    OwnerRequest.prototype.UpdateOwnerData = function () {
+        var _this = this;
+        this.ownerservice.UpdateOwnerState(this.owner)
+            .subscribe(function (owners) {
+            _this.owners = owners;
+        }, function (err) {
+            _this.errorMessage = err;
+        });
+    };
+    OwnerRequest.prototype.Approve = function (ownerId) {
+        this.Click = true;
+        this.owner.Id = ownerId;
+        this.owner.OwnerStates = 1;
+        this.UpdateOwnerData();
+    };
+    OwnerRequest.prototype.Reject = function (ownerId) {
+        this.Click = true;
+        this.owner.Id = ownerId;
+        this.owner.OwnerStates = 2;
+        this.UpdateOwnerData();
+    };
     OwnerRequest = __decorate([
         core_1.Component({
-            selector: "owner-requests",
+            selector: 'owner-requests',
             providers: [Service_1.OwnerService],
-            templateUrl: 'App/Owner/ListForAdmin.html'
+            templateUrl: 'AppAdmin/AdminView.html'
         }), 
         __metadata('design:paramtypes', [Service_1.OwnerService])
     ], OwnerRequest);

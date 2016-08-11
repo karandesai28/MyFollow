@@ -1,0 +1,35 @@
+﻿`<br />
+<h1>Owner Requests</h1><br />
+<div class='table-responsive'>
+    <table class='table'>
+        <tr>
+            <th>Name</th>
+            <th>Company Name</th>
+            <th>Description</th>
+            <th>Founded Year</th>
+            <th>Website Url</th>
+            <th>Approve/Reject</th>
+        </tr>
+        <tr *ngFor='let owner of owners'>
+            <td>
+                {{owner.CompanyName}}
+            </td>
+            <td>
+                {{owner.CompanyName}}
+            </td>
+            <td>
+                {{owner.Description}}
+            </td>
+            <td>
+                {{owner.FoundedYear}}
+            </td>
+            <td>
+                {{owner.WebsiteUrl}}
+            </td>
+            <td>
+                <button (click)="Approve(owner.Id)">Approve</button>
+                <button (click)="Reject(owner.Id)">Reject</button>
+            </td>
+        </tr>
+    </table>
+</div>`

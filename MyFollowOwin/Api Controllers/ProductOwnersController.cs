@@ -13,14 +13,17 @@ using MyFollowOwin.Models;
 using System.Web.Http.ModelBinding;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using System.Web.Security;
+using MyFollowOwin.Controllers;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyFollowOwin.Api_Controllers
 {
-    [RoutePrefix("api/[controller]")]
+    [RoutePrefix("api/[controller]")]  
+     
     public class ProductOwnersController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
+        private ApplicationDbContext db = new ApplicationDbContext();        
         // GET: api/ProductOwners
         [Route]
         public IQueryable<ProductOwners> GetOwners()
@@ -51,7 +54,58 @@ namespace MyFollowOwin.Api_Controllers
             return CreatedAtRoute("DefaultApi", new { id = productOwners.Id }, productOwners);
         }
 
-        
+        // PUT: api/ProductOwners1/5
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        [Route]
+        public IHttpActionResult PutProductOwners(int id, ProductOwners productOwners)
+        {           
+            var state=db.Owners.FirstOrDefault(x => x.Id == id);
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //if (id != productOwners.Id)
+            //{
+            //    return BadRequest();
+            //}
+
+            if (state != null)
+            {
+                state.OwnerStates = productOwners.OwnerStates;
+                if (productOwners.OwnerStates == OwnerRequestStates.States.Approved)
+                {                    
+                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                    //string userid = UserManager.FindById(productOwners.UserId).Id;
+                    ProductOwners po = db.Owners.Find(id);                    
+                    ApplicationUser user = db.Users.Find(po.UserId);
+
+                    UserManager.AddToRole(user.Id, "ProductOwners");
+                }
+            }
+
+            //db.Entry(productOwners).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductOwnersExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }  
+                  
         protected override void Dispose(bool disposing)
         {
             if (disposing)
