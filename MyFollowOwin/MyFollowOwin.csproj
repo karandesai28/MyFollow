@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Enums\OwnerRequestStates.cs" />
     <Compile Include="Enums\ProductMedia.cs" />
     <Compile Include="Enums\ProductPlatform.cs" />
@@ -210,10 +211,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppAdmin\AdminView.html" />
-    <Content Include="App\Owner\OwnerForm.html" />
-    <Content Include="App\Products\AddProduct.html" />
-    <Content Include="App\Products\ProductList.html" />
+    <Content Include="App\Admin\OwnerRequest.component.html" />
+    <Content Include="App\EndUsers\OwnerForm.component.html" />
+    <Content Include="App\EndUsers\ProductList.component.html" />
+    <Content Include="App\Owners\AddProduct.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -223,6 +224,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
+    <Content Include="App\Owners\AddedProducts.component.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -247,24 +249,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
@@ -275,6 +261,7 @@
     <Content Include="typings\globals\node\typings.json" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Owner\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -288,17 +275,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="AppAdmin\main.ts" />
-    <TypeScriptCompile Include="AppAdmin\Models.ts" />
-    <TypeScriptCompile Include="AppAdmin\Service.ts" />
-    <TypeScriptCompile Include="App\AddProduct.ts" />
+    <TypeScriptCompile Include="App\EndUsers\ProductList.component.ts" />
+    <TypeScriptCompile Include="App\Owners\AddedProducts.component.ts" />
+    <TypeScriptCompile Include="App\Shared\Service.ts" />
+    <TypeScriptCompile Include="App\Owners\AddProduct.component.ts" />
     <TypeScriptCompile Include="App\main.ts" />
-    <TypeScriptCompile Include="App\Models.ts" />
-    <TypeScriptCompile Include="App\OwnerForm.ts" />
-    <TypeScriptCompile Include="AppAdmin\OwnerRequest.ts" />
-    <TypeScriptCompile Include="App\ProductComponent.ts" />
-    <TypeScriptCompile Include="App\OwnerService.ts" />
-    <TypeScriptCompile Include="App\ProductService.ts" />
+    <TypeScriptCompile Include="App\Shared\Models.ts" />
+    <TypeScriptCompile Include="App\EndUsers\OwnerForm.component.ts" />
+    <TypeScriptCompile Include="App\Admin\OwnerRequest.component.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />

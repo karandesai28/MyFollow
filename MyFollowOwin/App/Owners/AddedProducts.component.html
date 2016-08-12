@@ -1,0 +1,34 @@
+﻿<h1> Your added products</h1>
+<br/>
+<div class='table-responsive'>
+    <table class='table'>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>HomepageUrl</th>
+            <th>PlayStoreUrl</th>
+            <th>AppStoreUrl</th>
+            <th>ProductPlatform</th>
+        </tr>
+        <tr *ngFor='let product of products'>
+            <td>
+                {{product.Name}}
+            </td>
+            <td>
+                {{product.Description}}
+            </td>
+            <td>
+                {{product.HomePageUrl}}
+            </td>
+            <td>
+                {{product.PlayStoreUrl}}
+            </td>
+            <td>
+                {{product.AppStoreUrl}}
+            </td>
+            <td>
+                {{product.ProductPlatform}}
+            </td>
+        </tr>
+    </table>
+</div>

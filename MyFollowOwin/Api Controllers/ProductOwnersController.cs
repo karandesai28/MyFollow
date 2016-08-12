@@ -54,38 +54,27 @@ namespace MyFollowOwin.Api_Controllers
             return CreatedAtRoute("DefaultApi", new { id = productOwners.Id }, productOwners);
         }
 
+        
         // PUT: api/ProductOwners1/5
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route]
         public IHttpActionResult PutProductOwners(int id, ProductOwners productOwners)
         {           
-            var state=db.Owners.FirstOrDefault(x => x.Id == id);
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            //if (id != productOwners.Id)
-            //{
-            //    return BadRequest();
-            //}
+            var state=db.Owners.FirstOrDefault(x => x.Id == id);            
 
             if (state != null)
             {
                 state.OwnerStates = productOwners.OwnerStates;
                 if (productOwners.OwnerStates == OwnerRequestStates.States.Approved)
                 {                    
-                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                    //string userid = UserManager.FindById(productOwners.UserId).Id;
+                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));                   
                     ProductOwners po = db.Owners.Find(id);                    
                     ApplicationUser user = db.Users.Find(po.UserId);
-
+                    UserManager.RemoveFromRole(user.Id, "EndUsers");
                     UserManager.AddToRole(user.Id, "ProductOwners");
                 }
-            }
-
-            //db.Entry(productOwners).State = EntityState.Modified;
+            }           
 
             try
             {

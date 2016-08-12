@@ -1,0 +1,13 @@
+﻿<button (click)="clicked()">Add Product</button>
+<h1 *ngIf="Click">Add Product</h1>
+<br/>
+<form *ngIf="Click" (ngSubmit)="onSubmit(product)" role="form" #AddForm="ngForm">
+    Name:<input #Name="ngForm" type="text" [(ngModel)]="product.Name" ngControl="Name"/><br />
+    Description:<input #Description="ngForm" type="text" [(ngModel)]="product.Description" ngControl="Description" /><br />
+    HomePageUrl:<input #HomePageUrl="ngForm" type="text" [(ngModel)]="product.HomePageUrl" ngControl="HomePageUrl" /><br />
+    PlayStoreUrl:<input #PlayStoreUrl="ngForm" type="text" [(ngModel)]="product.PlayStoreUrl" ngControl="PlayStoreUrl" /><br />
+    AppStoreUrl:<input #AppStoreUrl="ngForm" type="text" [(ngModel)]="product.AppStoreUrl" ngControl="AppStoreUrl" /><br />
+    <input type="submit" value="Submit" />
+</form>
+<br />
+<added-products>No products added yet!</added-products>
