@@ -24,12 +24,39 @@ namespace MyFollowOwin.Api_Controllers
     public class ProductOwnersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();        
-        // GET: api/ProductOwners
+        //// GET: api/ProductOwners        
+        //[Route]      
+        //public IQueryable<ProductOwners> GetOwners()
+        //{           
+        //    return db.Owners;
+        //}
+
+        // GET: api/ProductOwners/S
         [Route]
-        public IQueryable<ProductOwners> GetOwners()
-        {           
-            return db.Owners;
-        }        
+        public ProductOwners[] GetOwners()
+        {
+            int i=0,n = 0;
+            int ownerlen = db.Owners.Count();
+            
+            foreach (var row in db.Owners)
+            {
+                if (row.OwnerStates == OwnerRequestStates.States.Pending)
+                {                   
+                    i++;
+                }
+            }
+            ProductOwners[] productOwners = new ProductOwners[i];
+
+            foreach (var row in db.Owners)
+            {
+                if (row.OwnerStates == OwnerRequestStates.States.Pending)
+                {
+                    productOwners[n] = row;
+                    n++;                    
+                }
+            }            
+            return productOwners;                       
+        }
 
         // POST: api/ProductOwners
         [ResponseType(typeof(ProductOwners))]

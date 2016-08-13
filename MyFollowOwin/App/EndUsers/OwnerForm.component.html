@@ -1,12 +1,22 @@
-﻿<button (click)="clicked()">Become Owner</button><br />
+﻿<button class="btn btn-default" (click)="clicked()">Become Owner</button><br />
 <h1 *ngIf="Click">Become Owner</h1>
-<form *ngIf="Click" (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">
-    Company Name:<input #CompanyName="ngForm" type="text" [(ngModel)]="owner.CompanyName" ngControl="CompanyName" /><br />
-    Description:<input #Description="ngForm" type="text" [(ngModel)]="owner.Description" ngControl="Description" /><br />
-    FoundedYear:<input #FoundedYear="ngForm" type="text" [(ngModel)]="owner.FoundedYear" ngControl="FoundedYear" /><br />
-    WebsiteUrl:<input #WebsiteUrl="ngForm" type="text" [(ngModel)]="owner.WebsiteUrl" ngControl="WebsiteUrl" /><br />
-    <input type="submit" value="Submit" />
-</form>
+<div class="form-group">
+    <form *ngIf="Click" (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">
+        <label for="CompanyName">Company Name:</label>
+        <input class="form-control" #CompanyName="ngForm" type="text" [(ngModel)]="owner.CompanyName" ngControl="CompanyName" id="CompanyName" /><br />
+        
+        <label for="Description">Description:</label>
+        <input  class="form-control" #Description="ngForm" type="text" [(ngModel)]="owner.Description" ngControl="Description" id="Description" /><br />
+        
+        <label for="FoundedYear">Founded Year:</label>
+        <input  class="form-control" #FoundedYear="ngForm" type="text" [(ngModel)]="owner.FoundedYear" ngControl="FoundedYear" id="FoundedYear" /><br />
+        
+        <label for="WebsiteUrl">Website Url</label>
+        <input  class="form-control" #WebsiteUrl="ngForm" type="text" [(ngModel)]="owner.WebsiteUrl" ngControl="WebsiteUrl" id="WebsiteUrl" /><br />
+        
+        <input class="btn btn-default" type="submit" value="Submit" />
+    </form>
+</div>
 <br/>
 <br/>
 <h1>Find and Follow products you like!</h1>

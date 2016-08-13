@@ -3,29 +3,29 @@ import {Service} from './../Shared/Service';
 import {OwnerModel, OwnerRequestStates} from './../Shared/Models';
 @Component({
     selector: 'owner-requests', 
-    providers: [Service],
+    providers: [Service],   
     templateUrl:'App/Admin/OwnerRequest.component.html' 
 })
 
 export class OwnerRequest implements OnInit {
 
     Click: Boolean = false;    
-    owners: Array<OwnerModel>;
+    owners: Array<OwnerModel>;    
     errorMessage: string;
     owner: OwnerModel;
+      
     constructor(private ownerservice: Service) {
         this.owners = new Array<OwnerModel>();
-        this.owner = new OwnerModel();
+        this.owner = new OwnerModel();        
     }   
 
     
-    ngOnInit() {      
-        this.getOwners();        
+    ngOnInit() {
+        this.pendingOwners();                       
     }
    
-
-    getOwners() {
-        var displayOwner = this.ownerservice.getOwner()
+    pendingOwners() {
+        this.ownerservice.getPendingOwners()
             .subscribe((owners) => {
                 this.owners = owners
             }, err => {
@@ -47,7 +47,7 @@ export class OwnerRequest implements OnInit {
         this.Click = true;
         this.owner.Id = ownerId;
         this.owner.OwnerStates = 1;
-        this.UpdateOwnerData();
+        this.UpdateOwnerData();        
     }
 
     Reject(ownerId: number) {

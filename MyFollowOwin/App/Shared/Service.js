@@ -18,7 +18,7 @@ var Service = (function () {
         this.ownerUrl = 'api/ProductOwners/';
         this.productUrl = 'api/Products/';
     }
-    Service.prototype.getOwner = function () {
+    Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
             .map(function (response) { return response.json(); });
     };

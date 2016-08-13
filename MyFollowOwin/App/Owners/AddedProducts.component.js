@@ -16,7 +16,7 @@ var AddedProducts = (function () {
         this.productservice = productservice;
         this.Click = false;
         this.products = new Array();
-        this.product = new Models_1.Product();
+        this.product = new Models_1.ProductModel();
     }
     AddedProducts.prototype.clicked = function () {
         this.Click = true;

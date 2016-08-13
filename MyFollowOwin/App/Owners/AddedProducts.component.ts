@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {Product} from './../Shared/Models';
+import {ProductModel} from './../Shared/Models';
 @Component({
     selector: 'added-products',   
     providers: [Service],
@@ -9,12 +9,12 @@ import {Product} from './../Shared/Models';
 })
 export class AddedProducts implements OnInit {
 
-    products: Array<Product>;
+    products: Array<ProductModel>;
     errorMessage: string;
-    product: Product;
+    product: ProductModel;
     constructor(private productservice: Service) {
-        this.products = new Array<Product>();
-        this.product = new Product();
+        this.products = new Array<ProductModel>();
+        this.product = new ProductModel();        
     }
 
     Click: Boolean = false;

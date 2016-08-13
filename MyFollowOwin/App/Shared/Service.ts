@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import {OwnerModel, Product} from './Models';
+import {OwnerModel, ProductModel} from './Models';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -11,12 +11,13 @@ export class Service {
     private ownerUrl = 'api/ProductOwners/';
     private productUrl = 'api/Products/';
    
-    constructor(private http: Http) { }
+    constructor(private http: Http) { }    
 
-    getOwner() {
+    getPendingOwners() {
         return this.http.get(this.ownerUrl)
             .map(response => response.json());
     }  
+
 
     UpdateOwnerState(ownerobj: OwnerModel) {
         let headers = new Headers({
@@ -32,7 +33,7 @@ export class Service {
         return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(res => res.json());
     }
 
-    AddProduct(productobj: Product) {
+    AddProduct(productobj: ProductModel) {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });

@@ -18,10 +18,10 @@ var OwnerModel = (function () {
     return OwnerModel;
 }());
 exports.OwnerModel = OwnerModel;
-var Product = (function () {
-    function Product() {
+var ProductModel = (function () {
+    function ProductModel() {
     }
-    return Product;
+    return ProductModel;
 }());
-exports.Product = Product;
+exports.ProductModel = ProductModel;
 //# sourceMappingURL=Models.js.map

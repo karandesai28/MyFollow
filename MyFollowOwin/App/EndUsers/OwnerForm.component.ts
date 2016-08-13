@@ -11,10 +11,11 @@ import {ProductList} from './../EndUsers/ProductList.component';
 })
 
 export class OwnerComponent implements OnInit {   
+    
     owners: Array<OwnerModel>;     
     errorMessage: string;      
    owner: OwnerModel;
-   constructor(private ownerservice: Service) {
+   constructor(private ownerservice: Service) {      
        this.owners = new Array<OwnerModel>();     
        this.owner = new OwnerModel();
    }
@@ -26,7 +27,11 @@ export class OwnerComponent implements OnInit {
     
    ngOnInit() {
              
-    }  
+   } 
+
+   clean() {
+       this.owner = null;
+   }
     
     onSubmit(owner: OwnerModel) {
         console.log(owner.CompanyName);
@@ -35,6 +40,7 @@ export class OwnerComponent implements OnInit {
         console.log(owner.WebsiteUrl);
         console.log(owner.OwnerStates)       
         this.AddOwnerData();
+        this.clean();
    }
     AddOwnerData() {
         this.ownerservice.AddOwner(this.owner)

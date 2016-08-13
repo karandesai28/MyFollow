@@ -19,11 +19,11 @@ var OwnerRequest = (function () {
         this.owner = new Models_1.OwnerModel();
     }
     OwnerRequest.prototype.ngOnInit = function () {
-        this.getOwners();
+        this.pendingOwners();
     };
-    OwnerRequest.prototype.getOwners = function () {
+    OwnerRequest.prototype.pendingOwners = function () {
         var _this = this;
-        var displayOwner = this.ownerservice.getOwner()
+        this.ownerservice.getPendingOwners()
             .subscribe(function (owners) {
             _this.owners = owners;
         }, function (err) {

@@ -24,6 +24,9 @@ var OwnerComponent = (function () {
     };
     OwnerComponent.prototype.ngOnInit = function () {
     };
+    OwnerComponent.prototype.clean = function () {
+        this.owner = null;
+    };
     OwnerComponent.prototype.onSubmit = function (owner) {
         console.log(owner.CompanyName);
         console.log(owner.Description);
@@ -31,6 +34,7 @@ var OwnerComponent = (function () {
         console.log(owner.WebsiteUrl);
         console.log(owner.OwnerStates);
         this.AddOwnerData();
+        this.clean();
     };
     OwnerComponent.prototype.AddOwnerData = function () {
         var _this = this;

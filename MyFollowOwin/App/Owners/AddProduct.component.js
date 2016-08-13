@@ -17,20 +17,24 @@ var AddProduct = (function () {
         this.productservice = productservice;
         this.Click = false;
         this.products = new Array();
-        this.product = new Models_1.Product();
+        this.product = new Models_1.ProductModel();
     }
     AddProduct.prototype.clicked = function () {
         this.Click = true;
     };
     AddProduct.prototype.ngOnInit = function () {
     };
+    AddProduct.prototype.clean = function () {
+        this.product = null;
+    };
     AddProduct.prototype.onSubmit = function (product) {
         console.log(product.Name);
         console.log(product.Description);
-        console.log(product.HomePageUrl);
+        console.log(product.HomepageUrl);
         console.log(product.PlayStoreUrl);
         console.log(product.AppStoreUrl);
         this.AddProductData();
+        this.clean;
     };
     AddProduct.prototype.AddProductData = function () {
         var _this = this;

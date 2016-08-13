@@ -15,7 +15,7 @@ var ProductList = (function () {
     function ProductList(productservice) {
         this.productservice = productservice;
         this.products = new Array();
-        this.product = new Models_1.Product();
+        this.product = new Models_1.ProductModel();
     }
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();

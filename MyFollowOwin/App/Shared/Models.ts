@@ -9,11 +9,11 @@ export class OwnerModel {
     public OwnerStates: OwnerRequestStates = OwnerRequestStates.Pending;
 }
 
-export class Product {
+export class ProductModel {
     public ProductId: number;
     public Name: string;
     public Description: string;
-    public HomePageUrl: string;
+    public HomepageUrl: string;
     public PlayStoreUrl: string;
     public AppStoreUrl: string;
     public ProductPlatform: Platform;

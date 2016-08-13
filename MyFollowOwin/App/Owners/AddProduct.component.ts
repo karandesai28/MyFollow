@@ -1,5 +1,5 @@
 ﻿import { Component, Injectable, OnInit} from '@angular/core';
-import {Product} from './../Shared/Models';
+import {ProductModel} from './../Shared/Models';
 import {Service} from './../Shared/Service';
 import {AddedProducts} from './../Owners/AddedProducts.component';
 
@@ -11,12 +11,12 @@ import {AddedProducts} from './../Owners/AddedProducts.component';
 })
 
 export class AddProduct implements OnInit {
-    products: Array<Product>;
+    products: Array<ProductModel>;
     errorMessage: string;
-    product: Product;
+    product: ProductModel;
     constructor(private productservice: Service) {
-        this.products = new Array<Product>();
-        this.product = new Product();
+        this.products = new Array<ProductModel>();
+        this.product = new ProductModel();
     }
 
     Click: Boolean = false;
@@ -28,13 +28,18 @@ export class AddProduct implements OnInit {
 
     }
 
-    onSubmit(product: Product) {
+    clean() {
+        this.product = null;
+    }
+
+    onSubmit(product: ProductModel) {
         console.log(product.Name);
         console.log(product.Description);
-        console.log(product.HomePageUrl);
+        console.log(product.HomepageUrl);
         console.log(product.PlayStoreUrl);
         console.log(product.AppStoreUrl)
         this.AddProductData();
+        this.clean;
     }
     AddProductData() {
         this.productservice.AddProduct(this.product)
