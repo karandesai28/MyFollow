@@ -10,7 +10,7 @@ export class OwnerModel {
 }
 
 export class ProductModel {
-    public ProductId: number;
+    public Id: number;
     public Name: string;
     public Description: string;
     public HomepageUrl: string;

@@ -11,48 +11,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
-var ProductList = (function () {
-    function ProductList(productservice) {
+var EditProduct = (function () {
+    function EditProduct(productservice) {
         this.productservice = productservice;
-        this.hideclicked = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
-    ProductList.prototype.ngOnInit = function () {
-        this.getProducts();
+    EditProduct.prototype.ngOnInit = function () {
     };
-    ProductList.prototype.Follow = function (productId) {
-        this.product.Id = productId;
-        this.FollowProducts();
-        this.hideclicked = true;
+    EditProduct.prototype.onSubmit = function (product) {
+        this.product.Id = this.productId;
+        console.log(this.product);
+        this.EditProductData();
     };
-    ProductList.prototype.getProducts = function () {
+    EditProduct.prototype.EditProductData = function () {
         var _this = this;
-        var displayOwner = this.productservice.getProduct()
+        this.productservice.EditProduct(this.product)
             .subscribe(function (products) {
             _this.products = products;
         }, function (err) {
             _this.errorMessage = err;
         });
     };
-    ProductList.prototype.FollowProducts = function () {
-        var _this = this;
-        this.productservice.FollowProduct(this.product)
-            .subscribe(function (products) {
-            _this.products = products;
-        }, function (err) {
-            _this.errorMessage = err;
-        });
-    };
-    ProductList = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], EditProduct.prototype, "productId", void 0);
+    EditProduct = __decorate([
         core_1.Component({
-            selector: 'product-list',
+            selector: 'edit-product',
             providers: [Service_1.Service],
-            templateUrl: 'App/EndUsers/ProductList.component.html'
+            templateUrl: 'App/Owners/EditProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
-    ], ProductList);
-    return ProductList;
+    ], EditProduct);
+    return EditProduct;
 }());
-exports.ProductList = ProductList;
-//# sourceMappingURL=ProductList.component.js.map
+exports.EditProduct = EditProduct;
+//# sourceMappingURL=EditProduct.component.js.map

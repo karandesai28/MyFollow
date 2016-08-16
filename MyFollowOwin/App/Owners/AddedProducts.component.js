@@ -11,32 +11,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
+var EditProduct_component_1 = require('./../Owners/EditProduct.component');
 var AddedProducts = (function () {
     function AddedProducts(productservice) {
         this.productservice = productservice;
         this.Click = false;
+        this.Edit = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     AddedProducts.prototype.clicked = function () {
         this.Click = true;
     };
+    AddedProducts.prototype.EditClicked = function (ProductId) {
+        this.Edit = true;
+        this.ProductId = ProductId;
+    };
+    AddedProducts.prototype.DeleteClicked = function (ProductId) {
+        this.product.Id = ProductId;
+        this.DeleteProducts();
+    };
     AddedProducts.prototype.ngOnInit = function () {
         this.getProducts();
     };
     AddedProducts.prototype.getProducts = function () {
         var _this = this;
-        var displayOwner = this.productservice.getProduct()
+        this.productservice.getAddedProduct()
             .subscribe(function (products) {
             _this.products = products;
         }, function (err) {
             _this.errorMessage = err;
         });
     };
+    AddedProducts.prototype.DeleteProducts = function () {
+        this.productservice.DeleteProduct(this.product).subscribe(function (res) {
+        });
+    };
     AddedProducts = __decorate([
         core_1.Component({
             selector: 'added-products',
             providers: [Service_1.Service],
+            directives: [EditProduct_component_1.EditProduct],
             templateUrl: 'App/Owners/AddedProducts.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

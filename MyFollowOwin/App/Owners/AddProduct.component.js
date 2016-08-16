@@ -16,25 +16,32 @@ var AddProduct = (function () {
     function AddProduct(productservice) {
         this.productservice = productservice;
         this.Click = false;
+        this.hideclicked = false;
+        this.hideproductform = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     AddProduct.prototype.clicked = function () {
         this.Click = true;
     };
+    AddProduct.prototype.hide = function () {
+        this.hideclicked = true;
+        this.hideproductform = false;
+    };
     AddProduct.prototype.ngOnInit = function () {
     };
     AddProduct.prototype.clean = function () {
-        this.product = null;
+        this.product.Name = "";
+        this.product.Description = "";
+        this.product.HomepageUrl = "";
+        this.product.AppStoreUrl = "";
+        this.product.PlayStoreUrl = "";
     };
     AddProduct.prototype.onSubmit = function (product) {
-        console.log(product.Name);
-        console.log(product.Description);
-        console.log(product.HomepageUrl);
-        console.log(product.PlayStoreUrl);
-        console.log(product.AppStoreUrl);
         this.AddProductData();
-        this.clean;
+        this.clean();
+        this.hideclicked = false;
+        this.hideproductform = true;
     };
     AddProduct.prototype.AddProductData = function () {
         var _this = this;

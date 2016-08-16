@@ -17,6 +17,8 @@ var Service = (function () {
         this.http = http;
         this.ownerUrl = 'api/ProductOwners/';
         this.productUrl = 'api/Products/';
+        this.addedproductUrl = 'api/OwnerProductMappings/';
+        this.followUrl = 'api/Followers/';
     }
     Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
@@ -43,6 +45,25 @@ var Service = (function () {
     Service.prototype.getProduct = function () {
         return this.http.get(this.productUrl)
             .map(function (response) { return response.json(); });
+    };
+    Service.prototype.getAddedProduct = function () {
+        return this.http.get(this.addedproductUrl)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.EditProduct = function (productobj) {
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    Service.prototype.DeleteProduct = function (productobj) {
+        return this.http.delete(this.productUrl + productobj.Id);
+    };
+    Service.prototype.FollowProduct = function (productobj) {
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(function (res) { return res.json(); });
     };
     Service = __decorate([
         core_1.Injectable(), 

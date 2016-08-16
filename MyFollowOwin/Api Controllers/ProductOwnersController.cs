@@ -24,14 +24,9 @@ namespace MyFollowOwin.Api_Controllers
     public class ProductOwnersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();        
-        //// GET: api/ProductOwners        
-        //[Route]      
-        //public IQueryable<ProductOwners> GetOwners()
-        //{           
-        //    return db.Owners;
-        //}
-
-        // GET: api/ProductOwners/S
+        
+        // GET: api/ProductOwners/
+        [HttpGet]
         [Route]
         public ProductOwners[] GetOwners()
         {
@@ -66,7 +61,8 @@ namespace MyFollowOwin.Api_Controllers
         {
             var id = User.Identity.GetUserId();
             ApplicationUser user = db.Users.Find(id);
-            productOwners.UserId = User.Identity.GetUserId();
+
+            productOwners.UserId = user.Id;
             productOwners.CreateDate = DateTime.Today;
             productOwners.ModifiedDate = DateTime.Today;
           

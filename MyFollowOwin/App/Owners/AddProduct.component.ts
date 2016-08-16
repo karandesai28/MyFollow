@@ -20,8 +20,15 @@ export class AddProduct implements OnInit {
     }
 
     Click: Boolean = false;
+    hideclicked: Boolean = false;
+    hideproductform: Boolean = false;
     clicked() {
-        this.Click = true;
+        this.Click = true;        
+    }
+
+    hide() {
+        this.hideclicked = true;
+        this.hideproductform = false;
     }
 
     ngOnInit() {
@@ -29,18 +36,20 @@ export class AddProduct implements OnInit {
     }
 
     clean() {
-        this.product = null;
+        this.product.Name = "";
+        this.product.Description = "";
+        this.product.HomepageUrl = "";
+        this.product.AppStoreUrl = "";
+        this.product.PlayStoreUrl = "";
     }
 
-    onSubmit(product: ProductModel) {
-        console.log(product.Name);
-        console.log(product.Description);
-        console.log(product.HomepageUrl);
-        console.log(product.PlayStoreUrl);
-        console.log(product.AppStoreUrl)
-        this.AddProductData();
-        this.clean;
+    onSubmit(product: ProductModel) {        
+        this.AddProductData();        
+        this.clean();  
+        this.hideclicked = false;
+        this.hideproductform = true;    
     }
+    
     AddProductData() {
         this.productservice.AddProduct(this.product)
             .subscribe((products) => {

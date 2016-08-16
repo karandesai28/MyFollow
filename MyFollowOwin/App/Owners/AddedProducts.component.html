@@ -9,6 +9,7 @@
             <th>PlayStoreUrl</th>
             <th>AppStoreUrl</th>
             <th>ProductPlatform</th>
+            <th>Edit/Delete</th>
         </tr>
         <tr *ngFor='let product of products'>
             <td>
@@ -29,6 +30,13 @@
             <td>
                 {{product.ProductPlatform}}
             </td>
+            <td>                
+                <button (click)="EditClicked(product.Id)">Edit</button>
+                <button (click)="DeleteClicked(product.Id)">Delete</button>
+            </td>
         </tr>
     </table>
 </div>
+<br/>
+<edit-product [hidden]="!Edit" [productId]='ProductId'></edit-product>
+ 

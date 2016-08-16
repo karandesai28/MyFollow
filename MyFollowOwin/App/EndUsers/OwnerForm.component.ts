@@ -19,8 +19,17 @@ export class OwnerComponent implements OnInit {
        this.owners = new Array<OwnerModel>();     
        this.owner = new OwnerModel();
    }
-
+   hideclicked: Boolean;
+   hideownerform: Boolean;
    Click: Boolean = false;
+   hide() {
+       this.hideclicked = true;
+   }
+
+   hideform() {
+       this.hideownerform = true;
+   }
+
    clicked() {
        this.Click = true;
    }
@@ -30,7 +39,10 @@ export class OwnerComponent implements OnInit {
    } 
 
    clean() {
-       this.owner = null;
+       this.owner.CompanyName = "";
+       this.owner.Description = "";
+       this.owner.FoundedYear = null;
+       this.owner.WebsiteUrl = "";
    }
     
     onSubmit(owner: OwnerModel) {
@@ -38,7 +50,7 @@ export class OwnerComponent implements OnInit {
         console.log(owner.Description);
         console.log(owner.FoundedYear);
         console.log(owner.WebsiteUrl);
-        console.log(owner.OwnerStates)       
+        console.log(owner.OwnerStates);       
         this.AddOwnerData();
         this.clean();
    }

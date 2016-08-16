@@ -5,10 +5,10 @@ import {ProductModel} from './../Shared/Models';
     selector: 'product-list',
     providers: [Service],
     templateUrl: 'App/EndUsers/ProductList.component.html'
-
 })
 export class ProductList implements OnInit {
 
+    hideclicked: boolean = false;
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;    
@@ -20,11 +20,26 @@ export class ProductList implements OnInit {
         this.getProducts();        
     }
 
+    Follow(productId: number) {
+        this.product.Id = productId;
+        this.FollowProducts();
+        this.hideclicked = true;
+    }
     getProducts() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
                 this.products = products
             }, err => {
+                this.errorMessage = err;
+            });
+    }
+
+    FollowProducts() {
+        this.productservice.FollowProduct(this.product)
+            .subscribe((products) => {
+                this.products = products
+            },
+            err => {
                 this.errorMessage = err;
             });
     }

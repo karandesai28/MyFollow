@@ -19,13 +19,22 @@ var OwnerComponent = (function () {
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
     }
+    OwnerComponent.prototype.hide = function () {
+        this.hideclicked = true;
+    };
+    OwnerComponent.prototype.hideform = function () {
+        this.hideownerform = true;
+    };
     OwnerComponent.prototype.clicked = function () {
         this.Click = true;
     };
     OwnerComponent.prototype.ngOnInit = function () {
     };
     OwnerComponent.prototype.clean = function () {
-        this.owner = null;
+        this.owner.CompanyName = "";
+        this.owner.Description = "";
+        this.owner.FoundedYear = null;
+        this.owner.WebsiteUrl = "";
     };
     OwnerComponent.prototype.onSubmit = function (owner) {
         console.log(owner.CompanyName);

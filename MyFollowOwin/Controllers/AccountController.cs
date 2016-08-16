@@ -184,32 +184,32 @@ namespace MyFollowOwin.Controllers
         }
 
 
-        ////
-        //// GET: /Account/ConfirmEmail
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ConfirmEmail(string Token, string Email)
-        //{           
-        //    ApplicationUser user = this.UserManager.FindById(Token);
-        //    if (user != null)
-        //    {
-        //        if (user.Email == Email)
-        //        {
-        //            user.EmailConfirmed = true;
-        //            await UserManager.UpdateAsync(user);                  
-        //            return RedirectToAction("Login", "Account", new { ConfirmedEmail = user.Email });
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Confirm", "Account", new { Email = user.Email });
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Confirm", "Account", new { Email = "" });
-        //    }
-        //}
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string Token, string Email)
+        {
+            ApplicationUser user = this.UserManager.FindById(Token);
+            if (user != null)
+            {
+                if (user.Email == Email)
+                {
+                    user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(user);
+                    return RedirectToAction("Login", "Account", new { ConfirmedEmail = user.Email });
+                }
+                else
+                {
+                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                }
+            }
+            else
+            {
+                return RedirectToAction("Confirm", "Account", new { Email = "" });
+            }
+        }
 
-        
+
 
         ////
         //// GET: /Account/SendCode

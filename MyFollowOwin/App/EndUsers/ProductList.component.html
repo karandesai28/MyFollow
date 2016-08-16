@@ -29,7 +29,8 @@
                 {{product.ProductPlatform}}
             </td>
             <td>
-                <button>Follow</button>
+                <button [hidden]="hideclicked" (click)="Follow(product.Id)">Follow</button>
+                <button [hidden]="!hideclicked" (click)="Follow(product.Id)" value="Unfollow"></button>                 
             </td>
         </tr>
     </table>
