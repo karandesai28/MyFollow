@@ -1,7 +1,7 @@
 ﻿<div (click)="hide()" [hidden]="hideclicked">
     <button class="btn btn-default" (click)="clicked()">Become Owner</button><br />
 </div>
-<div (click)="hideform()" [hidden]="hideownerform">
+<div [hidden]="hideownerform">
     <h1 *ngIf="Click">Become Owner</h1>
     <div class="form-group">
         <form *ngIf="Click" (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">
@@ -22,5 +22,5 @@
     </div>
 </div>
     <br />
-    <h1>Find and Follow products you like!</h1>
+    <h1>Find and Follow products you like</h1>
     <product-list> </product-list>

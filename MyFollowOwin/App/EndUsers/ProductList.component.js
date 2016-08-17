@@ -14,17 +14,17 @@ var Models_1 = require('./../Shared/Models');
 var ProductList = (function () {
     function ProductList(productservice) {
         this.productservice = productservice;
-        this.hideclicked = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();
+        //this.productplatform = (Platform) enum.ToObject(typeof (this.productplatform), this.yourInt);
     };
     ProductList.prototype.Follow = function (productId) {
         this.product.Id = productId;
         this.FollowProducts();
-        this.hideclicked = true;
+        //hidebutton = true;             
     };
     ProductList.prototype.getProducts = function () {
         var _this = this;

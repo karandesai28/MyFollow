@@ -47,7 +47,7 @@ export class AddProduct implements OnInit {
         this.AddProductData();        
         this.clean();  
         this.hideclicked = false;
-        this.hideproductform = true;    
+        this.hideproductform = true;  
     }
     
     AddProductData() {

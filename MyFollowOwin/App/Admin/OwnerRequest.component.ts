@@ -8,7 +8,7 @@ import {OwnerModel, OwnerRequestStates} from './../Shared/Models';
 })
 
 export class OwnerRequest implements OnInit {
-
+    
     Click: Boolean = false;    
     owners: Array<OwnerModel>;    
     errorMessage: string;
@@ -16,12 +16,12 @@ export class OwnerRequest implements OnInit {
       
     constructor(private ownerservice: Service) {
         this.owners = new Array<OwnerModel>();
-        this.owner = new OwnerModel();        
+        this.owner = new OwnerModel();          
     }   
 
     
     ngOnInit() {
-        this.pendingOwners();                       
+        this.pendingOwners();                               
     }
    
     pendingOwners() {
@@ -36,7 +36,7 @@ export class OwnerRequest implements OnInit {
     UpdateOwnerData() {
         this.ownerservice.UpdateOwnerState(this.owner)
             .subscribe((owners) => {
-                this.owners = owners
+                this.owners = owners                   
             },
             err => {
                 this.errorMessage = err;
@@ -47,7 +47,8 @@ export class OwnerRequest implements OnInit {
         this.Click = true;
         this.owner.Id = ownerId;
         this.owner.OwnerStates = 1;
-        this.UpdateOwnerData();        
+        this.UpdateOwnerData();
+        this.pendingOwners();               
     }
 
     Reject(ownerId: number) {
@@ -55,5 +56,6 @@ export class OwnerRequest implements OnInit {
         this.owner.Id = ownerId;
         this.owner.OwnerStates = 2;
         this.UpdateOwnerData();
+        this.pendingOwners();       
     }
 }

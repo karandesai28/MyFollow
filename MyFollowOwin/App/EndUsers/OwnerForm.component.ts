@@ -20,7 +20,7 @@ export class OwnerComponent implements OnInit {
        this.owner = new OwnerModel();
    }
    hideclicked: Boolean;
-   hideownerform: Boolean;
+   hideownerform: Boolean=false;
    Click: Boolean = false;
    hide() {
        this.hideclicked = true;
@@ -52,6 +52,7 @@ export class OwnerComponent implements OnInit {
         console.log(owner.WebsiteUrl);
         console.log(owner.OwnerStates);       
         this.AddOwnerData();
+        this.hideform();
         this.clean();
    }
     AddOwnerData() {

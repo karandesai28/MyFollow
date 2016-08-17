@@ -9,7 +9,7 @@
             <th>ProductPlatform</th>
             <th>Follow/Unfollow</th>
         </tr>
-        <tr *ngFor='let product of products'>
+        <tr *ngFor='let product of products let i=index'>
             <td>
                 {{product.Name}}
             </td>
@@ -26,11 +26,13 @@
                 {{product.AppStoreUrl}}
             </td>
             <td>
-                {{product.ProductPlatform}}
+                <!--{{product.ProductPlatform}}-->
+                {{platform}}
             </td>
             <td>
-                <button [hidden]="hideclicked" (click)="Follow(product.Id)">Follow</button>
-                <button [hidden]="!hideclicked" (click)="Follow(product.Id)" value="Unfollow"></button>                 
+                <!--<button id="product{{product.Id}}" [style.display]="hidebutton[product.Id]?'none':'follow'" (click)="Follow(product.Id)">Follow</button>-->
+                <button (click)="Follow(product.Id)">Follow</button>
+                                           
             </td>
         </tr>
     </table>

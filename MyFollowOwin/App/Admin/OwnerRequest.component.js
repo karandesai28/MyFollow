@@ -44,12 +44,14 @@ var OwnerRequest = (function () {
         this.owner.Id = ownerId;
         this.owner.OwnerStates = 1;
         this.UpdateOwnerData();
+        this.pendingOwners();
     };
     OwnerRequest.prototype.Reject = function (ownerId) {
         this.Click = true;
         this.owner.Id = ownerId;
         this.owner.OwnerStates = 2;
         this.UpdateOwnerData();
+        this.pendingOwners();
     };
     OwnerRequest = __decorate([
         core_1.Component({

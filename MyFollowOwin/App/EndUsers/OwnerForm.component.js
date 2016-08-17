@@ -15,6 +15,7 @@ var ProductList_component_1 = require('./../EndUsers/ProductList.component');
 var OwnerComponent = (function () {
     function OwnerComponent(ownerservice) {
         this.ownerservice = ownerservice;
+        this.hideownerform = false;
         this.Click = false;
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
@@ -43,6 +44,7 @@ var OwnerComponent = (function () {
         console.log(owner.WebsiteUrl);
         console.log(owner.OwnerStates);
         this.AddOwnerData();
+        this.hideform();
         this.clean();
     };
     OwnerComponent.prototype.AddOwnerData = function () {

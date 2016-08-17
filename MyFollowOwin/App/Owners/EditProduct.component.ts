@@ -18,9 +18,7 @@ export class EditProduct implements OnInit {
 
     ngOnInit() {
 
-    }
-
-    
+    }    
 
     @Input() productId: number;
     onSubmit(product: ProductModel) {
