@@ -19,6 +19,7 @@ var Service = (function () {
         this.productUrl = 'api/Products/';
         this.addedproductUrl = 'api/OwnerProductMappings/';
         this.followUrl = 'api/Followers/';
+        this.updateUrl = 'api/ProductUpdates/';
     }
     Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
@@ -64,6 +65,12 @@ var Service = (function () {
             'Content-Type': 'application/json',
         });
         return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    Service.prototype.UpdateProduct = function (productobj) {
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json(); });
     };
     Service = __decorate([
         core_1.Injectable(), 

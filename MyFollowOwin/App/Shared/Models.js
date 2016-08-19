@@ -11,6 +11,12 @@ var OwnerRequestStates = exports.OwnerRequestStates;
     Platform[Platform["IOT"] = 2] = "IOT";
 })(exports.Platform || (exports.Platform = {}));
 var Platform = exports.Platform;
+(function (Media) {
+    Media[Media["Pictures"] = 0] = "Pictures";
+    Media[Media["videos"] = 1] = "videos";
+    Media[Media["GIF"] = 2] = "GIF";
+})(exports.Media || (exports.Media = {}));
+var Media = exports.Media;
 var OwnerModel = (function () {
     function OwnerModel() {
         this.OwnerStates = OwnerRequestStates.Pending;
@@ -24,4 +30,10 @@ var ProductModel = (function () {
     return ProductModel;
 }());
 exports.ProductModel = ProductModel;
+var ProductUpdate = (function () {
+    function ProductUpdate() {
+    }
+    return ProductUpdate;
+}());
+exports.ProductUpdate = ProductUpdate;
 //# sourceMappingURL=Models.js.map

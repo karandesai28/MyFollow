@@ -8,9 +8,9 @@ using System.Web;
 using static MyFolllowOwin.Models.ProductMedia;
 
 namespace MyFolllowOwin.Models
-{   
-    public class ProductUpdates:CommonProperty
-    {        
+{
+    public class ProductUpdates : CommonProperty
+    {
         [Required]
         [MaxLength(140)]
         public string Title { get; set; }
@@ -20,6 +20,12 @@ namespace MyFolllowOwin.Models
 
         [Required]
         public Media ProductMedia { get; set; }
+
+        public string ImagePath{get;set;}
+        
+        public string VideoUrl { get; set; }
+        
+        public string Gifpath { get; set; }       
 
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]

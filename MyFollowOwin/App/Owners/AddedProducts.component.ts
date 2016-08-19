@@ -1,23 +1,28 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel} from './../Shared/Models';
+import {ProductModel, ProductUpdate, Platform} from './../Shared/Models';
 import {EditProduct} from './../Owners/EditProduct.component';
+import {UpdateProduct} from './../Owners/UpdateProduct.component';
 
 @Component({
     selector: 'added-products',   
     providers: [Service],
-    directives:[EditProduct],
+    directives: [EditProduct, UpdateProduct],
     templateUrl: 'App/Owners/AddedProducts.component.html'
 
 })
 export class AddedProducts implements OnInit {
+    productplatform = Platform;
     ProductId: number;
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
+    productupdate: ProductUpdate;
+    
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
-        this.product = new ProductModel();        
+        this.product = new ProductModel();
+        this.productupdate = new ProductUpdate();          
     }
         
     Click: Boolean = false;
@@ -37,6 +42,13 @@ export class AddedProducts implements OnInit {
         
     }
 
+    Update: boolean = false;
+    UpdateClicked(ProductId: number) {
+        this.ProductId = ProductId;
+        this.Update = true;
+        this.productupdate.ProductId = ProductId;
+    }
+    
     ngOnInit() {
         this.getProducts();
     }

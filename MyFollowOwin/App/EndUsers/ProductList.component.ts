@@ -7,43 +7,44 @@ import {ProductModel,Platform} from './../Shared/Models';
     templateUrl: 'App/EndUsers/ProductList.component.html'
 })
 export class ProductList implements OnInit {
-    //hide: boolean = false;
-    //hidebutton: any=false;
-    //hidebutton:boolean=false;
-    //hidebutton: string = '';  
-    productplatform: Platform;
+    hidebutton: any[] = []; 
+    len: number;
+    productplatform = Platform;
     products: Array<ProductModel>;    
     errorMessage: string;
     product: ProductModel;  
-    yourInt: number;      
+         
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();                               
     }
     ngOnInit() {        
-        this.getProducts();
-        //this.productplatform = (Platform) enum.ToObject(typeof (this.productplatform), this.yourInt);
+        this.getProducts();      
     }
-    
-    Follow(productId: number) {        
+
+    Follow(productId: number) {           
+        this.hidebutton[productId] = true;      
         this.product.Id = productId;             
-        this.FollowProducts();
-        //hidebutton = true;             
+        this.FollowProducts();                    
+    }
+
+    Unfollow(productId: number) {
+        this.hidebutton[productId] = false;       
     }
 
     getProducts() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
-                this.products = products
+                this.products = products                
             }, err => {
                 this.errorMessage = err;
-            });        
+            });    
     }
 
     FollowProducts() {        
         this.productservice.FollowProduct(this.product)
             .subscribe((products) => {
-                this.products = products
+                this.products = products                
             },
             err => {
                 this.errorMessage = err;

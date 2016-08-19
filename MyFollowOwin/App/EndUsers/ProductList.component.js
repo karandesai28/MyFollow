@@ -14,17 +14,21 @@ var Models_1 = require('./../Shared/Models');
 var ProductList = (function () {
     function ProductList(productservice) {
         this.productservice = productservice;
+        this.hidebutton = [];
+        this.productplatform = Models_1.Platform;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();
-        //this.productplatform = (Platform) enum.ToObject(typeof (this.productplatform), this.yourInt);
     };
     ProductList.prototype.Follow = function (productId) {
+        this.hidebutton[productId] = true;
         this.product.Id = productId;
         this.FollowProducts();
-        //hidebutton = true;             
+    };
+    ProductList.prototype.Unfollow = function (productId) {
+        this.hidebutton[productId] = false;
     };
     ProductList.prototype.getProducts = function () {
         var _this = this;

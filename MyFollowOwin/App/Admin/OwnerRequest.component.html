@@ -10,7 +10,7 @@
             <th>Website Url</th>
             <th>Approve/Reject</th>
         </tr>
-        <tr *ngFor='let owner of (owners | async)'>
+        <tr *ngFor='let owner of owners'>
             <td>
                 {{owner.CompanyName}}
             </td>

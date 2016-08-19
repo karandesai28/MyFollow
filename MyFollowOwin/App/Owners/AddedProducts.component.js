@@ -12,13 +12,17 @@ var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
 var EditProduct_component_1 = require('./../Owners/EditProduct.component');
+var UpdateProduct_component_1 = require('./../Owners/UpdateProduct.component');
 var AddedProducts = (function () {
     function AddedProducts(productservice) {
         this.productservice = productservice;
+        this.productplatform = Models_1.Platform;
         this.Click = false;
         this.Edit = false;
+        this.Update = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
+        this.productupdate = new Models_1.ProductUpdate();
     }
     AddedProducts.prototype.clicked = function () {
         this.Click = true;
@@ -30,6 +34,11 @@ var AddedProducts = (function () {
     AddedProducts.prototype.DeleteClicked = function (ProductId) {
         this.product.Id = ProductId;
         this.DeleteProducts();
+    };
+    AddedProducts.prototype.UpdateClicked = function (ProductId) {
+        this.ProductId = ProductId;
+        this.Update = true;
+        this.productupdate.ProductId = ProductId;
     };
     AddedProducts.prototype.ngOnInit = function () {
         this.getProducts();
@@ -51,7 +60,7 @@ var AddedProducts = (function () {
         core_1.Component({
             selector: 'added-products',
             providers: [Service_1.Service],
-            directives: [EditProduct_component_1.EditProduct],
+            directives: [EditProduct_component_1.EditProduct, UpdateProduct_component_1.UpdateProduct],
             templateUrl: 'App/Owners/AddedProducts.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

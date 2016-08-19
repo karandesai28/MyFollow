@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import {OwnerModel, ProductModel} from './Models';
+import {OwnerModel, ProductModel, ProductUpdate} from './Models';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -12,6 +12,7 @@ export class Service {
     private productUrl = 'api/Products/';
     private addedproductUrl = 'api/OwnerProductMappings/';
     private followUrl = 'api/Followers/';
+    private updateUrl = 'api/ProductUpdates/';
     constructor(private http: Http) { }    
 
     getPendingOwners() {
@@ -67,5 +68,12 @@ export class Service {
             'Content-Type': 'application/json',
         });
         return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(res => res.json());
+    }
+
+    UpdateProduct(productobj: ProductUpdate) {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(res => res.json());
     }
 }

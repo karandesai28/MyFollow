@@ -180,6 +180,7 @@
     <Compile Include="Api Controllers\OwnerProductMappingsController.cs" />
     <Compile Include="Api Controllers\ProductOwnersController.cs" />
     <Compile Include="Api Controllers\ProductsController.cs" />
+    <Compile Include="Api Controllers\ProductUpdatesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -218,6 +219,7 @@
     <Content Include="App\EndUsers\ProductList.component.html" />
     <Content Include="App\Owners\AddProduct.component.html" />
     <Content Include="App\Owners\EditProduct.component.html" />
+    <Content Include="App\Owners\UpdateProduct.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -281,6 +283,7 @@
     <TypeScriptCompile Include="App\EndUsers\ProductList.component.ts" />
     <TypeScriptCompile Include="App\Owners\AddedProducts.component.ts" />
     <TypeScriptCompile Include="App\Owners\EditProduct.component.ts" />
+    <TypeScriptCompile Include="App\Owners\UpdateProduct.component.ts" />
     <TypeScriptCompile Include="App\Shared\Service.ts" />
     <TypeScriptCompile Include="App\Owners\AddProduct.component.ts" />
     <TypeScriptCompile Include="App\main.ts" />
