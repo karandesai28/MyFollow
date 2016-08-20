@@ -11,63 +11,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
-var ViewUpdates_component_1 = require('./../EndUsers/ViewUpdates.component');
-var ProductList = (function () {
-    function ProductList(productservice) {
+var ViewUpdates = (function () {
+    function ViewUpdates(productservice) {
         this.productservice = productservice;
-        this.hidebutton = [];
         this.productplatform = Models_1.Platform;
-        this.update = [];
-        this.updateclicked = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
+        this.productupdate = new Models_1.ProductUpdate();
+        this.productupdates = new Array();
     }
-    ProductList.prototype.ngOnInit = function () {
-        this.getProducts();
+    ViewUpdates.prototype.ngOnInit = function () {
     };
-    ProductList.prototype.Follow = function (productobj) {
-        this.hidebutton[productobj.Id] = true;
-        this.update[productobj.Id] = true;
-        this.FollowProducts(productobj);
-        this.product = productobj;
+    ViewUpdates.prototype.ViewData = function () {
+        this.product.Id = this.productId;
+        this.getProducts(this.productId);
+        this.getUpdates(this.productId);
     };
-    ProductList.prototype.Unfollow = function (productobj) {
-        this.hidebutton[productobj.Id] = false;
-        this.update[productobj.Id] = false;
-    };
-    ProductList.prototype.ProductUpdates = function (productobj) {
-        this.updateclicked = true;
-        this.ProductId = productobj.Id;
-    };
-    ProductList.prototype.getProducts = function () {
+    ViewUpdates.prototype.getProducts = function (productId) {
         var _this = this;
-        var displayOwner = this.productservice.getProduct()
+        this.productservice.getProductById(productId)
             .subscribe(function (products) {
             _this.products = products;
         }, function (err) {
             _this.errorMessage = err;
         });
     };
-    ProductList.prototype.FollowProducts = function (productobj) {
+    ViewUpdates.prototype.getUpdates = function (productId) {
         var _this = this;
-        this.productservice.FollowProduct(productobj)
-            .subscribe(function (products) {
-            _this.products = products;
-            _this.getProducts();
+        this.productservice.getProductUpdates(productId)
+            .subscribe(function (productupdates) {
+            _this.productupdates = productupdates;
         }, function (err) {
             _this.errorMessage = err;
         });
     };
-    ProductList = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], ViewUpdates.prototype, "productId", void 0);
+    ViewUpdates = __decorate([
         core_1.Component({
-            selector: 'product-list',
-            directives: [ViewUpdates_component_1.ViewUpdates],
+            selector: 'view-update',
             providers: [Service_1.Service],
-            templateUrl: 'App/EndUsers/ProductList.component.html'
+            templateUrl: 'App/EndUsers/ViewUpdates.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
-    ], ProductList);
-    return ProductList;
+    ], ViewUpdates);
+    return ViewUpdates;
 }());
-exports.ProductList = ProductList;
-//# sourceMappingURL=ProductList.component.js.map
+exports.ViewUpdates = ViewUpdates;
+//# sourceMappingURL=ViewUpdates.component.js.map

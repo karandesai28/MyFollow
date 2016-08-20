@@ -26,7 +26,22 @@ namespace MyFollowOwin.Api_Controllers
         {
             return db.Products;
         }
-        
+
+        // GET: api/Products/5
+        [Route]
+        [HttpGet]
+        [ResponseType(typeof(Products))]
+        public IHttpActionResult GetProducts(int id)
+        {
+            Products products = db.Products.Find(id);
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
+        }
+
 
 
         // POST: api/Products

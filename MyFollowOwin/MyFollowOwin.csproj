@@ -176,6 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api Controllers\ApplicationUsersController.cs" />
     <Compile Include="Api Controllers\FollowersController.cs" />
     <Compile Include="Api Controllers\OwnerProductMappingsController.cs" />
     <Compile Include="Api Controllers\ProductOwnersController.cs" />
@@ -217,6 +218,7 @@
     <Content Include="App\Admin\OwnerRequest.component.html" />
     <Content Include="App\EndUsers\OwnerForm.component.html" />
     <Content Include="App\EndUsers\ProductList.component.html" />
+    <Content Include="App\EndUsers\ViewUpdates.component.html" />
     <Content Include="App\Owners\AddProduct.component.html" />
     <Content Include="App\Owners\EditProduct.component.html" />
     <Content Include="App\Owners\UpdateProduct.component.html" />
@@ -281,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\EndUsers\ProductList.component.ts" />
+    <TypeScriptCompile Include="App\EndUsers\ViewUpdates.component.ts" />
     <TypeScriptCompile Include="App\Owners\AddedProducts.component.ts" />
     <TypeScriptCompile Include="App\Owners\EditProduct.component.ts" />
     <TypeScriptCompile Include="App\Owners\UpdateProduct.component.ts" />

@@ -20,6 +20,8 @@ namespace MyFollowOwin.Api_Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Followers
+        [HttpGet]
+        [Route]
         public IQueryable<Followers> GetFollowers()
         {
             return db.Followers;

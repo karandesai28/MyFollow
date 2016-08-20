@@ -33,6 +33,7 @@ namespace MyFollowOwin.Models
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductUpdates> ProductUpdates { get; set; }
         public object AspNetUsers { get; internal set; }
-        
+
+        //public System.Data.Entity.DbSet<MyFollowOwin.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

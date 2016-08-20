@@ -24,6 +24,23 @@ var OwnerModel = (function () {
     return OwnerModel;
 }());
 exports.OwnerModel = OwnerModel;
+var CommonProperty = (function () {
+    function CommonProperty() {
+    }
+    return CommonProperty;
+}());
+exports.CommonProperty = CommonProperty;
+var Address = (function () {
+    function Address() {
+    }
+    return Address;
+}());
+var UserModel = (function () {
+    function UserModel() {
+    }
+    return UserModel;
+}());
+exports.UserModel = UserModel;
 var ProductModel = (function () {
     function ProductModel() {
     }

@@ -29,9 +29,12 @@
                {{productplatform[product.ProductPlatform]}}                
             </td>
             <td>               
-                <button  [hidden]="hidebutton[product.Id]" (click)="Follow(product.Id)">Follow</button> 
-                <button  [hidden]="!hidebutton[product.Id]" (click)="Unfollow(product.Id)">Unfollow</button>                                           
+                <button  [hidden]="hidebutton[product.Id]"  (click)="Follow(product)">Follow</button> 
+                <button  [hidden]="!hidebutton[product.Id]" (click)="Unfollow(product)">Unfollow</button>
+                <button [hidden]="!update[product.Id]" (click)="ProductUpdates(product)">View Updates</button>                                           
             </td>
         </tr>
     </table>
 </div>
+<br/>
+<view-update [hidden]="!updateclicked" [productId]='ProductId'>Fetching Records...!</view-update>

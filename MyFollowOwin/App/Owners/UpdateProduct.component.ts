@@ -57,6 +57,12 @@ export class UpdateProduct implements OnInit {
     UploadGif() {       
         this.uploadgif = !this.uploadgif;
         this.productupdate.ProductMedia = Media.GIF;
+        console.log(this.productupdate);
+    }
+   
+
+    PicUpload(path: any) {
+        this.productupdate.ImagePath = path.target.value;
     }
 
 }

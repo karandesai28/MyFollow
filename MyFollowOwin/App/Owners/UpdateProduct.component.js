@@ -47,6 +47,10 @@ var UpdateProduct = (function () {
     UpdateProduct.prototype.UploadGif = function () {
         this.uploadgif = !this.uploadgif;
         this.productupdate.ProductMedia = Models_1.Media.GIF;
+        console.log(this.productupdate);
+    };
+    UpdateProduct.prototype.PicUpload = function (path) {
+        this.productupdate.ImagePath = path.target.value;
     };
     __decorate([
         core_1.Input(), 

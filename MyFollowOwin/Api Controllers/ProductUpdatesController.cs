@@ -18,23 +18,27 @@ namespace MyFollowOwin.Api_Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/ProductUpdates
-        public IQueryable<ProductUpdates> GetProductUpdates()
-        {
-            return db.ProductUpdates;
-        }
+        //// GET: api/ProductUpdates        
+        //public IQueryable<ProductUpdates> GetProductUpdates()
+        //{
+        //    return db.ProductUpdates;
+        //}
 
         // GET: api/ProductUpdates/5
+        [Route]
+        [HttpGet]
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult GetProductUpdates(int id)
         {
-            ProductUpdates productUpdates = db.ProductUpdates.Find(id);
-            if (productUpdates == null)
+            var productId = db.Products.Find(id);
+            //  ProductUpdates productUpdates = db.ProductUpdates.Find(productId.Id);
+            var state = db.ProductUpdates.FirstOrDefault(x => x.ProductId == productId.Id);
+            if (state == null)
             {
                 return NotFound();
             }
 
-            return Ok(productUpdates);
+            return Ok(state);
         }
 
         // PUT: api/ProductUpdates/5

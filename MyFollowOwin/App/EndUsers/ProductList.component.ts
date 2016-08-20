@@ -1,35 +1,49 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel,Platform} from './../Shared/Models';
+import {ProductModel, Platform} from './../Shared/Models';
+import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
 @Component({
     selector: 'product-list',
+    directives: [ViewUpdates],
     providers: [Service],
     templateUrl: 'App/EndUsers/ProductList.component.html'
 })
-export class ProductList implements OnInit {
+export class ProductList implements OnInit{
+
+    ProductId: number;
     hidebutton: any[] = []; 
     len: number;
     productplatform = Platform;
     products: Array<ProductModel>;    
     errorMessage: string;
-    product: ProductModel;  
-         
+    product: ProductModel;
+             
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
-        this.product = new ProductModel();                               
+        this.product = new ProductModel();
+                                             
     }
     ngOnInit() {        
         this.getProducts();      
     }
 
-    Follow(productId: number) {           
-        this.hidebutton[productId] = true;      
-        this.product.Id = productId;             
-        this.FollowProducts();                    
+    update:any[] = [];
+    Follow(productobj: ProductModel) {
+        this.hidebutton[productobj.Id] = true;
+        this.update[productobj.Id] = true;
+        this.FollowProducts(productobj);
+        this.product = productobj;                          
     }
 
-    Unfollow(productId: number) {
-        this.hidebutton[productId] = false;       
+    Unfollow(productobj: ProductModel) {
+        this.hidebutton[productobj.Id] = false; 
+        this.update[productobj.Id] = false;      
+    }
+
+    updateclicked: boolean = false;
+    ProductUpdates(productobj: ProductModel) {
+        this.updateclicked = true;
+        this.ProductId = productobj.Id;                   
     }
 
     getProducts() {
@@ -41,10 +55,11 @@ export class ProductList implements OnInit {
             });    
     }
 
-    FollowProducts() {        
-        this.productservice.FollowProduct(this.product)
+    FollowProducts(productobj: ProductModel) {        
+        this.productservice.FollowProduct(productobj)
             .subscribe((products) => {
-                this.products = products                
+                this.products = products  
+                 this.getProducts();
             },
             err => {
                 this.errorMessage = err;

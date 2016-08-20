@@ -26,7 +26,7 @@
 
         <div *ngIf="uploadpic">
             <label *ngIf="uploadpic" for="ImagePath">Upload Image</label>
-            <input class="btn-file" *ngIf="uploadpic" type="file" #ImagePath="ngForm" [(ngModel)]="productupdate.ImagePath" ngControl="ImagePath" id="ImagePath" accept="image/*" />
+            <input (change)="PicUpload($event)" class="btn-file" *ngIf="uploadpic" type="file" #ImagePath="ngForm" [(ngModel)]="productupdate.ImagePath" ngControl="ImagePath" id="ImagePath" accept="image/*" />
         </div>
         <br/>
         <div *ngIf="uploadvideo">

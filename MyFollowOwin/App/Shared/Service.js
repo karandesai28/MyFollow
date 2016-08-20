@@ -17,9 +17,10 @@ var Service = (function () {
         this.http = http;
         this.ownerUrl = 'api/ProductOwners/';
         this.productUrl = 'api/Products/';
-        this.addedproductUrl = 'api/OwnerProductMappings/';
         this.followUrl = 'api/Followers/';
+        this.addedproductUrl = 'api/OwnerProductMappings/';
         this.updateUrl = 'api/ProductUpdates/';
+        this.userUrl = 'api/ApplicationUsers/';
     }
     Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
@@ -29,19 +30,19 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json().data; });
     };
     Service.prototype.AddOwner = function (ownerobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json().data; });
     };
     Service.prototype.AddProduct = function (productobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
     };
     Service.prototype.getProduct = function () {
         return this.http.get(this.productUrl)
@@ -55,7 +56,7 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
     };
     Service.prototype.DeleteProduct = function (productobj) {
         return this.http.delete(this.productUrl + productobj.Id);
@@ -64,13 +65,25 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(function (res) { return res.json().data; });
     };
     Service.prototype.UpdateProduct = function (productobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
+    };
+    Service.prototype.getProductUpdates = function (productId) {
+        return this.http.get(this.updateUrl + productId)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.getProductById = function (productId) {
+        return this.http.get(this.productUrl + productId)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.getUsers = function () {
+        return this.http.get(this.userUrl)
+            .map(function (response) { return response.json(); });
     };
     Service = __decorate([
         core_1.Injectable(), 
