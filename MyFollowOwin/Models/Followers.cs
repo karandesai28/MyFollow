@@ -16,7 +16,7 @@ namespace MyFolllowOwin.Models
         
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
-        public Products Products { get; set; }
+        public Products Products { get; set; }     
 
     }
 }

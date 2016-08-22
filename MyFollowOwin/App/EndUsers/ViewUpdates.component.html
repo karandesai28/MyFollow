@@ -1,38 +1,31 @@
-﻿<button (click)="ViewData()">Click</button>
-<h1 class="container">Complete Product Details</h1>
+﻿<h1 class="container">Complete Product Details</h1>
 <div class="container">
-    <h2 class="container">Quick Summary:</h2>
-    <p class="lead">This product was added on:{{product.CreateDate}}</p>
-    
-
-         {{product.Name}}
-         Description
-         {{product.Description}}
-         Homepage Url
-         {{product.HomepageUrl}}
-         playStore Url
-         {{product.HomepageUrl}}
-         AppStore Url
-         {{product.HomepageUrl}}
-         Product Platform
-         {{platform[product.platform]}}
-         Hompage Url
-         {{product.HomepageUrl}}
-    
-
+    <h2>Quick Summary:</h2>
+    <p class="lead">The product was created on:{{product.CreateDate}}</p>
 </div>
+
+<ul class="list-unstyled">
+    <li>Name: {{product.Name}}</li>
+    <li>Description: {{product.Description}}</li>
+    <li>Homepage Url: {{product.HomepageUrl}}</li>
+    <li>Playstore Url: {{product.PlayStoreUrl}}</li>
+    <li>Appstore Url: {{product.AppStoreUrl}}</li>
+    <li>Platform: {{productplatform[product.ProductPlatform]}}</li>
+</ul>
+
 <div class="container">
     <h2 class="container">Recent Product Update:</h2>
-    <p class="lead">This product was last update on:{{productupdate.createdate}}</p>
-    <dl>
-        <dt>Title</dt>
-        <dd>{{productupdate.Title}}</dd>
-        <dt>Details</dt>
-        <dd>{{productupdate.Details}}</dd>
-        <dt>Media</dt>        
-        <dd>{{productupdate.ImagePath}}</dd>
-        <dd>{{productupdate.VideoUrl}}</dd>
-        <dd>{{productupdate.Gifpath}}</dd>
-    </dl>
-    <img src="{{productupdate.ImagePath}}" />
+    <p class="lead">This product was last update on:{{productupdate.createdate}}</p>  
 </div>
+<dl>
+    <dt>Title</dt>
+    <dd>{{productupdate.Title}}</dd>
+    <dt>Details</dt>
+    <dd>{{productupdate.Details}}</dd>
+    <dt>Media</dt>
+    <dd>{{productupdate.ImagePath}}</dd>
+    <dd>{{productupdate.VideoUrl}}</dd>
+    <dd>{{productupdate.Gifpath}}</dd>
+</dl>
+<img src={{productupdate.ImagePath}} />
+<!--<img src={{url}} />-->

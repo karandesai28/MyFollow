@@ -20,18 +20,29 @@ var ViewUpdates = (function () {
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
     }
+    ViewUpdates.prototype.ngOnChanges = function () {
+        if (this.productId != null) {
+            this.ViewData();
+        }
+        else {
+            console.log("Invalid");
+        }
+    };
+    ViewUpdates.prototype.ngOnDestroy = function () { console.log("destroyed"); };
     ViewUpdates.prototype.ngOnInit = function () {
     };
     ViewUpdates.prototype.ViewData = function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
+        this.productupdate.ImagePath = "https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png";
+        this.ngOnDestroy();
     };
     ViewUpdates.prototype.getProducts = function (productId) {
         var _this = this;
         this.productservice.getProductById(productId)
             .subscribe(function (products) {
-            _this.products = products;
+            _this.product = products;
         }, function (err) {
             _this.errorMessage = err;
         });
@@ -40,7 +51,7 @@ var ViewUpdates = (function () {
         var _this = this;
         this.productservice.getProductUpdates(productId)
             .subscribe(function (productupdates) {
-            _this.productupdates = productupdates;
+            _this.productupdate = productupdates;
         }, function (err) {
             _this.errorMessage = err;
         });

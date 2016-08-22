@@ -8,6 +8,7 @@ import {ProductModel} from './../Shared/Models';
 })
 
 export class EditProduct implements OnInit {
+    Hide: boolean = false;
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
@@ -22,9 +23,10 @@ export class EditProduct implements OnInit {
 
     @Input() productId: number;
     onSubmit(product: ProductModel) {
+        this.Hide = true; 
         this.product.Id = this.productId;
         console.log(this.product);       
-        this.EditProductData();               
+        this.EditProductData();                    
     }
 
     EditProductData() {

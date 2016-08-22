@@ -14,12 +14,14 @@ var Models_1 = require('./../Shared/Models');
 var EditProduct = (function () {
     function EditProduct(productservice) {
         this.productservice = productservice;
+        this.Hide = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     EditProduct.prototype.ngOnInit = function () {
     };
     EditProduct.prototype.onSubmit = function (product) {
+        this.Hide = true;
         this.product.Id = this.productId;
         console.log(this.product);
         this.EditProductData();

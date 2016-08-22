@@ -18,6 +18,8 @@ var ProductList = (function () {
         this.hidebutton = [];
         this.productplatform = Models_1.Platform;
         this.update = [];
+        this.j = 0;
+        this.k = 0;
         this.updateclicked = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
@@ -30,6 +32,23 @@ var ProductList = (function () {
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;
+        this.count = this.hidebutton.length;
+        for (this.i = 0; this.i < this.count; this.i++) {
+            if (this.hidebutton[this.i] == true) {
+                this.sf[this.j] = this.i;
+                this.j++;
+            }
+        }
+        this.StayFollowed();
+    };
+    ProductList.prototype.StayFollowed = function () {
+        this.count = this.sf.length;
+        for (this.i = 0; this.i < this.count; this.i++) {
+            if (this.sf[this.i] == this.k) {
+                this.hidebutton[this.k] = true;
+            }
+            this.k++;
+        }
     };
     ProductList.prototype.Unfollow = function (productobj) {
         this.hidebutton[productobj.Id] = false;

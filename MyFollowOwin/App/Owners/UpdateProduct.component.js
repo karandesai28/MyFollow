@@ -14,6 +14,7 @@ var Models_1 = require('./../Shared/Models');
 var UpdateProduct = (function () {
     function UpdateProduct(productservice) {
         this.productservice = productservice;
+        this.Hide = false;
         this.uploadpic = false;
         this.uploadvideo = false;
         this.uploadgif = false;
@@ -26,6 +27,7 @@ var UpdateProduct = (function () {
         this.productupdate.ProductId = this.productId;
         console.log(this.productupdate);
         this.UpdateProducts();
+        this.Hide = true;
     };
     UpdateProduct.prototype.UpdateProducts = function () {
         var _this = this;

@@ -39,7 +39,7 @@ export class ProductModel {
     public Description: string;
     public HomepageUrl: string;
     public PlayStoreUrl: string;
-    public AppStoreUrl: string;
+    public AppStoreUrl: string;   
     public ProductPlatform: Platform;
     public Dates: CommonProperty;      
 }

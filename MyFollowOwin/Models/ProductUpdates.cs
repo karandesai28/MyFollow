@@ -25,7 +25,7 @@ namespace MyFolllowOwin.Models
         
         public string VideoUrl { get; set; }
         
-        public string Gifpath { get; set; }       
+        public string Gifpath { get; set; }            
 
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]

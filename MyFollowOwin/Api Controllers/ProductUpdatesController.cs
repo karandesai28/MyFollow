@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MyFolllowOwin.Models;
 using MyFollowOwin.Models;
+using System.IO;
+using System.Web;
 
 namespace MyFollowOwin.Api_Controllers
 {
@@ -82,11 +84,28 @@ namespace MyFollowOwin.Api_Controllers
         [HttpPost]
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult PostProductUpdates(int id, ProductUpdates productUpdates)
-        {            
+        {
+            HttpPostedFileBase file = default(HttpPostedFileBase);
+           
             Products product = db.Products.Find(id);
             if (product != null)
             {
                 productUpdates.ProductId = product.Id;
+                //var myFile = HttpContext.Current.Request.Files[productUpdates.ImagePath];
+                //string name = Path.GetFileName(productUpdates.ImagePath);
+                int count = HttpContext.Current.Request.Files.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var myFile = HttpContext.Current.Request.Files[i];
+
+
+                    if (myFile != null && myFile.ContentLength != 0)
+                    {
+                        var path = HttpContext.Current.Server.MapPath("~/Image Database");
+                        //file.SaveAs(path);
+                        myFile.SaveAs(Path.Combine(path, myFile.FileName));
+                    }
+                }
             }
 
             productUpdates.CreateDate = DateTime.Today;

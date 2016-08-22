@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import {OwnerModel, ProductModel, ProductUpdate} from './Models';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
+
 
 @Injectable()
 export class Service {

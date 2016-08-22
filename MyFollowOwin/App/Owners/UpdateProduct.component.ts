@@ -8,6 +8,7 @@ import {ProductUpdate,Media} from './../Shared/Models';
 })
 
 export class UpdateProduct implements OnInit {
+    Hide: boolean = false;
     media: Media;
     errorMessage: string;
     productupdate: ProductUpdate;
@@ -28,6 +29,7 @@ export class UpdateProduct implements OnInit {
         this.productupdate.ProductId = this.productId;
         console.log(this.productupdate);
         this.UpdateProducts();
+        this.Hide = true;
     }
     
 
@@ -61,8 +63,9 @@ export class UpdateProduct implements OnInit {
     }
    
 
-    PicUpload(path: any) {
+    PicUpload(path) {
         this.productupdate.ImagePath = path.target.value;
     }
+    
 
 }

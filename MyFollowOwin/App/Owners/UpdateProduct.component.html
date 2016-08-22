@@ -1,6 +1,6 @@
-﻿<h1>Update Product Details</h1>
+﻿<h1 [hidden]="Hide">Update Product Details</h1>
 
-<div class="form-group">
+<div [hidden]="Hide" class="form-group">
     <form (ngSubmit)="onSubmit(productupdate)" role="form" #AddForm="ngForm">
 
         <label for="Title">Title:</label>
@@ -26,7 +26,8 @@
 
         <div *ngIf="uploadpic">
             <label *ngIf="uploadpic" for="ImagePath">Upload Image</label>
-            <input (change)="PicUpload($event)" class="btn-file" *ngIf="uploadpic" type="file" #ImagePath="ngForm" [(ngModel)]="productupdate.ImagePath" ngControl="ImagePath" id="ImagePath" accept="image/*" />
+            <input (change)="PicUpload($event)" class="btn-file" *ngIf="uploadpic" type="file" #ImagePath="ngForm" [(ngModel)]="productupdate.ImagePath" ngControl="ImagePath" id="ImagePath" accept="image/*" /> 
+            <!--<input class="btn-file" *ngIf="uploadpic" type="text" #ImagePath="ngForm" [(ngModel)]="productupdate.ImagePath" ngControl="ImagePath" id="ImagePath"/>-->
         </div>
         <br/>
         <div *ngIf="uploadvideo">
