@@ -85,7 +85,7 @@ namespace MyFollowOwin.Api_Controllers
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult PostProductUpdates(int id, ProductUpdates productUpdates)
         {
-            HttpPostedFileBase file = default(HttpPostedFileBase);
+            //HttpPostedFileBase file = default(HttpPostedFileBase);
            
             Products product = db.Products.Find(id);
             if (product != null)

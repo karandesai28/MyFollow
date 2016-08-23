@@ -215,13 +215,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\Admin\OwnerRequest.component.html" />
-    <Content Include="App\EndUsers\OwnerForm.component.html" />
-    <Content Include="App\EndUsers\ProductList.component.html" />
-    <Content Include="App\EndUsers\ViewUpdates.component.html" />
-    <Content Include="App\Owners\AddProduct.component.html" />
-    <Content Include="App\Owners\EditProduct.component.html" />
-    <Content Include="App\Owners\UpdateProduct.component.html" />
+    <Content Include="App\Client Side Views\Admin\OwnerRequest.component.html" />
+    <Content Include="App\Client Side Views\EndUsers\OwnerForm.component.html" />
+    <Content Include="App\Client Side Views\EndUsers\ProductList.component.html" />
+    <Content Include="App\Client Side Views\EndUsers\ViewUpdates.component.html" />
+    <Content Include="App\Client Side Views\Owners\AddProduct.component.html" />
+    <Content Include="App\Client Side Views\Owners\EditProduct.component.html" />
+    <Content Include="App\Client Side Views\Owners\UpdateProduct.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -231,7 +231,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
-    <Content Include="App\Owners\AddedProducts.component.html" />
+    <Content Include="App\Client Side Views\Owners\AddedProducts.component.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -283,17 +283,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\EndUsers\ProductList.component.ts" />
-    <TypeScriptCompile Include="App\EndUsers\ViewUpdates.component.ts" />
-    <TypeScriptCompile Include="App\Owners\AddedProducts.component.ts" />
-    <TypeScriptCompile Include="App\Owners\EditProduct.component.ts" />
-    <TypeScriptCompile Include="App\Owners\UpdateProduct.component.ts" />
-    <TypeScriptCompile Include="App\Shared\Service.ts" />
-    <TypeScriptCompile Include="App\Owners\AddProduct.component.ts" />
+    <TypeScriptCompile Include="App\Components\EndUsers\ProductList.component.ts" />
+    <TypeScriptCompile Include="App\Components\EndUsers\ViewUpdates.component.ts" />
+    <TypeScriptCompile Include="App\Components\Owners\AddedProducts.component.ts" />
+    <TypeScriptCompile Include="App\Components\Owners\EditProduct.component.ts" />
+    <TypeScriptCompile Include="App\Components\Owners\UpdateProduct.component.ts" />
+    <TypeScriptCompile Include="App\Components\Shared\Service.ts" />
+    <TypeScriptCompile Include="App\Components\Owners\AddProduct.component.ts" />
     <TypeScriptCompile Include="App\main.ts" />
-    <TypeScriptCompile Include="App\Shared\Models.ts" />
-    <TypeScriptCompile Include="App\EndUsers\OwnerForm.component.ts" />
-    <TypeScriptCompile Include="App\Admin\OwnerRequest.component.ts" />
+    <TypeScriptCompile Include="App\Components\Shared\Models.ts" />
+    <TypeScriptCompile Include="App\Components\EndUsers\OwnerForm.component.ts" />
+    <TypeScriptCompile Include="App\Components\Admin\OwnerRequest.component.ts" />
     <TypeScriptCompile Include="typings\globals\core-js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />

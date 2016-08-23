@@ -1,0 +1,48 @@
+﻿<h1 [hidden]="Hide">Edit Product Details</h1>
+
+<div [hidden]="Hide" class="form-group">
+    <form  (ngSubmit)="onSubmit(product)" role="form" #AddForm="ngForm">
+        
+        <label for="Name">Name:</label>
+        <input class="form-control" #Name="ngForm" type="text" [(ngModel)]="product.Name" ngControl="Name" id="Name" required/><br/>
+        <div [hidden]="Name.valid || Name.pristine" class="alert alert-danger">
+            This is required field
+        </div>
+
+        <label for="Description">Description</label>
+        <input class="form-control" #Description="ngForm" type="text" [(ngModel)]="product.Description" ngControl="Description" id="Description" required/><br />
+        <div [hidden]="Description.valid || Description.pristine" class="alert alert-danger">
+            This is required field
+        </div>
+
+        <label for="HomePageUrl">Homepage Url</label>
+        <input class="form-control" #HomepageUrl="ngForm" type="text" [(ngModel)]="product.HomepageUrl" ngControl="HomepageUrl" id="HomepageUrl" required pattern="https?://.+"/><br />
+        <div [hidden]="HomepageUrl.valid || HomepageUrl.pristine" class="alert alert-danger">
+            Enter URL starting with http://
+        </div>
+
+        <label for="PlayStoreUrl">PlayStore Url</label>
+        <input class="form-control" #PlayStoreUrl="ngForm" type="text" [(ngModel)]="product.PlayStoreUrl" ngControl="PlayStoreUrl" id="PlayStoreUrl" required pattern="https?://.+"/><br />
+        <div [hidden]="PlayStoreUrl.valid || PlayStoreUrl.pristine" class="alert alert-danger">
+            Enter URL starting with http://
+        </div>
+
+        <label for="AppStoreUrl">AppStore Url</label>
+        <input class="form-control" #AppStoreUrl="ngForm" type="text" [(ngModel)]="product.AppStoreUrl" ngControl="AppStoreUrl" id="AppStoreUrl" required pattern="https?://.+"/><br />
+        <div [hidden]="AppStoreUrl.valid || AppStoreUrl.pristine" class="alert alert-danger">
+            Enter URL starting with http://
+        </div>
+
+        <label for="ProductPlatform">Product Platform</label>
+        <select class="form-control" #ProductPlatform="ngForm" [(ngModel)]="product.ProductPlatform" ngControl="ProductPlatform" id="ProductPlatform" required>
+            <option value="Mobile">Mobile</option>
+            <option value="Web">Web</option>
+            <option value="IOT">IOT</option>
+        </select><br />
+        <div [hidden]="ProductPlatform.valid || ProductPlatform.pristine" class="alert alert-danger">
+            This is required field
+        </div>
+
+        <input class="btn btn-default" type="submit" value="Submit" />
+    </form>
+</div>

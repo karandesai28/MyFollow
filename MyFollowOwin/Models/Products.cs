@@ -27,7 +27,9 @@ namespace MyFolllowOwin.Models
 
         [Required]
         [Url]
-        public string AppStoreUrl { get; set; }       
+        public string AppStoreUrl { get; set; }   
+        
+        public bool StatusBit { get; set; }    
 
         public Platform ProductPlatform { get; set; }        
     }
