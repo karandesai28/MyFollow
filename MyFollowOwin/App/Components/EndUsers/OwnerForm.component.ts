@@ -59,11 +59,9 @@ export class OwnerComponent implements OnInit {
    }
     AddOwnerData() {
         this.ownerservice.AddOwner(this.owner)
-            .subscribe((owners) => {
-                this.owners = owners
-            },
-            err => {
-                this.errorMessage = err;
-            });
+            .subscribe(
+            function (response) { console.log("Success Response" + response) },
+            function (error) { console.log("Error happened" + error) },
+            () => {})
     }
 }

@@ -41,8 +41,7 @@ export class ProductModel {
     public PlayStoreUrl: string;
     public AppStoreUrl: string;   
     public ProductPlatform: Platform;
-    public Dates: CommonProperty;
-    public StatusBit: boolean;     
+    public Dates: CommonProperty;      
 }
 
 export class ProductUpdate {
@@ -55,4 +54,10 @@ export class ProductUpdate {
     public VideoUrl: string;
     public Gifpath: string;
     public Dates: CommonProperty;
+}
+
+export class Followers {
+    public Product: ProductModel;
+    public User: UserModel;
+    public StatusBit: boolean;
 }

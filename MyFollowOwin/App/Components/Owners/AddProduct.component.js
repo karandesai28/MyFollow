@@ -29,28 +29,20 @@ var AddProduct = (function () {
         this.hideproductform = false;
     };
     AddProduct.prototype.ngOnInit = function () {
-    };
-    AddProduct.prototype.clean = function () {
-        this.product.Name = "";
-        this.product.Description = "";
-        this.product.HomepageUrl = "";
-        this.product.AppStoreUrl = "";
-        this.product.PlayStoreUrl = "";
+        this.product = new Models_1.ProductModel();
     };
     AddProduct.prototype.onSubmit = function (product) {
         this.AddProductData();
-        this.clean();
         this.hideclicked = false;
         this.hideproductform = true;
-        alert("Product is added!");
     };
     AddProduct.prototype.AddProductData = function () {
         var _this = this;
         this.productservice.AddProduct(this.product)
-            .subscribe(function (products) {
-            _this.products = products;
-        }, function (err) {
-            _this.errorMessage = err;
+            .subscribe(function (response) {
+            console.log("Success Response" + response);
+        }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.addedproducts.ngOnChanges();
         });
     };
     AddProduct = __decorate([

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel, Platform} from './../Shared/Models';
+import {ProductModel, Platform, Followers} from './../Shared/Models';
 import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
 
 @Component({
@@ -17,21 +17,27 @@ export class ProductList implements OnInit{
     productplatform = Platform;
     products: Array<ProductModel>;    
     errorMessage: string;
-    product: ProductModel;   
+    product: ProductModel;
+    follower: Followers;
+    followers: Array<Followers>;
+       
 
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
-        this.product = new ProductModel();           
+        this.product = new ProductModel();
+        this.follower = new Followers();
+        this.followers = new Array<Followers>();          
                                                     
     }
     ngOnInit() {        
-        this.getProducts();         
+        this.getProducts(); 
     }
 
     update: any[] = [];
-    
-    Follow(productobj: ProductModel) {
-        this.hidebutton[productobj.Id] = true;    
+
+   
+    Follow(productobj: ProductModel) {        
+        this.hidebutton[productobj.Id]    
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;                          
@@ -40,7 +46,7 @@ export class ProductList implements OnInit{
   
 
     Unfollow(productobj: ProductModel) {
-        this.hidebutton[productobj.Id] = false; 
+        this.hidebutton[productobj.Id] = this.follower.StatusBit; 
         this.update[productobj.Id] = false;      
     }
 
@@ -53,7 +59,7 @@ export class ProductList implements OnInit{
     getProducts() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
-                this.products = products                
+                this.products = products                              
             }, err => {
                 this.errorMessage = err;
             });    
@@ -61,11 +67,18 @@ export class ProductList implements OnInit{
 
     FollowProducts(productobj: ProductModel) {        
         this.productservice.FollowProduct(productobj)
-            .subscribe((products) => {
-                this.products = products  
-                 this.getProducts();
-            },
-            err => {
+            .subscribe(
+            function (response) { console.log("Success Response" + response) },
+            function (error) { console.log("Error happened" + error) },
+            () => { this.getProducts(); })  
+    }
+
+
+    getFollowProducts(productId:number) {
+        this.productservice.getFollowBit(productId)
+            .subscribe((followers) => {
+                this.followers = followers
+            }, err => {
                 this.errorMessage = err;
             });
     }

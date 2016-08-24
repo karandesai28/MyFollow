@@ -52,12 +52,12 @@ namespace MyFollowOwin.Migrations
                     City = "Vadodara",
                     State = "Gujarat",
                     Country = "India",
-                    ContactNo = "9924815850",
+                    ContactNo = 9924815850L,
                     Pin = 390022
                 }
             };
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            user.UserName = "Admin";
+            user.UserName = user.Email;
             string pwd = "A.a1234";
 
             context.Users.Add(user);

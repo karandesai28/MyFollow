@@ -24,6 +24,10 @@ var AddedProducts = (function () {
         this.product = new Models_1.ProductModel();
         this.productupdate = new Models_1.ProductUpdate();
     }
+    AddedProducts.prototype.ngOnChanges = function () {
+        alert("I am here");
+        this.getProducts();
+    };
     AddedProducts.prototype.clicked = function () {
         this.Click = true;
     };

@@ -32,32 +32,28 @@ export class AddProduct implements OnInit {
     }
 
     ngOnInit() {
+        this.product = new ProductModel();
 
     }
 
-    clean() {
-        this.product.Name = "";
-        this.product.Description = "";
-        this.product.HomepageUrl = "";
-        this.product.AppStoreUrl = "";
-        this.product.PlayStoreUrl = "";
-    }
-
+   
     onSubmit(product: ProductModel) {        
-        this.AddProductData();        
-        this.clean();  
+       
+        this.AddProductData();
         this.hideclicked = false;
         this.hideproductform = true;  
-        alert("Product is added!");
+       
     }
-    
+    addedproducts: AddedProducts;
     AddProductData() {
         this.productservice.AddProduct(this.product)
-            .subscribe((products) => {
-                this.products = products
+            .subscribe(
+            function (response) {                             
+                console.log("Success Response" + response)
             },
-            err => {
-                this.errorMessage = err;
-            });
+                function (error) { console.log("Error happened" + error) },
+                () => {                    
+                    this.addedproducts.ngOnChanges();
+                })  
     }
 }

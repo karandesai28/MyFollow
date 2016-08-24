@@ -28,13 +28,8 @@ var EditProduct = (function () {
         alert("Product Edited");
     };
     EditProduct.prototype.EditProductData = function () {
-        var _this = this;
         this.productservice.EditProduct(this.product)
-            .subscribe(function (products) {
-            _this.products = products;
-        }, function (err) {
-            _this.errorMessage = err;
-        });
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
     __decorate([
         core_1.Input(), 

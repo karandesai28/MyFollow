@@ -14,22 +14,11 @@ var Models_1 = require('./../Shared/Models');
 var OwnerRequest = (function () {
     function OwnerRequest(ownerservice) {
         this.ownerservice = ownerservice;
-        this.Click = false;
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
-        if (this.Click == true) {
-            this.pendingOwners();
-        }
     }
     OwnerRequest.prototype.ngOnInit = function () {
         this.pendingOwners();
-    };
-    OwnerRequest.prototype.ngOnChanges = function () {
-        alert("Removing record");
-        if (this.Click == true) {
-            this.pendingOwners();
-            this.Click = false;
-        }
     };
     OwnerRequest.prototype.pendingOwners = function () {
         var _this = this;
@@ -42,24 +31,17 @@ var OwnerRequest = (function () {
     };
     OwnerRequest.prototype.UpdateOwnerData = function () {
         var _this = this;
-        this.ownerservice.UpdateOwnerState(this.owner)
-            .subscribe(function (owners) {
-            _this.owners = owners;
-        }, function (err) {
-            _this.errorMessage = err;
-        });
-        this.ngOnChanges();
+        var ownerupdate = this.ownerservice.UpdateOwnerState(this.owner)
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { _this.pendingOwners(); });
     };
     OwnerRequest.prototype.Approve = function (ownerId) {
-        this.Click = true;
         this.owner.Id = ownerId;
-        this.owner.OwnerStates = 1;
+        this.owner.OwnerStates = Models_1.OwnerRequestStates.Approved;
         this.UpdateOwnerData();
     };
     OwnerRequest.prototype.Reject = function (ownerId) {
-        this.Click = true;
         this.owner.Id = ownerId;
-        this.owner.OwnerStates = 2;
+        this.owner.OwnerStates = Models_1.OwnerRequestStates.Rejected;
         this.UpdateOwnerData();
     };
     OwnerRequest = __decorate([

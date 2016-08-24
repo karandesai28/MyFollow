@@ -18,26 +18,15 @@ namespace MyFollowOwin.Api_Controllers
     public class FollowersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/Followers
+        
         [HttpGet]
         [Route]
-        public IQueryable<Followers> GetFollowers()
-        {
-            return db.Followers;
-        }
-
         // GET: api/Followers/5
         [ResponseType(typeof(Followers))]
-        public IHttpActionResult GetFollowers(int id)
+        public IQueryable<Followers> GetFollowers(int id)
         {
-            Followers followers = db.Followers.Find(id);
-            if (followers == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(followers);
+            var record = db.Followers.Where(e => e.ProductId == id);
+            return record;
         }
 
         // PUT: api/Followers/5
@@ -89,7 +78,7 @@ namespace MyFollowOwin.Api_Controllers
             {
                 followers.UserId = user.Id;
             }
-
+            followers.StatusBit = true;
             followers.ProductId = productId;
             followers.CreateDate = DateTime.Today;
             followers.ModifiedDate = DateTime.Today;

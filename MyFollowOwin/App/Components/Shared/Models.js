@@ -53,4 +53,10 @@ var ProductUpdate = (function () {
     return ProductUpdate;
 }());
 exports.ProductUpdate = ProductUpdate;
+var Followers = (function () {
+    function Followers() {
+    }
+    return Followers;
+}());
+exports.Followers = Followers;
 //# sourceMappingURL=Models.js.map

@@ -36,12 +36,10 @@ export class UpdateProduct implements OnInit {
 
     UpdateProducts() {
         this.productservice.UpdateProduct(this.productupdate)
-            .subscribe((productupdates) => {
-                this.productupdates = productupdates
-            },
-            err => {
-                this.errorMessage = err;
-            });
+            .subscribe(
+            function (response) { console.log("Success Response" + response) },
+            function (error) { console.log("Error happened" + error) },
+            () => { })
     }
 
     uploadpic: boolean = false;

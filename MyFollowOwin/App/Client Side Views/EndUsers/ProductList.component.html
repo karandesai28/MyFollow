@@ -29,8 +29,8 @@
                {{productplatform[product.ProductPlatform]}}                
             </td>
             <td>               
-                <button  [hidden]="hidebutton[product.Id]"  (click)="Follow(product)">Follow</button> 
-                <button  [hidden]="!hidebutton[product.Id]" (click)="Unfollow(product)">Unfollow</button>
+                <button *ngIf="follower.StatusBit" (click)="Follow(product)">Follow</button> 
+                <button *ngIf="!follower.StatusBit" (click)="Unfollow(product)">Unfollow</button>
                 <button [hidden]="!update[product.Id]" (click)="ProductUpdates(product)">View Updates</button>                                           
             </td>
         </tr>

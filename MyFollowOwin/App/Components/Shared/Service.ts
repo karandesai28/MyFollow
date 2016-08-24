@@ -16,9 +16,9 @@ export class Service {
     private userUrl = 'api/ApplicationUsers/';
     constructor(private http: Http) { }    
 
-    getPendingOwners() {
-        return this.http.get(this.ownerUrl)
-            .map(response => response.json());
+    getPendingOwners(){
+      return this.http.get(this.ownerUrl)
+            .map(response => response.json());        
     }  
 
 
@@ -26,21 +26,21 @@ export class Service {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers }).map(res => res.json().data);
+        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers });
     }
 
     AddOwner(ownerobj: OwnerModel) {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(res => res.json().data);
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers });
     }
 
     AddProduct(productobj: ProductModel) {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers }).map(res => res.json().data);
+        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers });
     }
 
     getProduct() {
@@ -57,7 +57,7 @@ export class Service {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers }).map(res => res.json().data);
+        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers });
     }
 
     DeleteProduct(productobj: ProductModel) {        
@@ -68,14 +68,14 @@ export class Service {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(res => res.json().data);
+        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers });
     }
 
     UpdateProduct(productobj: ProductUpdate) {
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(res => res.json().data);
+        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers });
     }
 
     getProductUpdates(productId:number) {
@@ -91,6 +91,11 @@ export class Service {
 
     getUsers() {
         return this.http.get(this.userUrl)
+            .map(response => response.json());
+    }
+
+    getFollowBit(productId:number) {
+        return this.http.get(this.followUrl+productId)
             .map(response => response.json());
     }
 }

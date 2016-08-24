@@ -29,19 +29,19 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.put(this.ownerUrl + ownerobj.Id, JSON.stringify(ownerobj), { headers: headers });
     };
     Service.prototype.AddOwner = function (ownerobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.post(this.ownerUrl, JSON.stringify(ownerobj), { headers: headers });
     };
     Service.prototype.AddProduct = function (productobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.post(this.productUrl, JSON.stringify(productobj), { headers: headers });
     };
     Service.prototype.getProduct = function () {
         return this.http.get(this.productUrl)
@@ -55,7 +55,7 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.put(this.productUrl + productobj.Id, JSON.stringify(productobj), { headers: headers });
     };
     Service.prototype.DeleteProduct = function (productobj) {
         return this.http.delete(this.productUrl + productobj.Id);
@@ -64,13 +64,13 @@ var Service = (function () {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.post(this.followUrl + productobj.Id, JSON.stringify(productobj.Id), { headers: headers });
     };
     Service.prototype.UpdateProduct = function (productobj) {
         var headers = new http_1.Headers({
             'Content-Type': 'application/json',
         });
-        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers }).map(function (res) { return res.json().data; });
+        return this.http.post(this.updateUrl + productobj.ProductId, JSON.stringify(productobj), { headers: headers });
     };
     Service.prototype.getProductUpdates = function (productId) {
         return this.http.get(this.updateUrl + productId)
@@ -82,6 +82,10 @@ var Service = (function () {
     };
     Service.prototype.getUsers = function () {
         return this.http.get(this.userUrl)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.getFollowBit = function (productId) {
+        return this.http.get(this.followUrl + productId)
             .map(function (response) { return response.json(); });
     };
     Service = __decorate([

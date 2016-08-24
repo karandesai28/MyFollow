@@ -32,11 +32,9 @@ export class EditProduct implements OnInit {
 
     EditProductData() {
         this.productservice.EditProduct(this.product)
-            .subscribe((products) => {
-                this.products = products
-            },
-            err => {
-                this.errorMessage = err;
-            });
+            .subscribe(
+                function (response) { console.log("Success Response" + response) },
+            function (error) { console.log("Error happened" + error) },
+            () => {})
     }
 }

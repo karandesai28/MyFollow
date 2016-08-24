@@ -49,13 +49,8 @@ var OwnerComponent = (function () {
         this.clean();
     };
     OwnerComponent.prototype.AddOwnerData = function () {
-        var _this = this;
         this.ownerservice.AddOwner(this.owner)
-            .subscribe(function (owners) {
-            _this.owners = owners;
-        }, function (err) {
-            _this.errorMessage = err;
-        });
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
     OwnerComponent = __decorate([
         core_1.Component({

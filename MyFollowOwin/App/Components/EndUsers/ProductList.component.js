@@ -21,18 +21,20 @@ var ProductList = (function () {
         this.updateclicked = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
+        this.follower = new Models_1.Followers();
+        this.followers = new Array();
     }
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();
     };
     ProductList.prototype.Follow = function (productobj) {
-        this.hidebutton[productobj.Id] = true;
+        this.hidebutton[productobj.Id];
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;
     };
     ProductList.prototype.Unfollow = function (productobj) {
-        this.hidebutton[productobj.Id] = false;
+        this.hidebutton[productobj.Id] = this.follower.StatusBit;
         this.update[productobj.Id] = false;
     };
     ProductList.prototype.ProductUpdates = function (productobj) {
@@ -51,9 +53,13 @@ var ProductList = (function () {
     ProductList.prototype.FollowProducts = function (productobj) {
         var _this = this;
         this.productservice.FollowProduct(productobj)
-            .subscribe(function (products) {
-            _this.products = products;
-            _this.getProducts();
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { _this.getProducts(); });
+    };
+    ProductList.prototype.getFollowProducts = function (productId) {
+        var _this = this;
+        this.productservice.getFollowBit(productId)
+            .subscribe(function (followers) {
+            _this.followers = followers;
         }, function (err) {
             _this.errorMessage = err;
         });

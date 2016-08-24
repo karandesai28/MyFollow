@@ -103,7 +103,7 @@ namespace MyFollowOwin.Api_Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
                 if (!ProductOwnersExists(id))
                 {
@@ -111,11 +111,11 @@ namespace MyFollowOwin.Api_Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }  
                   
         protected override void Dispose(bool disposing)

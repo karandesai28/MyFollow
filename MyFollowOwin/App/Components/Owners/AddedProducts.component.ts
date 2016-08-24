@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit,OnDestroy,OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel, ProductUpdate, Platform} from './../Shared/Models';
 import {EditProduct} from './../Owners/EditProduct.component';
@@ -11,7 +11,7 @@ import {UpdateProduct} from './../Owners/UpdateProduct.component';
     templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
 
 })
-export class AddedProducts implements OnInit {
+export class AddedProducts implements OnInit, OnChanges {
     productplatform = Platform;
     ProductId: number;
     products: Array<ProductModel>;
@@ -23,6 +23,11 @@ export class AddedProducts implements OnInit {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
         this.productupdate = new ProductUpdate();          
+    }
+
+    ngOnChanges() {
+        alert("I am here");
+        this.getProducts();
     }
         
     Click: Boolean = false;

@@ -25,7 +25,7 @@ namespace MyFollowOwin.Models
         [Required]
         public long Pin { get; set; }
 
-        [Required]
-        public string ContactNo { get; set; }
+        [Required]        
+        public long ContactNo { get; set; }
     }
 }

@@ -31,13 +31,8 @@ var UpdateProduct = (function () {
         alert("Product Updated");
     };
     UpdateProduct.prototype.UpdateProducts = function () {
-        var _this = this;
         this.productservice.UpdateProduct(this.productupdate)
-            .subscribe(function (productupdates) {
-            _this.productupdates = productupdates;
-        }, function (err) {
-            _this.errorMessage = err;
-        });
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
     UpdateProduct.prototype.UploadPic = function () {
         this.uploadpic = !this.uploadpic;

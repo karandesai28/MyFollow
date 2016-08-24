@@ -1,4 +1,4 @@
-﻿import { Component, OnInit,Input,AfterContentChecked,OnDestroy,OnChanges } from '@angular/core';
+﻿import { Component, OnInit,OnDestroy,Input,OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel} from './../Shared/Models';
 @Component({
@@ -6,7 +6,7 @@ import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel} from './..
     providers: [Service],
     templateUrl: 'App/Client Side Views/EndUsers/ViewUpdates.component.html'
 })
-export class ViewUpdates implements OnInit,OnDestroy, OnChanges { 
+export class ViewUpdates implements OnInit,OnChanges,OnDestroy { 
    
     fname: string;
     path: any;

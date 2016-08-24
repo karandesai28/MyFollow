@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyFollowOwin.Models;
 using System.Net.Mail;
+using System.Net;
 
 namespace MyFollowOwin.Controllers
 {
@@ -138,6 +139,7 @@ namespace MyFollowOwin.Controllers
         {            
             if (ModelState.IsValid)
           {
+                bool status;
              var user = new ApplicationUser {UserName=model.Email,Email = model.Email, Address = model.Users.Address, BirthDate = model.Users.BirthDate, Name = model.Users.Name };                    
              user.Email = model.Email;
              user.EmailConfirmed = false;
@@ -145,8 +147,19 @@ namespace MyFollowOwin.Controllers
              if (result.Succeeded)
              {
                 var roleresult = UserManager.AddToRole(user.Id, "EndUsers");               
-                SendMail(user);
-                return RedirectToAction("Confirm", "Account");                       
+                status=SendMail(user);
+                    if (status == true)
+                    {
+                        return RedirectToAction("Confirm", "Account");
+                    }
+                    else
+                    {
+                        ApplicationDbContext db = new ApplicationDbContext();
+                        var entityToRemove = db.Users.First(e => e.Id == user.Id);
+                        db.Users.Remove(entityToRemove);
+                        db.SaveChanges();
+                        return RedirectToAction("Failed", "Account");
+                    }                     
              }
                     AddErrors(result);                
            }
@@ -154,7 +167,7 @@ namespace MyFollowOwin.Controllers
             return View(model);
         }
 
-        public void SendMail(ApplicationUser user)
+        public bool SendMail(ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
@@ -163,23 +176,31 @@ namespace MyFollowOwin.Controllers
                 m.Body = string.Format("Dear {0}<BR/>Thank you for your registration,Click to Confirm Email <a href=\"{1}\" title=\"User Email Confirm\">{1}</a>", user.Name, Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Url.Scheme));
                 m.IsBodyHtml = true;            
                 SmtpClient smtp = new SmtpClient();
+              
                 try
                 {
-                    smtp.Send(m);
+                    smtp.Send(m);                   
                 }
                 catch(Exception ex)
                 {
-                    String errorString = "";
+                    string errorString = "";
                     errorString += ex.Message + ";" + ex.InnerException;
+                    return false;                                       
                 }
-                     
-                           
+                
             }
+            return true;
         }
 
         [AllowAnonymous]
         public ActionResult Confirm()
         {            
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Failed()
+        {                      
             return View();
         }
 
