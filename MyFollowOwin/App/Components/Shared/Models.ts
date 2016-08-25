@@ -57,7 +57,7 @@ export class ProductUpdate {
 }
 
 export class Followers {
-    public Product: ProductModel;
-    public User: UserModel;
+    public ProductId: number;
+    public UserId: string;
     public StatusBit: boolean;
 }

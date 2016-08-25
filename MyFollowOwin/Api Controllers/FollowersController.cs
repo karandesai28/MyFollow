@@ -23,10 +23,16 @@ namespace MyFollowOwin.Api_Controllers
         [Route]
         // GET: api/Followers/5
         [ResponseType(typeof(Followers))]
-        public IQueryable<Followers> GetFollowers(int id)
+        public IHttpActionResult GetFollowers()
         {
-            var record = db.Followers.Where(e => e.ProductId == id);
-            return record;
+            var user = User.Identity.GetUserId();
+            var record = db.Followers.Where(e=>e.UserId==user);
+            
+            if (record == null)
+            {
+                return NotFound();
+            }
+            return Ok(record);
         }
 
         // PUT: api/Followers/5
@@ -94,15 +100,19 @@ namespace MyFollowOwin.Api_Controllers
         }
 
         // DELETE: api/Followers/5
+        [HttpDelete]
+        [Route]
         [ResponseType(typeof(Followers))]
         public IHttpActionResult DeleteFollowers(int id)
         {
-            Followers followers = db.Followers.Find(id);
+            var user= User.Identity.GetUserId();
+            var followers = db.Followers.FirstOrDefault(e => e.ProductId == id && e.UserId==user);
+            
             if (followers == null)
             {
                 return NotFound();
             }
-
+            
             db.Followers.Remove(followers);
             db.SaveChanges();
 

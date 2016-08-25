@@ -94,8 +94,12 @@ export class Service {
             .map(response => response.json());
     }
 
-    getFollowBit(productId:number) {
-        return this.http.get(this.followUrl+productId)
+    getFollowBit() {
+        return this.http.get(this.followUrl)
             .map(response => response.json());
+    }
+
+    DeleteFollower(productId:number) {
+        return this.http.delete(this.followUrl + productId);
     }
 }

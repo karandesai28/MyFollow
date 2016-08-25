@@ -1,4 +1,4 @@
-﻿import { Component, Injectable, OnInit} from '@angular/core';
+﻿import { Component, Injectable, OnInit,Output} from '@angular/core';
 import {ProductModel} from './../Shared/Models';
 import {Service} from './../Shared/Service';
 import {AddedProducts} from './../Owners/AddedProducts.component';
@@ -11,9 +11,12 @@ import {AddedProducts} from './../Owners/AddedProducts.component';
 })
 
 export class AddProduct implements OnInit {
+    
+    Product: ProductModel;
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
+    addedproducts: AddedProducts;
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
@@ -32,28 +35,28 @@ export class AddProduct implements OnInit {
     }
 
     ngOnInit() {
-        this.product = new ProductModel();
+        this.product = new ProductModel();       
 
     }
 
    
-    onSubmit(product: ProductModel) {        
-       
+    onSubmit(product: ProductModel) {         
         this.AddProductData();
         this.hideclicked = false;
         this.hideproductform = true;  
        
     }
-    addedproducts: AddedProducts;
+    
     AddProductData() {
         this.productservice.AddProduct(this.product)
             .subscribe(
-            function (response) {                             
+            function (response) {                                         
                 console.log("Success Response" + response)
             },
                 function (error) { console.log("Error happened" + error) },
-                () => {                    
-                    this.addedproducts.ngOnChanges();
+                () => {
+                    this.Product = this.product;       
+                    
                 })  
     }
 }

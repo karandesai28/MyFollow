@@ -42,7 +42,7 @@ var AddProduct = (function () {
             .subscribe(function (response) {
             console.log("Success Response" + response);
         }, function (error) { console.log("Error happened" + error); }, function () {
-            _this.addedproducts.ngOnChanges();
+            _this.Product = _this.product;
         });
     };
     AddProduct = __decorate([

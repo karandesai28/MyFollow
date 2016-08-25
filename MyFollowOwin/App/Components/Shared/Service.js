@@ -84,9 +84,12 @@ var Service = (function () {
         return this.http.get(this.userUrl)
             .map(function (response) { return response.json(); });
     };
-    Service.prototype.getFollowBit = function (productId) {
-        return this.http.get(this.followUrl + productId)
+    Service.prototype.getFollowBit = function () {
+        return this.http.get(this.followUrl)
             .map(function (response) { return response.json(); });
+    };
+    Service.prototype.DeleteFollower = function (productId) {
+        return this.http.delete(this.followUrl + productId);
     };
     Service = __decorate([
         core_1.Injectable(), 

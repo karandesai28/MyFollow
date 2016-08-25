@@ -10,7 +10,7 @@ import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
     templateUrl: 'App/Client Side Views/EndUsers/ProductList.component.html'
 })
 export class ProductList implements OnInit{
-    
+   
     ProductId: number;
     hidebutton: any[] = []; 
     len: number;
@@ -29,15 +29,16 @@ export class ProductList implements OnInit{
         this.followers = new Array<Followers>();          
                                                     
     }
-    ngOnInit() {        
+    ngOnInit() {
         this.getProducts(); 
     }
 
     update: any[] = [];
 
    
-    Follow(productobj: ProductModel) {        
-        this.hidebutton[productobj.Id]    
+    Follow(productobj: ProductModel) {
+        this.follower.StatusBit = true;
+        this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;                          
@@ -45,8 +46,9 @@ export class ProductList implements OnInit{
 
   
 
-    Unfollow(productobj: ProductModel) {
-        this.hidebutton[productobj.Id] = this.follower.StatusBit; 
+    Unfollow(productobj: ProductModel) {       
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
         this.update[productobj.Id] = false;      
     }
 
@@ -59,9 +61,13 @@ export class ProductList implements OnInit{
     getProducts() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
-                this.products = products                              
+                this.products = products
+                this.getFollowProducts();                                
             }, err => {
                 this.errorMessage = err;
+            },
+            () => {
+                             
             });    
     }
 
@@ -70,17 +76,40 @@ export class ProductList implements OnInit{
             .subscribe(
             function (response) { console.log("Success Response" + response) },
             function (error) { console.log("Error happened" + error) },
-            () => { this.getProducts(); })  
+            () => {
+                this.getFollowProducts();
+                this.getProducts();
+            })  
     }
 
 
-    getFollowProducts(productId:number) {
-        this.productservice.getFollowBit(productId)
+    getFollowProducts() {
+        this.productservice.getFollowBit()
             .subscribe((followers) => {
-                this.followers = followers
+                this.followers = followers;
+                     
+           
             }, err => {
                 this.errorMessage = err;
+            },
+            () => {
+                //alert(this.followers);
+                for (let follower of this.followers) {
+                    this.hidebutton[follower.ProductId] = follower.StatusBit;
+                    this.update[follower.ProductId] = true;
+                }
             });
     }
 
+    UnfollowFollowers(productId: number) {
+        this.productservice.DeleteFollower(productId)
+            .subscribe(function (response) {
+                console.log("Success Response" + response)
+            },
+            function (error) { console.log("Error happened" + error) },
+            () => {
+                this.getProducts();
+
+            });
+    }
 }

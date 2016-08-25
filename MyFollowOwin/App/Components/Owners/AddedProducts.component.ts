@@ -1,19 +1,19 @@
-﻿import { Component, OnInit,OnDestroy,OnChanges } from '@angular/core';
+﻿import { Component, OnInit,OnDestroy,OnChanges,Input} from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel, ProductUpdate, Platform} from './../Shared/Models';
 import {EditProduct} from './../Owners/EditProduct.component';
 import {UpdateProduct} from './../Owners/UpdateProduct.component';
 
 @Component({
-    selector: 'added-products',   
+    selector: 'added-products',     
     providers: [Service],
     directives: [EditProduct, UpdateProduct],
     templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
 
 })
 export class AddedProducts implements OnInit, OnChanges {
-    productplatform = Platform;
     ProductId: number;
+    productplatform = Platform;   
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
@@ -22,12 +22,18 @@ export class AddedProducts implements OnInit, OnChanges {
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
-        this.productupdate = new ProductUpdate();          
+        this.productupdate = new ProductUpdate();
+                  
     }
 
+    @Input() productobj: ProductModel;
     ngOnChanges() {
-        alert("I am here");
-        this.getProducts();
+        if (this.productobj != null) {
+            this.getProducts();
+        }
+        else {
+            console.log("first time loading");
+        }      
     }
         
     Click: Boolean = false;
@@ -36,9 +42,9 @@ export class AddedProducts implements OnInit, OnChanges {
     }
 
     Edit: Boolean = false;
-    EditClicked(ProductId:number) {
+    EditClicked(Product:ProductModel) {
         this.Edit = true;
-        this.ProductId = ProductId;        
+        this.product = Product;        
     }
 
     DeleteClicked(ProductId: number) {
@@ -64,12 +70,21 @@ export class AddedProducts implements OnInit, OnChanges {
                 this.products = products
             }, err => {
                 this.errorMessage = err;
-            });
+            },
+            () => {  }
+       );
     }
 
     DeleteProducts() {
-        this.productservice.DeleteProduct(this.product).subscribe((res) => {
-        });
+        this.productservice.DeleteProduct(this.product)
+            .subscribe(function (response) {
+                console.log("Success Response" + response)
+            },
+            function (error) { console.log("Error happened" + error) },
+            () => {
+                this.getProducts();
+
+            });
     }
 
 }

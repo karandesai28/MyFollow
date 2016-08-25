@@ -1,4 +1,4 @@
-﻿import { Component, OnInit,Input } from '@angular/core';
+﻿import { Component, OnInit,Input,OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel} from './../Shared/Models';
 @Component({
@@ -7,7 +7,7 @@ import {ProductModel} from './../Shared/Models';
     templateUrl: 'App/Client Side Views/Owners/EditProduct.component.html'
 })
 
-export class EditProduct implements OnInit {
+export class EditProduct implements OnInit, OnChanges {
     Hide: boolean = false;
     products: Array<ProductModel>;
     errorMessage: string;
@@ -16,15 +16,20 @@ export class EditProduct implements OnInit {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
     }  
+    ngOnInit() { }
+    @Input() productobj: ProductModel;
+    ngOnChanges() {
+        if ((this.productobj) != null) {
+            this.product = this.productobj;                               
+        }
+        else {
+            console.log("First time loading");
+        }
 
-    ngOnInit() {
-
-    }    
-
-    @Input() productId: number;
+    }  
+       
     onSubmit(product: ProductModel) {
-        this.Hide = true; 
-        this.product.Id = this.productId;
+        this.Hide = true;         
         console.log(this.product);       
         this.EditProductData(); 
         alert("Product Edited");                   

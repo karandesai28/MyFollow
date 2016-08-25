@@ -34,7 +34,7 @@ export class OwnerRequest implements OnInit{
 
     UpdateOwnerData() {
         var ownerupdate = this.ownerservice.UpdateOwnerState(this.owner)
-            .subscribe(
+            .subscribe(                
             function (response) { console.log("Success Response" + response) },
             function (error) { console.log("Error happened" + error) },
             () => { this.pendingOwners(); }

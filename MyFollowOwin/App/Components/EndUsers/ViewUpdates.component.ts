@@ -8,6 +8,8 @@ import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel} from './..
 })
 export class ViewUpdates implements OnInit,OnChanges,OnDestroy { 
    
+    message: string;
+    show: boolean=false;
     fname: string;
     path: any;
     productplatform = Platform;
@@ -25,8 +27,17 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
     }
 
     ngOnChanges() {
+        
         if (this.productId != null) {
-            this.ViewData();            
+            var update=this.getUpdates(this.productId);
+            if (update != null) {
+                this.ViewData();
+            }
+            else {
+                this.getProducts(this.productId);
+                this.message = "Owner has not added any updates for this product yet!";
+                this.show = true;
+            }            
         }
         else {
             console.log("Invalid");
@@ -44,7 +55,7 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
         this.product.Id = this.productId;
         this.getProducts(this.productId);       
         this.getUpdates(this.productId);
-        this.productupdate.ImagePath = "https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png";      
+        this.productupdate.ImagePath;      
         this.ngOnDestroy();
     }
 

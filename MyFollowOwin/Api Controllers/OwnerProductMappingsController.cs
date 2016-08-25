@@ -22,11 +22,12 @@ namespace MyFollowOwin.Api_Controllers
         // GET: api/OwnerProductMappings
         [Route]
         [HttpGet]
+        [ResponseType(typeof(Products))]
         public Products[] GetAddedProducts()
         {
             var id = User.Identity.GetUserId();
             ApplicationUser user = db.Users.Find(id);
-            int k = 0,n=0,i=0,ownerId=0;
+            int k = 0, n = 0, i = 0, ownerId = 0;
             foreach (var item in db.Owners)
             {
                 if (item.UserId == user.Id)
@@ -35,9 +36,9 @@ namespace MyFollowOwin.Api_Controllers
                 }
             }
 
-            foreach(var item in db.AddedProducts)
+            foreach (var item in db.AddedProducts)
             {
-                if (item.OwnerId==ownerId)
+                if (item.OwnerId == ownerId)
                 {
                     i++;
                 }
@@ -45,7 +46,7 @@ namespace MyFollowOwin.Api_Controllers
             OwnerProductMapping[] ownerProductMapping = new OwnerProductMapping[i];
             foreach (var row in db.AddedProducts)
             {
-                if (row.OwnerId==ownerId)
+                if (row.OwnerId == ownerId)
                 {
                     ownerProductMapping[n] = row;
                     n++;
@@ -56,7 +57,7 @@ namespace MyFollowOwin.Api_Controllers
             {
                 foreach (var item in ownerProductMapping)
                 {
-                    if (item.ProductId==row.Id)
+                    if (item.ProductId == row.Id)
                     {
                         product[k] = row;
                         k++;

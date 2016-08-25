@@ -18,11 +18,17 @@ var EditProduct = (function () {
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
-    EditProduct.prototype.ngOnInit = function () {
+    EditProduct.prototype.ngOnInit = function () { };
+    EditProduct.prototype.ngOnChanges = function () {
+        if ((this.productobj) != null) {
+            this.product = this.productobj;
+        }
+        else {
+            console.log("First time loading");
+        }
     };
     EditProduct.prototype.onSubmit = function (product) {
         this.Hide = true;
-        this.product.Id = this.productId;
         console.log(this.product);
         this.EditProductData();
         alert("Product Edited");
@@ -33,8 +39,8 @@ var EditProduct = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Number)
-    ], EditProduct.prototype, "productId", void 0);
+        __metadata('design:type', Models_1.ProductModel)
+    ], EditProduct.prototype, "productobj", void 0);
     EditProduct = __decorate([
         core_1.Component({
             selector: 'edit-product',

@@ -25,15 +25,19 @@ var AddedProducts = (function () {
         this.productupdate = new Models_1.ProductUpdate();
     }
     AddedProducts.prototype.ngOnChanges = function () {
-        alert("I am here");
-        this.getProducts();
+        if (this.productobj != null) {
+            this.getProducts();
+        }
+        else {
+            console.log("first time loading");
+        }
     };
     AddedProducts.prototype.clicked = function () {
         this.Click = true;
     };
-    AddedProducts.prototype.EditClicked = function (ProductId) {
+    AddedProducts.prototype.EditClicked = function (Product) {
         this.Edit = true;
-        this.ProductId = ProductId;
+        this.product = Product;
     };
     AddedProducts.prototype.DeleteClicked = function (ProductId) {
         this.product.Id = ProductId;
@@ -54,12 +58,21 @@ var AddedProducts = (function () {
             _this.products = products;
         }, function (err) {
             _this.errorMessage = err;
-        });
+        }, function () { });
     };
     AddedProducts.prototype.DeleteProducts = function () {
-        this.productservice.DeleteProduct(this.product).subscribe(function (res) {
+        var _this = this;
+        this.productservice.DeleteProduct(this.product)
+            .subscribe(function (response) {
+            console.log("Success Response" + response);
+        }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.getProducts();
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Models_1.ProductModel)
+    ], AddedProducts.prototype, "productobj", void 0);
     AddedProducts = __decorate([
         core_1.Component({
             selector: 'added-products',

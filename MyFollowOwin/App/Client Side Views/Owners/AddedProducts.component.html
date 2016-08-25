@@ -31,7 +31,7 @@
                 {{productplatform[product.ProductPlatform]}}
             </td>
             <td>                
-                <button (click)="EditClicked(product.Id)">Edit</button>
+                <button (click)="EditClicked(product)">Edit</button>
                 <button (click)="DeleteClicked(product.Id)">Delete</button>
                 <button (click)="UpdateClicked(product.Id)">Update</button>
             </td>
@@ -39,6 +39,7 @@
     </table>
 </div>
 <br/>
-<edit-product [hidden]="!Edit" [productId]='ProductId'></edit-product>
+
+<edit-product [hidden]="!Edit" [productobj]='product'></edit-product>
 <update-product [hidden]="!Update" [productId]='ProductId'></update-product>
  

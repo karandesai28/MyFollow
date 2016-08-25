@@ -14,6 +14,7 @@ var Models_1 = require('./../Shared/Models');
 var ViewUpdates = (function () {
     function ViewUpdates(productservice) {
         this.productservice = productservice;
+        this.show = false;
         this.productplatform = Models_1.Platform;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
@@ -22,7 +23,15 @@ var ViewUpdates = (function () {
     }
     ViewUpdates.prototype.ngOnChanges = function () {
         if (this.productId != null) {
-            this.ViewData();
+            var update = this.getUpdates(this.productId);
+            if (update != null) {
+                this.ViewData();
+            }
+            else {
+                this.getProducts(this.productId);
+                this.message = "Owner has not added any updates for this product yet!";
+                this.show = true;
+            }
         }
         else {
             console.log("Invalid");
@@ -35,7 +44,7 @@ var ViewUpdates = (function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        this.productupdate.ImagePath = "https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png";
+        this.productupdate.ImagePath;
         this.ngOnDestroy();
     };
     ViewUpdates.prototype.getProducts = function (productId) {

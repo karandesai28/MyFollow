@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyFolllowOwin.Models;
 using MyFollowOwin.Models;
-using System.Web.Http.ModelBinding;
-using System.Web;
 using Microsoft.AspNet.Identity;
-using System.Web.Security;
-using MyFollowOwin.Controllers;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyFollowOwin.Api_Controllers

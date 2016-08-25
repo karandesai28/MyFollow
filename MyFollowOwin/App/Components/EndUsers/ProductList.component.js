@@ -28,13 +28,15 @@ var ProductList = (function () {
         this.getProducts();
     };
     ProductList.prototype.Follow = function (productobj) {
-        this.hidebutton[productobj.Id];
+        this.follower.StatusBit = true;
+        this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;
     };
     ProductList.prototype.Unfollow = function (productobj) {
-        this.hidebutton[productobj.Id] = this.follower.StatusBit;
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
         this.update[productobj.Id] = false;
     };
     ProductList.prototype.ProductUpdates = function (productobj) {
@@ -46,22 +48,43 @@ var ProductList = (function () {
         var displayOwner = this.productservice.getProduct()
             .subscribe(function (products) {
             _this.products = products;
+            _this.getFollowProducts();
         }, function (err) {
             _this.errorMessage = err;
+        }, function () {
         });
     };
     ProductList.prototype.FollowProducts = function (productobj) {
         var _this = this;
         this.productservice.FollowProduct(productobj)
-            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { _this.getProducts(); });
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.getFollowProducts();
+            _this.getProducts();
+        });
     };
-    ProductList.prototype.getFollowProducts = function (productId) {
+    ProductList.prototype.getFollowProducts = function () {
         var _this = this;
-        this.productservice.getFollowBit(productId)
+        this.productservice.getFollowBit()
             .subscribe(function (followers) {
             _this.followers = followers;
         }, function (err) {
             _this.errorMessage = err;
+        }, function () {
+            //alert(this.followers);
+            for (var _i = 0, _a = _this.followers; _i < _a.length; _i++) {
+                var follower = _a[_i];
+                _this.hidebutton[follower.ProductId] = follower.StatusBit;
+                _this.update[follower.ProductId] = true;
+            }
+        });
+    };
+    ProductList.prototype.UnfollowFollowers = function (productId) {
+        var _this = this;
+        this.productservice.DeleteFollower(productId)
+            .subscribe(function (response) {
+            console.log("Success Response" + response);
+        }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.getProducts();
         });
     };
     ProductList = __decorate([
