@@ -84,6 +84,8 @@ export class AddedProducts implements OnInit, OnChanges {
         this.ProductId = ProductId;
         this.Update = true;
         this.productupdate.ProductId = ProductId;
+        
+        
     }
     
     ngOnInit() {
@@ -148,9 +150,46 @@ export class AddedProducts implements OnInit, OnChanges {
             },
             () => {                
                 for (let follower of this.followers) {
-                    this.hidebutton[follower.ProductId] = follower.StatusBit;
-                    this.update[follower.ProductId] = follower.StatusBit;
+                    this.hidebutton[follower.ProductId] = true;
+                    this.update[follower.ProductId] = true;
                 }
+            });
+    }
+
+    Follow(productobj: ProductModel) {
+        //this.follower.StatusBit = true;
+        this.hidebutton[productobj.Id] = true;
+        this.update[productobj.Id] = true;
+        this.FollowProducts(productobj);
+        this.product = productobj;
+    }
+
+    FollowProducts(productobj: ProductModel) {
+        this.productservice.FollowProduct(productobj)
+            .subscribe(
+            function (response) { console.log("Success Response" + response) },
+            function (error) { console.log("Error happened" + error) },
+            () => {
+                this.getFollowProducts();
+                this.getProducts();
+            })
+    }
+
+    Unfollow(productobj: ProductModel) {
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
+        this.update[productobj.Id] = false;
+    }
+
+    UnfollowFollowers(productId: number) {
+        this.productservice.DeleteFollower(productId)
+            .subscribe(function (response) {
+                console.log("Success Response" + response)
+            },
+            function (error) { console.log("Error happened" + error) },
+            () => {
+                this.getProducts();
+
             });
     }
 

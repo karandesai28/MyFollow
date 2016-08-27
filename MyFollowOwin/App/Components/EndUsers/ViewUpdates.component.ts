@@ -27,9 +27,16 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
     }
 
     ngOnChanges() {
-        
+
         if (this.productId != null) {
-            var update=this.getUpdates(this.productId);
+           this.getUpdates(this.productId);
+            
+        }
+        else {
+            console.log("Invalid");
+        }
+    }
+          checkUpdates(productId:number,update){
             if (update != null) {
                 this.ViewData();
             }
@@ -37,11 +44,7 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
                 this.getProducts(this.productId);
                 this.message = "Owner has not added any updates for this product yet!";
                 this.show = true;
-            }            
-        }
-        else {
-            console.log("Invalid");
-        }
+            }         
     }
 
     ngOnDestroy() {console.log("destroyed") }
@@ -51,7 +54,7 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
     } 
     
     @Input() productId: number;   
-    public ViewData() {
+    public ViewData() {        
         this.product.Id = this.productId;
         this.getProducts(this.productId);       
         this.getUpdates(this.productId);
@@ -73,10 +76,12 @@ export class ViewUpdates implements OnInit,OnChanges,OnDestroy {
     getUpdates(productId:number) {
         this.productservice.getProductUpdates(productId)
             .subscribe((productupdates) => {
-                this.productupdate = productupdates
+                this.productupdate = productupdates,
+                this.checkUpdates(productId, this.productupdate);
             }, err => {
                 this.errorMessage = err;
-            });
+            },
+            () => { console.log("Update Found"); });
     }
     
 }

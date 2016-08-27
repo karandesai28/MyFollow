@@ -120,9 +120,38 @@ var AddedProducts = (function () {
         }, function () {
             for (var _i = 0, _a = _this.followers; _i < _a.length; _i++) {
                 var follower = _a[_i];
-                _this.hidebutton[follower.ProductId] = follower.StatusBit;
-                _this.update[follower.ProductId] = follower.StatusBit;
+                _this.hidebutton[follower.ProductId] = true;
+                _this.update[follower.ProductId] = true;
             }
+        });
+    };
+    AddedProducts.prototype.Follow = function (productobj) {
+        //this.follower.StatusBit = true;
+        this.hidebutton[productobj.Id] = true;
+        this.update[productobj.Id] = true;
+        this.FollowProducts(productobj);
+        this.product = productobj;
+    };
+    AddedProducts.prototype.FollowProducts = function (productobj) {
+        var _this = this;
+        this.productservice.FollowProduct(productobj)
+            .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.getFollowProducts();
+            _this.getProducts();
+        });
+    };
+    AddedProducts.prototype.Unfollow = function (productobj) {
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
+        this.update[productobj.Id] = false;
+    };
+    AddedProducts.prototype.UnfollowFollowers = function (productId) {
+        var _this = this;
+        this.productservice.DeleteFollower(productId)
+            .subscribe(function (response) {
+            console.log("Success Response" + response);
+        }, function (error) { console.log("Error happened" + error); }, function () {
+            _this.getProducts();
         });
     };
     __decorate([

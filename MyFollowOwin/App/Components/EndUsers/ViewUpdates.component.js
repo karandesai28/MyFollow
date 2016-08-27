@@ -23,18 +23,20 @@ var ViewUpdates = (function () {
     }
     ViewUpdates.prototype.ngOnChanges = function () {
         if (this.productId != null) {
-            var update = this.getUpdates(this.productId);
-            if (update != null) {
-                this.ViewData();
-            }
-            else {
-                this.getProducts(this.productId);
-                this.message = "Owner has not added any updates for this product yet!";
-                this.show = true;
-            }
+            this.getUpdates(this.productId);
         }
         else {
             console.log("Invalid");
+        }
+    };
+    ViewUpdates.prototype.checkUpdates = function (productId, update) {
+        if (update != null) {
+            this.ViewData();
+        }
+        else {
+            this.getProducts(this.productId);
+            this.message = "Owner has not added any updates for this product yet!";
+            this.show = true;
         }
     };
     ViewUpdates.prototype.ngOnDestroy = function () { console.log("destroyed"); };
@@ -60,10 +62,11 @@ var ViewUpdates = (function () {
         var _this = this;
         this.productservice.getProductUpdates(productId)
             .subscribe(function (productupdates) {
-            _this.productupdate = productupdates;
+            _this.productupdate = productupdates,
+                _this.checkUpdates(productId, _this.productupdate);
         }, function (err) {
             _this.errorMessage = err;
-        });
+        }, function () { console.log("Update Found"); });
     };
     __decorate([
         core_1.Input(), 

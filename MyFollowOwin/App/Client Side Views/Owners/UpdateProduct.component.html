@@ -1,7 +1,7 @@
 ﻿<h1 [hidden]="Hide">Update Product Details</h1>
 
 <div [hidden]="Hide" class="form-group">
-    <form (ngSubmit)="onSubmit(productupdate)" role="form" #AddForm="ngForm">
+    <form *ngIf="Click" (ngSubmit)="onSubmit(productupdate)" role="form" #AddForm="ngForm" enctype="multipart/form-data" >
 
         <label for="Title">Title:</label>
         <input class="form-control" #Title="ngForm" type="text" [(ngModel)]="productupdate.Title" ngControl="Title" id="Title" required/><br />      

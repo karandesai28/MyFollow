@@ -14,6 +14,7 @@ var Models_1 = require('./../Shared/Models');
 var UpdateProduct = (function () {
     function UpdateProduct(productservice) {
         this.productservice = productservice;
+        this.Click = true;
         this.Hide = false;
         this.uploadpic = false;
         this.uploadvideo = false;
@@ -24,11 +25,14 @@ var UpdateProduct = (function () {
     UpdateProduct.prototype.ngOnInit = function () {
     };
     UpdateProduct.prototype.onSubmit = function (productupdate) {
+        var _this = this;
         this.productupdate.ProductId = this.productId;
         console.log(this.productupdate);
         this.UpdateProducts();
         this.Hide = true;
-        alert("Product Updated");
+        this.Click = false;
+        this.productupdate = new Models_1.ProductUpdate();
+        setTimeout(function () { return _this.Click = true; }, 0.5);
     };
     UpdateProduct.prototype.UpdateProducts = function () {
         this.productservice.UpdateProduct(this.productupdate)
@@ -48,13 +52,8 @@ var UpdateProduct = (function () {
         console.log(this.productupdate);
     };
     UpdateProduct.prototype.PicUpload = function (path) {
-        var reader = new FileReader();
+        //var reader = new FileReader();
         this.productupdate.ImagePath = path.target.value;
-        //reader.onload = (e) => {
-        //    this.productupdate.ImagePath = e.target.result;
-        //}
-        //this.productupdate.ImagePath = path.target.result;
-        //    console.log(reader.readAsDataURL(path.target.files[0]));
     };
     __decorate([
         core_1.Input(), 

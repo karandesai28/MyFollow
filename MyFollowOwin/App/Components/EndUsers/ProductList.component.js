@@ -28,7 +28,7 @@ var ProductList = (function () {
         this.getProducts();
     };
     ProductList.prototype.Follow = function (productobj) {
-        this.follower.StatusBit = true;
+        //this.follower.StatusBit = true;
         this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
@@ -73,8 +73,8 @@ var ProductList = (function () {
             //alert(this.followers);
             for (var _i = 0, _a = _this.followers; _i < _a.length; _i++) {
                 var follower = _a[_i];
-                _this.hidebutton[follower.ProductId] = follower.StatusBit;
-                _this.update[follower.ProductId] = follower.StatusBit;
+                _this.hidebutton[follower.ProductId] = true;
+                _this.update[follower.ProductId] = true;
             }
         });
     };

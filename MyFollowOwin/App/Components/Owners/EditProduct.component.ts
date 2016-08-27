@@ -31,7 +31,7 @@ export class EditProduct implements OnInit, OnChanges {
     onSubmit(product: ProductModel) {
         this.Hide = true;         
         console.log(this.product);       
-        this.EditProductData(); 
+        this.EditProductData();         
         alert("Product Edited");                   
     }
 

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit,OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel, Platform, Followers} from './../Shared/Models';
 import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
@@ -32,12 +32,12 @@ export class ProductList implements OnInit{
     ngOnInit() {
         this.getProducts(); 
     }
-
+   
     update: any[] = [];
 
    
     Follow(productobj: ProductModel) {
-        this.follower.StatusBit = true;
+        //this.follower.StatusBit = true;
         this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
@@ -55,8 +55,10 @@ export class ProductList implements OnInit{
     updateclicked: boolean = false;
     ProductUpdates(productobj: ProductModel) {
         this.updateclicked = true;
-        this.ProductId = productobj.Id;                              
+        this.ProductId = productobj.Id; 
+              
     }
+    
 
     getProducts() {
         var displayOwner = this.productservice.getProduct()
@@ -67,7 +69,7 @@ export class ProductList implements OnInit{
                 this.errorMessage = err;
             },
             () => {
-                             
+                  
             });    
     }
 
@@ -94,9 +96,9 @@ export class ProductList implements OnInit{
             },
             () => {
                 //alert(this.followers);
-                for (let follower of this.followers) {
-                    this.hidebutton[follower.ProductId] = follower.StatusBit;
-                    this.update[follower.ProductId] = follower.StatusBit;
+                for (let follower of this.followers) {               
+                    this.hidebutton[follower.ProductId] = true;
+                    this.update[follower.ProductId] = true;
                 }
             });
     }

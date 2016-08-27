@@ -32,6 +32,9 @@ export class AddProduct implements OnInit {
     hide() {
         this.hideclicked = true;
         this.hideproductform = false;
+        this.Click = false;  
+        this.product = new ProductModel();       
+        setTimeout(() => this.Click = true, 0.5);
     }
 
     ngOnInit() {

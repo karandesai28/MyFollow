@@ -84,7 +84,7 @@ namespace MyFollowOwin.Api_Controllers
             {
                 followers.UserId = user.Id;
             }
-            followers.StatusBit = true;
+           
             followers.ProductId = productId;
             followers.CreateDate = DateTime.Today;
             followers.ModifiedDate = DateTime.Today;

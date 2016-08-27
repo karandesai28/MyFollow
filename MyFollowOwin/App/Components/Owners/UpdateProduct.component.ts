@@ -8,6 +8,7 @@ import {ProductUpdate,Media} from './../Shared/Models';
 })
 
 export class UpdateProduct implements OnInit {
+    Click: boolean = true;
     Hide: boolean = false;
     media: Media;
     errorMessage: string;
@@ -30,7 +31,9 @@ export class UpdateProduct implements OnInit {
         console.log(this.productupdate);
         this.UpdateProducts();
         this.Hide = true;
-        alert("Product Updated");
+        this.Click = false;
+        this.productupdate = new ProductUpdate();
+        setTimeout(() => this.Click = true, 0.5);
     }
     
 
@@ -63,14 +66,9 @@ export class UpdateProduct implements OnInit {
    
 
     PicUpload(path) {
-        var reader = new FileReader();
-        this.productupdate.ImagePath = path.target.value;
-        //reader.onload = (e) => {
-        //    this.productupdate.ImagePath = e.target.result;
-        //}
-
-        //this.productupdate.ImagePath = path.target.result;
-        //    console.log(reader.readAsDataURL(path.target.files[0]));
+        //var reader = new FileReader();
+        this.productupdate.ImagePath = path.target.value;   
+          
     }
     
 

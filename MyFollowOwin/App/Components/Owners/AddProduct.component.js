@@ -25,8 +25,12 @@ var AddProduct = (function () {
         this.Click = true;
     };
     AddProduct.prototype.hide = function () {
+        var _this = this;
         this.hideclicked = true;
         this.hideproductform = false;
+        this.Click = false;
+        this.product = new Models_1.ProductModel();
+        setTimeout(function () { return _this.Click = true; }, 0.5);
     };
     AddProduct.prototype.ngOnInit = function () {
         this.product = new Models_1.ProductModel();
