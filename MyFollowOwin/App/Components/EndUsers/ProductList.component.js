@@ -74,7 +74,7 @@ var ProductList = (function () {
             for (var _i = 0, _a = _this.followers; _i < _a.length; _i++) {
                 var follower = _a[_i];
                 _this.hidebutton[follower.ProductId] = follower.StatusBit;
-                _this.update[follower.ProductId] = true;
+                _this.update[follower.ProductId] = follower.StatusBit;
             }
         });
     };

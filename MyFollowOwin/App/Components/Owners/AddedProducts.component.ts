@@ -1,13 +1,14 @@
 ﻿import { Component, OnInit,OnDestroy,OnChanges,Input} from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel, ProductUpdate, Platform} from './../Shared/Models';
+import {ProductModel, ProductUpdate, Platform, Followers} from './../Shared/Models';
 import {EditProduct} from './../Owners/EditProduct.component';
 import {UpdateProduct} from './../Owners/UpdateProduct.component';
+import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
 
 @Component({
     selector: 'added-products',     
     providers: [Service],
-    directives: [EditProduct, UpdateProduct],
+    directives: [EditProduct, UpdateProduct,ViewUpdates],
     templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
 
 })
@@ -18,18 +19,34 @@ export class AddedProducts implements OnInit, OnChanges {
     errorMessage: string;
     product: ProductModel;
     productupdate: ProductUpdate;
-    
+    follower: Followers;
+    followers: Array<Followers>;
+    hidebutton: any[] = []; 
+    update: any[] = [];
+    urowner: any[] = [];
+    productobject: ProductModel;
+    productobjects: Array<ProductModel>;
+    productupdates : Array<ProductUpdate>;
+    productupdateobj: ProductUpdate;
+    updateclicked: boolean = false;
+
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
         this.productupdate = new ProductUpdate();
-                  
+        this.follower = new Followers();
+        this.followers = new Array<Followers>();  
+        this.productobjects = new Array<ProductModel>();
+        this.productobject = new ProductModel();
+        this.productupdates = new Array<ProductUpdate>();
+        this.productupdateobj = new ProductUpdate();        
     }
 
-    @Input() productobj: ProductModel;
+    @Input() productobj: ProductModel;    
     ngOnChanges() {
         if (this.productobj != null) {
             this.getProducts();
+            this.getProductsToFollow();
         }
         else {
             console.log("first time loading");
@@ -53,6 +70,15 @@ export class AddedProducts implements OnInit, OnChanges {
         
     }
 
+    ViewUpdateClicked(ProductId: number) {
+        this.product.Id = ProductId;
+        this.ProductId = ProductId;
+        this.UpdateClicked[ProductId] = true;
+        this.updateclicked = true;
+      
+
+    }
+
     Update: boolean = false;
     UpdateClicked(ProductId: number) {
         this.ProductId = ProductId;
@@ -62,6 +88,7 @@ export class AddedProducts implements OnInit, OnChanges {
     
     ngOnInit() {
         this.getProducts();
+        this.getProductsToFollow();
     }
 
     getProducts() {
@@ -71,9 +98,14 @@ export class AddedProducts implements OnInit, OnChanges {
             }, err => {
                 this.errorMessage = err;
             },
-            () => {  }
+            () => {
+                this.getFollowProducts();
+                this.getProductsToFollow();
+            }
        );
     }
+
+    
 
     DeleteProducts() {
         this.productservice.DeleteProduct(this.product)
@@ -84,6 +116,41 @@ export class AddedProducts implements OnInit, OnChanges {
             () => {
                 this.getProducts();
 
+            });
+    }
+
+    getProductsToFollow() {
+        var displayOwner = this.productservice.getProduct()
+            .subscribe((products) => {
+                this.productobjects = products;               
+            }, err => {
+                this.errorMessage = err;
+            },
+            () => {
+                for (let product of this.productobjects) {
+                    for (let addedproduct of this.products)
+                        if (product.Id == addedproduct.Id) {
+                            this.urowner[addedproduct.Id] = true;
+                        }
+                }
+
+            });
+    }
+
+    getFollowProducts() {
+        this.productservice.getFollowBit()
+            .subscribe((followers) => {
+                this.followers = followers;
+
+
+            }, err => {
+                this.errorMessage = err;
+            },
+            () => {                
+                for (let follower of this.followers) {
+                    this.hidebutton[follower.ProductId] = follower.StatusBit;
+                    this.update[follower.ProductId] = follower.StatusBit;
+                }
             });
     }
 

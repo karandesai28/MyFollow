@@ -25,7 +25,6 @@ var OwnerComponent = (function () {
     };
     OwnerComponent.prototype.hideform = function () {
         this.hideownerform = true;
-        alert("Thanks your request has been submitted!");
     };
     OwnerComponent.prototype.clicked = function () {
         this.Click = true;
@@ -33,17 +32,14 @@ var OwnerComponent = (function () {
     OwnerComponent.prototype.ngOnInit = function () {
     };
     OwnerComponent.prototype.clean = function () {
-        this.owner.CompanyName = "";
-        this.owner.Description = "";
-        this.owner.FoundedYear = null;
-        this.owner.WebsiteUrl = "";
+        this.owners = new Array();
+        this.owner = new Models_1.OwnerModel();
+        //this.owner.CompanyName = "";
+        //this.owner.Description = "";
+        //this.owner.FoundedYear = null;
+        //this.owner.WebsiteUrl = "";
     };
     OwnerComponent.prototype.onSubmit = function (owner) {
-        console.log(owner.CompanyName);
-        console.log(owner.Description);
-        console.log(owner.FoundedYear);
-        console.log(owner.WebsiteUrl);
-        console.log(owner.OwnerStates);
         this.AddOwnerData();
         this.hideform();
         this.clean();

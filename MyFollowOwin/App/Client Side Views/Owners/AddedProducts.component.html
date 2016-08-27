@@ -34,12 +34,61 @@
                 <button (click)="EditClicked(product)">Edit</button>
                 <button (click)="DeleteClicked(product.Id)">Delete</button>
                 <button (click)="UpdateClicked(product.Id)">Update</button>
+                <button (click)="ViewUpdateClicked(product.Id)">View Updates</button>
             </td>
         </tr>
     </table>
 </div>
 <br/>
+<div>
+    <h1>Find and Follow other products you like</h1>
 
+    <div class='table-responsive'>
+        <table class='table'>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>HomepageUrl</th>
+                <th>PlayStoreUrl</th>
+                <th>AppStoreUrl</th>
+                <th>ProductPlatform</th>
+                <th>Follow/Unfollow</th>
+            </tr>
+            <tr *ngFor='let product of productobjects'>
+                <td>
+                    {{product.Name}}
+                </td>
+                <td>
+                    {{product.Description}}
+                </td>
+                <td>
+                    {{product.HomepageUrl}}
+                </td>
+                <td>
+                    {{product.PlayStoreUrl}}
+                </td>
+                <td>
+                    {{product.AppStoreUrl}}
+                </td>
+                <td>
+                    {{productplatform[product.ProductPlatform]}}
+                </td>
+                <td>
+                    <div [hidden]="urowner[product.Id]">
+                    <button [hidden]="hidebutton[product.Id]" (click)="Follow(product)">Follow</button>
+                    <button [hidden]="!hidebutton[product.Id]" (click)="Unfollow(product)">Unfollow</button>
+                    <button [hidden]="!update[product.Id]" (click)="ViewUpdateClicked(product.Id)">View Updates</button>
+                    </div> 
+                    <h5 [hidden]="!urowner[product.Id]">Your Product</h5>                   
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+</div>
+
+<view-update [hidden]="!updateclicked" [productId]='ProductId'>Fetching Records...!</view-update>
 <edit-product [hidden]="!Edit" [productobj]='product'></edit-product>
 <update-product [hidden]="!Update" [productId]='ProductId'></update-product>
+
  

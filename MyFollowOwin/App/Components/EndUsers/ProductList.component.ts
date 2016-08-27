@@ -96,7 +96,7 @@ export class ProductList implements OnInit{
                 //alert(this.followers);
                 for (let follower of this.followers) {
                     this.hidebutton[follower.ProductId] = follower.StatusBit;
-                    this.update[follower.ProductId] = true;
+                    this.update[follower.ProductId] = follower.StatusBit;
                 }
             });
     }

@@ -28,8 +28,7 @@ export class OwnerComponent implements OnInit {
    }
 
    hideform() {
-       this.hideownerform = true;
-       alert("Thanks your request has been submitted!");
+       this.hideownerform = true;       
    }
 
    clicked() {
@@ -41,18 +40,15 @@ export class OwnerComponent implements OnInit {
    } 
 
    clean() {
-       this.owner.CompanyName = "";
-       this.owner.Description = "";
-       this.owner.FoundedYear = null;
-       this.owner.WebsiteUrl = "";
+       this.owners = new Array<OwnerModel>();
+       this.owner = new OwnerModel();   
+       //this.owner.CompanyName = "";
+       //this.owner.Description = "";
+       //this.owner.FoundedYear = null;
+       //this.owner.WebsiteUrl = "";
    }
     
-   onSubmit(owner: OwnerModel) {      
-        console.log(owner.CompanyName);
-        console.log(owner.Description);
-        console.log(owner.FoundedYear);
-        console.log(owner.WebsiteUrl);
-        console.log(owner.OwnerStates);       
+   onSubmit(owner: OwnerModel) {  
         this.AddOwnerData();
         this.hideform();
         this.clean();        

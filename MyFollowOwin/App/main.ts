@@ -5,6 +5,7 @@ import {Service} from './Components/Shared/Service';
 import {OwnerRequest} from './Components/Admin/OwnerRequest.component';
 import {AddProduct} from './Components/Owners/AddProduct.component';
 
+
 bootstrap(OwnerComponent, [HTTP_PROVIDERS, Service]);
 bootstrap(OwnerRequest, [HTTP_PROVIDERS, Service]);
 bootstrap(AddProduct, [HTTP_PROVIDERS, Service]);
