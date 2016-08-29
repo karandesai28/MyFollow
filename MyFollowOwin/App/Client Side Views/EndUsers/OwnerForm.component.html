@@ -25,9 +25,9 @@
 
 
             <label for="WebsiteUrl">Website Url</label>
-            <input class="form-control" #WebsiteUrl="ngForm" type="text" [(ngModel)]="owner.WebsiteUrl" ngControl="WebsiteUrl" id="WebsiteUrl" required pattern="https?://.+"/><br />
+            <input class="form-control" #WebsiteUrl="ngForm" type="text" [(ngModel)]="owner.WebsiteUrl" ngControl="WebsiteUrl" id="WebsiteUrl" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/$"/><br />
             <div [hidden]="WebsiteUrl.valid || WebsiteUrl.pristine" class="alert alert-danger">
-                Enter URL starting with http://
+                Enter valid URL starting with http://
             </div>
 
             <input class="btn btn-default" type="submit" value="Submit"/>

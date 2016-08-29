@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyFolllowOwin.Models;
 using MyFollowOwin.Models;
-using System.IO;
 using System.Web;
+using System.IO;
 
 namespace MyFollowOwin.Api_Controllers
 {
@@ -34,11 +31,12 @@ namespace MyFollowOwin.Api_Controllers
         {
             var productId = db.Products.Find(id);
             //  ProductUpdates productUpdates = db.ProductUpdates.Find(productId.Id);
-            var state = db.ProductUpdates.FirstOrDefault(x => x.ProductId == productId.Id);
+            var state = db.ProductUpdates.ToList().LastOrDefault(x => x.ProductId == productId.Id);
+            
             if (state == null)
             {
                 return NotFound();
-            }
+            }           
 
             return Ok(state);
         }
@@ -85,31 +83,12 @@ namespace MyFollowOwin.Api_Controllers
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult PostProductUpdates(int id, ProductUpdates productUpdates)
         {
-           // HttpPostedFileBase file = default(HttpPostedFileBase);
-           
+                
             Products product = db.Products.Find(id);
             if (product != null)
-            {
-                //var FileName = Path.GetFileName(productUpdates.ImagePath);
-                //var path=Path.Combine(HttpContext.Current.Server.MapPath("/Image Database"));
-                //file.SaveAs(Path.Combine(path, FileName));
-                //productUpdates.ProductId = product.Id;
-                ////var myFile = HttpContext.Current.Request.Files[productUpdates.ImagePath];
-                ////string name = Path.GetFileName(productUpdates.ImagePath);
-                //int count = HttpContext.Current.Request.Files.Count;
-                //for (int i = 0; i < count; i++)
-                //{
-                //    var myFile = HttpContext.Current.Request.Files[i];
-
-
-                //    if (myFile != null && myFile.ContentLength != 0)
-                //    {
-                //        var path = HttpContext.Current.Server.MapPath("~/Image Database");
-                //        //file.SaveAs(path);
-                //        myFile.SaveAs(Path.Combine(path, myFile.FileName));
-                //    }
-                //}
-            }
+            {              
+                productUpdates.ProductId = product.Id;           
+            }         
 
             productUpdates.CreateDate = DateTime.Today;
             productUpdates.ModifiedDate = DateTime.Today;

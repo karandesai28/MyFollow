@@ -24,6 +24,7 @@ var ViewUpdates = (function () {
     ViewUpdates.prototype.ngOnChanges = function () {
         if (this.productId != null) {
             this.getUpdates(this.productId);
+            this.getProducts(this.productId);
         }
         else {
             console.log("Invalid");
@@ -53,6 +54,7 @@ var ViewUpdates = (function () {
         var _this = this;
         this.productservice.getProductById(productId)
             .subscribe(function (products) {
+            _this.checkUpdates(productId, _this.productupdate);
             _this.product = products;
         }, function (err) {
             _this.errorMessage = err;
@@ -62,11 +64,13 @@ var ViewUpdates = (function () {
         var _this = this;
         this.productservice.getProductUpdates(productId)
             .subscribe(function (productupdates) {
-            _this.productupdate = productupdates,
-                _this.checkUpdates(productId, _this.productupdate);
+            _this.productupdate = productupdates;
         }, function (err) {
             _this.errorMessage = err;
-        }, function () { console.log("Update Found"); });
+        }, function () {
+            console.log("Update Found");
+            _this.video = atob(_this.productupdate.VideoUrl);
+        });
     };
     __decorate([
         core_1.Input(), 

@@ -20,21 +20,21 @@
 
 
             <label for="HomePageUrl">Homepage Url</label>
-            <input class="form-control" #HomepageUrl="ngForm" type="text" [(ngModel)]="product.HomepageUrl" ngControl="HomepageUrl" id="HomepageUrl" required pattern="https?://.+"/><br />
+            <input class="form-control" #HomepageUrl="ngForm" type="text" [(ngModel)]="product.HomepageUrl" ngControl="HomepageUrl" id="HomepageUrl" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/$"/><br />
             <div [hidden]="HomepageUrl.valid || HomepageUrl.pristine" class="alert alert-danger">
-                Enter URL starting with http://
+                Enter valid URL starting with http://
             </div>
 
             <label for="PlayStoreUrl">PlayStore Url</label>
-            <input class="form-control" #PlayStoreUrl="ngForm" type="text" [(ngModel)]="product.PlayStoreUrl" ngControl="PlayStoreUrl" id="PlayStoreUrl" required pattern="https?://.+" /><br />
+            <input class="form-control" #PlayStoreUrl="ngForm" type="text" [(ngModel)]="product.PlayStoreUrl" ngControl="PlayStoreUrl" id="PlayStoreUrl" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/$" /><br />
             <div [hidden]="PlayStoreUrl.valid || PlayStoreUrl.pristine" class="alert alert-danger">
-                Enter URL starting with http://
+                Enter valid URL starting with http://
             </div>
 
             <label for="AppStoreUrl">AppStore Url</label>
-            <input class="form-control" #AppStoreUrl="ngForm" type="text" [(ngModel)]="product.AppStoreUrl" ngControl="AppStoreUrl" id="AppStoreUrl" required pattern="https?://.+"/><br />
+            <input class="form-control" #AppStoreUrl="ngForm" type="text" [(ngModel)]="product.AppStoreUrl" ngControl="AppStoreUrl" id="AppStoreUrl" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/$"/><br />
             <div [hidden]="AppStoreUrl.valid || AppStoreUrl.pristine" class="alert alert-danger">
-                Enter URL starting with http://
+                Enter valid URL starting with http://
             </div>
 
             <label for="ProductPlatform">Product Platform</label>

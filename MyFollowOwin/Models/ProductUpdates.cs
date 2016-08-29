@@ -21,7 +21,8 @@ namespace MyFolllowOwin.Models
         [Required]
         public Media ProductMedia { get; set; }
 
-        public string ImagePath{get;set;}
+        public string ImagePath { get; set; }
+       
         
         public string VideoUrl { get; set; }
         
