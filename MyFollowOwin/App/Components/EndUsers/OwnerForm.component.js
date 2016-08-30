@@ -12,37 +12,19 @@ var core_1 = require('@angular/core');
 var Models_1 = require('./../Shared/Models');
 var Service_1 = require('./../Shared/Service');
 var ProductList_component_1 = require('./../EndUsers/ProductList.component');
+var router_1 = require('@angular/router');
 var OwnerComponent = (function () {
     function OwnerComponent(ownerservice) {
         this.ownerservice = ownerservice;
         this.hideownerform = false;
-        this.Click = false;
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
     }
-    OwnerComponent.prototype.hide = function () {
-        this.hideclicked = true;
-    };
-    OwnerComponent.prototype.hideform = function () {
-        this.hideownerform = true;
-    };
-    OwnerComponent.prototype.clicked = function () {
-        this.Click = true;
-    };
     OwnerComponent.prototype.ngOnInit = function () {
     };
-    OwnerComponent.prototype.clean = function () {
-        this.owners = new Array();
-        this.owner = new Models_1.OwnerModel();
-        //this.owner.CompanyName = "";
-        //this.owner.Description = "";
-        //this.owner.FoundedYear = null;
-        //this.owner.WebsiteUrl = "";
-    };
     OwnerComponent.prototype.onSubmit = function (owner) {
+        this.hideownerform = true;
         this.AddOwnerData();
-        this.hideform();
-        this.clean();
     };
     OwnerComponent.prototype.AddOwnerData = function () {
         this.ownerservice.AddOwner(this.owner)
@@ -52,7 +34,7 @@ var OwnerComponent = (function () {
         core_1.Component({
             selector: 'owner-form',
             providers: [Service_1.Service],
-            directives: [ProductList_component_1.ProductList],
+            directives: [ProductList_component_1.ProductList, router_1.ROUTER_DIRECTIVES],
             templateUrl: 'App/Client Side Views/EndUsers/OwnerForm.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

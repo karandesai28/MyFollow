@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
-var ng2_imageupload_1 = require('ng2-imageupload');
 var UpdateProduct = (function () {
     function UpdateProduct(productservice) {
         this.productservice = productservice;
@@ -28,7 +27,7 @@ var UpdateProduct = (function () {
     UpdateProduct.prototype.onSubmit = function (productupdate) {
         var _this = this;
         this.productupdate.ProductId = this.productId;
-        console.log(this.productupdate);
+        console.log(this.productupdate.ImagePath);
         this.UpdateProducts();
         this.Hide = true;
         this.Click = false;
@@ -53,7 +52,7 @@ var UpdateProduct = (function () {
         console.log(this.productupdate);
     };
     UpdateProduct.prototype.PicUpload = function (path) {
-        this.productupdate.ImagePath = path.dataURL;
+        this.productupdate.ImagePath = path.target.value;
     };
     UpdateProduct.prototype.VidUpload = function (path) {
         this.productupdate.VideoUrl = btoa(path.dataURL);
@@ -66,7 +65,6 @@ var UpdateProduct = (function () {
         core_1.Component({
             selector: 'update-product',
             providers: [Service_1.Service],
-            directives: [ng2_imageupload_1.ImageUpload],
             templateUrl: 'App/Client Side Views/Owners/UpdateProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

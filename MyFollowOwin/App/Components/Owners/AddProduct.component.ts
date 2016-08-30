@@ -2,16 +2,17 @@
 import {ProductModel} from './../Shared/Models';
 import {Service} from './../Shared/Service';
 import {AddedProducts} from './../Owners/AddedProducts.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'add-product',
     providers: [Service],
-    directives: [AddedProducts],  
+    directives: [AddedProducts, ROUTER_DIRECTIVES],  
     templateUrl: 'App/Client Side Views/Owners/AddProduct.component.html'
 })
 
 export class AddProduct implements OnInit {
-    
+    refreshform: Boolean = false;
     Product: ProductModel;
     products: Array<ProductModel>;
     errorMessage: string;
@@ -20,22 +21,8 @@ export class AddProduct implements OnInit {
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
-    }
+    }   
 
-    Click: Boolean = false;
-    hideclicked: Boolean = false;
-    hideproductform: Boolean = false;
-    clicked() {
-        this.Click = true;        
-    }
-
-    hide() {
-        this.hideclicked = true;
-        this.hideproductform = false;
-        this.Click = false;  
-        this.product = new ProductModel();       
-        setTimeout(() => this.Click = true, 0.5);
-    }
 
     ngOnInit() {
         this.product = new ProductModel();       
@@ -45,8 +32,9 @@ export class AddProduct implements OnInit {
    
     onSubmit(product: ProductModel) {         
         this.AddProductData();
-        this.hideclicked = false;
-        this.hideproductform = true;  
+        this.refreshform = true;
+        this.product = new ProductModel();
+        setTimeout(() => this.refreshform = false, 500);   
        
     }
     

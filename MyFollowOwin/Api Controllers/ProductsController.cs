@@ -32,8 +32,9 @@ namespace MyFollowOwin.Api_Controllers
         [HttpGet]
         [ResponseType(typeof(Products))]
         public IHttpActionResult GetProducts(int id)
-        {
+        {            
             Products products = db.Products.Find(id);
+
             if (products == null)
             {
                 return NotFound();

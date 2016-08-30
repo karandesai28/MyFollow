@@ -2,16 +2,16 @@
 import {OwnerModel} from './../Shared/Models';
 import {Service} from './../Shared/Service';
 import {ProductList} from './../EndUsers/ProductList.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'owner-form',    
     providers: [Service],
-    directives: [ProductList],
+    directives: [ProductList, ROUTER_DIRECTIVES],
     templateUrl:'App/Client Side Views/EndUsers/OwnerForm.component.html'    
 })
 
 export class OwnerComponent implements OnInit {   
-    
     owners: Array<OwnerModel>;     
     errorMessage: string;      
     owner: OwnerModel;
@@ -20,38 +20,17 @@ export class OwnerComponent implements OnInit {
        this.owners = new Array<OwnerModel>();     
        this.owner = new OwnerModel();      
    }
-   hideclicked: Boolean;
+ 
    hideownerform: Boolean=false;
-   Click: Boolean = false;
-   hide() {
-       this.hideclicked = true;
-   }
-
-   hideform() {
-       this.hideownerform = true;       
-   }
-
-   clicked() {
-       this.Click = true;
-   }
-    
+   
    ngOnInit() {
              
    } 
 
-   clean() {
-       this.owners = new Array<OwnerModel>();
-       this.owner = new OwnerModel();   
-       //this.owner.CompanyName = "";
-       //this.owner.Description = "";
-       //this.owner.FoundedYear = null;
-       //this.owner.WebsiteUrl = "";
-   }
-    
-   onSubmit(owner: OwnerModel) {  
-        this.AddOwnerData();
-        this.hideform();
-        this.clean();        
+  
+   onSubmit(owner: OwnerModel) { 
+       this.hideownerform = true;       
+        this.AddOwnerData();           
    }
     AddOwnerData() {
         this.ownerservice.AddOwner(this.owner)

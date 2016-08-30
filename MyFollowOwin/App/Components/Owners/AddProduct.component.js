@@ -12,33 +12,23 @@ var core_1 = require('@angular/core');
 var Models_1 = require('./../Shared/Models');
 var Service_1 = require('./../Shared/Service');
 var AddedProducts_component_1 = require('./../Owners/AddedProducts.component');
+var router_1 = require('@angular/router');
 var AddProduct = (function () {
     function AddProduct(productservice) {
         this.productservice = productservice;
-        this.Click = false;
-        this.hideclicked = false;
-        this.hideproductform = false;
+        this.refreshform = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
-    AddProduct.prototype.clicked = function () {
-        this.Click = true;
-    };
-    AddProduct.prototype.hide = function () {
-        var _this = this;
-        this.hideclicked = true;
-        this.hideproductform = false;
-        this.Click = false;
-        this.product = new Models_1.ProductModel();
-        setTimeout(function () { return _this.Click = true; }, 0.5);
-    };
     AddProduct.prototype.ngOnInit = function () {
         this.product = new Models_1.ProductModel();
     };
     AddProduct.prototype.onSubmit = function (product) {
+        var _this = this;
         this.AddProductData();
-        this.hideclicked = false;
-        this.hideproductform = true;
+        this.refreshform = true;
+        this.product = new Models_1.ProductModel();
+        setTimeout(function () { return _this.refreshform = false; }, 500);
     };
     AddProduct.prototype.AddProductData = function () {
         var _this = this;
@@ -53,7 +43,7 @@ var AddProduct = (function () {
         core_1.Component({
             selector: 'add-product',
             providers: [Service_1.Service],
-            directives: [AddedProducts_component_1.AddedProducts],
+            directives: [AddedProducts_component_1.AddedProducts, router_1.ROUTER_DIRECTIVES],
             templateUrl: 'App/Client Side Views/Owners/AddProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

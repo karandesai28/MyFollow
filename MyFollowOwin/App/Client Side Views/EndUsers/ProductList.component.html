@@ -28,11 +28,14 @@
             <td>
                {{productplatform[product.ProductPlatform]}}                
             </td>
-            <td>               
-                <button [hidden]="hidebutton[product.Id]" (click)="Follow(product)">Follow</button> 
-                <button [hidden]="!hidebutton[product.Id]"  (click)="Unfollow(product)">Unfollow</button>
-                <button [hidden]="!update[product.Id]" (click)="ProductUpdates(product)">View Updates</button>                                           
-            </td>
+            <td>  
+                <div [hidden]="urowner[product.Id]">
+                    <button [hidden]="hidebutton[product.Id]" (click)="Follow(product)">Follow</button>
+                    <button [hidden]="!hidebutton[product.Id]" (click)="Unfollow(product)">Unfollow</button>
+                    <button [hidden]="!update[product.Id]" (click)="ProductUpdates(product)">View Updates</button>
+                </div>
+                <h5 [hidden]="!urowner[product.Id]">Your Product</h5>  
+        </td>
         </tr>
     </table>
 </div>

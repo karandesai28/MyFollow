@@ -4,11 +4,12 @@ import {ProductModel, ProductUpdate, Platform, Followers} from './../Shared/Mode
 import {EditProduct} from './../Owners/EditProduct.component';
 import {UpdateProduct} from './../Owners/UpdateProduct.component';
 import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'added-products',     
     providers: [Service],
-    directives: [EditProduct, UpdateProduct,ViewUpdates],
+    directives: [EditProduct, UpdateProduct, ViewUpdates, ROUTER_DIRECTIVES],
     templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
 
 })

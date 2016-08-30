@@ -1,12 +1,11 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductUpdate, Media} from './../Shared/Models';
-import {ImageUpload, ImageResult, ResizeOptions} from 'ng2-imageupload';
+
 
 @Component({
     selector: 'update-product',
-    providers: [Service],
-    directives: [ImageUpload],
+    providers: [Service],   
     templateUrl: 'App/Client Side Views/Owners/UpdateProduct.component.html'
 })
 
@@ -30,8 +29,8 @@ export class UpdateProduct implements OnInit {
 
     @Input() productId: number;
     onSubmit(productupdate: ProductUpdate) {
-        this.productupdate.ProductId = this.productId;
-        console.log(this.productupdate);
+        this.productupdate.ProductId = this.productId;        
+        console.log(this.productupdate.ImagePath);
         this.UpdateProducts();
         this.Hide = true;
         this.Click = false;
@@ -68,9 +67,8 @@ export class UpdateProduct implements OnInit {
     }
    
    
-    PicUpload(path: ImageResult) {       
-        this.productupdate.ImagePath = path.dataURL;  
-                  
+    PicUpload(path) {       
+        this.productupdate.ImagePath = path.target.value;                 
           
     }
 

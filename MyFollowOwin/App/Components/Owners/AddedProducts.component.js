@@ -14,6 +14,7 @@ var Models_1 = require('./../Shared/Models');
 var EditProduct_component_1 = require('./../Owners/EditProduct.component');
 var UpdateProduct_component_1 = require('./../Owners/UpdateProduct.component');
 var ViewUpdates_component_1 = require('./../EndUsers/ViewUpdates.component');
+var router_1 = require('@angular/router');
 var AddedProducts = (function () {
     function AddedProducts(productservice) {
         this.productservice = productservice;
@@ -162,7 +163,7 @@ var AddedProducts = (function () {
         core_1.Component({
             selector: 'added-products',
             providers: [Service_1.Service],
-            directives: [EditProduct_component_1.EditProduct, UpdateProduct_component_1.UpdateProduct, ViewUpdates_component_1.ViewUpdates],
+            directives: [EditProduct_component_1.EditProduct, UpdateProduct_component_1.UpdateProduct, ViewUpdates_component_1.ViewUpdates, router_1.ROUTER_DIRECTIVES],
             templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

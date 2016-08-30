@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
 var ViewUpdates_component_1 = require('./../EndUsers/ViewUpdates.component');
+var router_1 = require('@angular/router');
 var ProductList = (function () {
     function ProductList(productservice) {
         this.productservice = productservice;
         this.hidebutton = [];
+        this.urowner = [];
         this.productplatform = Models_1.Platform;
         this.update = [];
         this.updateclicked = false;
@@ -23,6 +25,8 @@ var ProductList = (function () {
         this.product = new Models_1.ProductModel();
         this.follower = new Models_1.Followers();
         this.followers = new Array();
+        this.addedproduct = new Models_1.ProductModel();
+        this.addedproducts = new Array();
     }
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();
@@ -51,7 +55,25 @@ var ProductList = (function () {
             _this.getFollowProducts();
         }, function (err) {
             _this.errorMessage = err;
+        }, function () { });
+    };
+    ProductList.prototype.getAddedProducts = function () {
+        var _this = this;
+        this.productservice.getAddedProduct()
+            .subscribe(function (products) {
+            _this.addedproducts = products;
+        }, function (err) {
+            _this.errorMessage = err;
         }, function () {
+            for (var _i = 0, _a = _this.products; _i < _a.length; _i++) {
+                var product = _a[_i];
+                for (var _b = 0, _c = _this.addedproducts; _b < _c.length; _b++) {
+                    var addedproduct = _c[_b];
+                    if (product.Id == addedproduct.Id) {
+                        _this.urowner[addedproduct.Id] = true;
+                    }
+                }
+            }
         });
     };
     ProductList.prototype.FollowProducts = function (productobj) {
@@ -67,6 +89,7 @@ var ProductList = (function () {
         this.productservice.getFollowBit()
             .subscribe(function (followers) {
             _this.followers = followers;
+            _this.getAddedProducts();
         }, function (err) {
             _this.errorMessage = err;
         }, function () {
@@ -90,7 +113,7 @@ var ProductList = (function () {
     ProductList = __decorate([
         core_1.Component({
             selector: 'product-list',
-            directives: [ViewUpdates_component_1.ViewUpdates],
+            directives: [ViewUpdates_component_1.ViewUpdates, router_1.ROUTER_DIRECTIVES],
             providers: [Service_1.Service],
             templateUrl: 'App/Client Side Views/EndUsers/ProductList.component.html'
         }), 

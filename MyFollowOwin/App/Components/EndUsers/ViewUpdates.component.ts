@@ -1,8 +1,11 @@
 ﻿import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel} from './../Shared/Models';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+
 @Component({
     selector: 'view-update',
+    directives: [ROUTER_DIRECTIVES],
     providers: [Service],
     templateUrl: 'App/Client Side Views/EndUsers/ViewUpdates.component.html'
 })
@@ -60,6 +63,7 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
         this.getProducts(this.productId);
         this.getUpdates(this.productId);       
         this.productupdate.ImagePath;
+        this.productId = null;
         this.ngOnDestroy();
     }
 

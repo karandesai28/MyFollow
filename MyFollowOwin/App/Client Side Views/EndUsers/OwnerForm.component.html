@@ -1,10 +1,7 @@
-﻿<div (click)="hide()" [hidden]="hideclicked">
-    <button class="btn btn-default" (click)="clicked()">Become Owner</button><br />
-</div>
-<div [hidden]="hideownerform">
-    <h1 *ngIf="Click">Become Owner</h1>
+﻿<div *ngIf="!hideownerform">
+    <h1>Become Owner</h1>
     <div class="form-group">
-        <form *ngIf="Click" (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">
+        <form (ngSubmit)="onSubmit(owner)" role="form" #AddForm="ngForm">
             <label for="CompanyName">Company Name:</label>
             <input class="form-control" #CompanyName="ngForm" type="text" [(ngModel)]="owner.CompanyName" ngControl="CompanyName" id="CompanyName" required/><br />
             <div [hidden]="CompanyName.valid || CompanyName.pristine" class="alert alert-danger">
@@ -31,10 +28,9 @@
             </div>
 
             <input class="btn btn-default" type="submit" value="Submit"/>
-            <button class="btn-btn-default" (click)="hideform()">Close</button>
+           
         </form>
     </div>
 </div>
     <br />
-    <h1>Find and Follow products you like</h1>
-    <product-list> </product-list>
+<div *ngIf="hideownerform"><p class="lead">Request sent!</p></div>

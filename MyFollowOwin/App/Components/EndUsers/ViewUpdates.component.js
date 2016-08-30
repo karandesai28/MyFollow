@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
+var router_1 = require('@angular/router');
 var ViewUpdates = (function () {
     function ViewUpdates(productservice) {
         this.productservice = productservice;
@@ -48,6 +49,7 @@ var ViewUpdates = (function () {
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
         this.productupdate.ImagePath;
+        this.productId = null;
         this.ngOnDestroy();
     };
     ViewUpdates.prototype.getProducts = function (productId) {
@@ -79,6 +81,7 @@ var ViewUpdates = (function () {
     ViewUpdates = __decorate([
         core_1.Component({
             selector: 'view-update',
+            directives: [router_1.ROUTER_DIRECTIVES],
             providers: [Service_1.Service],
             templateUrl: 'App/Client Side Views/EndUsers/ViewUpdates.component.html'
         }), 

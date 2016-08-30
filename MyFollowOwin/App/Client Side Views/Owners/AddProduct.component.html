@@ -1,11 +1,8 @@
-﻿<div (click)="hide()" [hidden]="hideclicked">
-    <button class="btn btn-default" (click)="clicked()">Add Product</button>
-</div>
-<div [hidden]="hideproductform">
-    <h1 *ngIf="Click">Add Product!</h1>
+﻿<div *ngIf="!refreshform">
+    <h1>Add Product!</h1>
     <br />
     <div class="form-group">
-        <form *ngIf="Click" (ngSubmit)="onSubmit(product)" role="form" #AddForm="ngForm">
+        <form (ngSubmit)="onSubmit(product)" role="form" #AddForm="ngForm">
             <label for="Name">Name:</label>
             <input class="form-control" #Name="ngForm" type="text" [(ngModel)]="product.Name" ngControl="Name" id="Name" required /><br />
             <div [hidden]="Name.valid || Name.pristine" class="alert alert-danger">
@@ -52,5 +49,4 @@
     </div>
 </div>
     <br />
-    <br />
-    <added-products [productobj]='Product'>No products added yet</added-products>
+<div *ngIf="refreshform"><p class="lead">Product Added! Refreshing form...</p></div>

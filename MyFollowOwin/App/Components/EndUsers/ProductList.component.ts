@@ -2,10 +2,12 @@
 import {Service} from './../Shared/Service';
 import {ProductModel, Platform, Followers} from './../Shared/Models';
 import {ViewUpdates} from './../EndUsers/ViewUpdates.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+
 
 @Component({
     selector: 'product-list',
-    directives: [ViewUpdates],
+    directives: [ViewUpdates, ROUTER_DIRECTIVES],
     providers: [Service],
     templateUrl: 'App/Client Side Views/EndUsers/ProductList.component.html'
 })
@@ -13,6 +15,7 @@ export class ProductList implements OnInit{
    
     ProductId: number;
     hidebutton: any[] = []; 
+    urowner: any[] = [];
     len: number;
     productplatform = Platform;
     products: Array<ProductModel>;    
@@ -20,17 +23,22 @@ export class ProductList implements OnInit{
     product: ProductModel;
     follower: Followers;
     followers: Array<Followers>;
+    addedproduct: ProductModel;
+    addedproducts: Array<ProductModel>;
        
 
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
         this.follower = new Followers();
-        this.followers = new Array<Followers>();          
+        this.followers = new Array<Followers>();
+        this.addedproduct = new ProductModel();
+        this.addedproducts = new Array<ProductModel>();        
                                                     
     }
     ngOnInit() {
-        this.getProducts(); 
+        this.getProducts();
+       
     }
    
     update: any[] = [];
@@ -64,13 +72,32 @@ export class ProductList implements OnInit{
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
                 this.products = products
-                this.getFollowProducts();                                
+                this.getFollowProducts();
+            }, err => {
+                this.errorMessage = err;
+            },
+            () => { });
+                
+    }
+
+    getAddedProducts() {
+        this.productservice.getAddedProduct()
+            .subscribe((products) => {
+                this.addedproducts = products
             }, err => {
                 this.errorMessage = err;
             },
             () => {
-                  
-            });    
+                for (let product of this.products) {
+                    for (let addedproduct of this.addedproducts) {
+                        if (product.Id == addedproduct.Id) {
+                            this.urowner[addedproduct.Id] = true;
+                        }
+                    }
+                }           
+               
+            }
+            );
     }
 
     FollowProducts(productobj: ProductModel) {        
@@ -89,6 +116,7 @@ export class ProductList implements OnInit{
         this.productservice.getFollowBit()
             .subscribe((followers) => {
                 this.followers = followers;
+                this.getAddedProducts();
                      
            
             }, err => {
