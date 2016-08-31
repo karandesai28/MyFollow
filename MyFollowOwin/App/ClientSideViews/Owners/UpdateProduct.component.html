@@ -1,0 +1,41 @@
+﻿<h1 [hidden]="Hide">Update Product Details</h1>
+
+<div [hidden]="Hide" class="form-group">
+    <form *ngIf="Click" (ngSubmit)="onSubmit(productupdate)" role="form" #AddForm="ngForm" enctype="multipart/form-data" >
+
+        <label for="Title">Title:</label>
+        <input class="form-control" #Title="ngForm" type="text" [(ngModel)]="productupdate.Title" ngControl="Title" id="Title" required/><br />      
+        <div [hidden]="Title.valid || Title.pristine" class="alert alert-danger">
+            This is required field
+        </div>
+
+        <label for="Details">Details:</label>
+        <input class="form-control" #Details="ngForm" type="text" [(ngModel)]="productupdate.Details" ngControl="Details" id="Details" required/><br />        
+        <div [hidden]="Details.valid || Details.pristine" class="alert alert-danger">
+            This is required field
+        </div>
+
+        <label for="ProductMedia">Select Media Types to upload:</label>
+
+        <div class="radio">
+            <label><input type="radio" (click)="UploadPic()" value="Pictures" id="Pictures" name="rb">Upload Pics</label>
+        </div>
+
+        <div class="radio">
+            <label><input type="radio" (click)="UploadVideo()" value="Videos" id="Videos" name="rb">Upload videos</label>
+        </div>      
+  
+        <div class="radio">
+            <label><input type="radio" (click)="UploadAudio()" value="Audio" id="Audio" name="rb">Upload Audio</label>
+        </div>
+        <br />         
+
+        <div>
+            <label for="Media">Upload Image</label>           
+            <!--<input class="form-control"  type="file" image-upload (imageSelected)="Selected($event)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" />-->
+            <input class="form-control" type="file" (change)="Selected($event.target)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="/*"/>
+        </div>
+  
+        <input class="btn btn-default" type="submit" value="Submit" />
+</form>
+</div>

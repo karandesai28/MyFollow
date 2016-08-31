@@ -115,7 +115,7 @@ var ProductList = (function () {
             selector: 'product-list',
             directives: [ViewUpdates_component_1.ViewUpdates, router_1.ROUTER_DIRECTIVES],
             providers: [Service_1.Service],
-            templateUrl: 'App/Client Side Views/EndUsers/ProductList.component.html'
+            templateUrl: 'App/ClientSideViews/EndUsers/ProductList.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], ProductList);

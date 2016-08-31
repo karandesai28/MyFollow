@@ -176,12 +176,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api Controllers\ApplicationUsersController.cs" />
-    <Compile Include="Api Controllers\FollowersController.cs" />
-    <Compile Include="Api Controllers\OwnerProductMappingsController.cs" />
-    <Compile Include="Api Controllers\ProductOwnersController.cs" />
-    <Compile Include="Api Controllers\ProductsController.cs" />
-    <Compile Include="Api Controllers\ProductUpdatesController.cs" />
+    <Compile Include="ApiControllers\ApplicationUsersController.cs" />
+    <Compile Include="ApiControllers\FollowersController.cs" />
+    <Compile Include="ApiControllers\OwnerProductMappingsController.cs" />
+    <Compile Include="ApiControllers\ProductOwnersController.cs" />
+    <Compile Include="ApiControllers\ProductsController.cs" />
+    <Compile Include="ApiControllers\ProductUpdatesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -206,24 +206,24 @@
     <Compile Include="Models\ProductOwners.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductUpdates.cs" />
-    <Compile Include="View Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\AddressInfo.cs" />
     <Compile Include="Models\CommonProperty.cs" />
-    <Compile Include="View Models\IdentityModels.cs" />
-    <Compile Include="View Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\IdentityModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\Client Side Views\Admin\OwnerRequest.component.html" />
-    <Content Include="App\Client Side Views\EndUsers\EndUser.component.html" />
-    <Content Include="App\Client Side Views\EndUsers\OwnerForm.component.html" />
-    <Content Include="App\Client Side Views\EndUsers\ProductList.component.html" />
-    <Content Include="App\Client Side Views\EndUsers\ViewUpdates.component.html" />
-    <Content Include="App\Client Side Views\Owners\AddProduct.component.html" />
-    <Content Include="App\Client Side Views\Owners\EditProduct.component.html" />
-    <Content Include="App\Client Side Views\Owners\Owner.component.html" />
-    <Content Include="App\Client Side Views\Owners\UpdateProduct.component.html" />
+    <Content Include="App\ClientSideViews\Admin\OwnerRequest.component.html" />
+    <Content Include="App\ClientSideViews\EndUsers\EndUser.component.html" />
+    <Content Include="App\ClientSideViews\EndUsers\OwnerForm.component.html" />
+    <Content Include="App\ClientSideViews\EndUsers\ProductList.component.html" />
+    <Content Include="App\ClientSideViews\EndUsers\ViewUpdates.component.html" />
+    <Content Include="App\ClientSideViews\Owners\AddProduct.component.html" />
+    <Content Include="App\ClientSideViews\Owners\EditProduct.component.html" />
+    <Content Include="App\ClientSideViews\Owners\Owner.component.html" />
+    <Content Include="App\ClientSideViews\Owners\UpdateProduct.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -233,7 +233,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
-    <Content Include="App\Client Side Views\Owners\AddedProducts.component.html" />
+    <Content Include="App\ClientSideViews\Owners\AddedProducts.component.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -275,7 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image Database\" />
+    <Folder Include="ImageDatabase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

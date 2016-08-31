@@ -10,7 +10,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'added-products',     
     providers: [Service],
     directives: [EditProduct, UpdateProduct, ViewUpdates, ROUTER_DIRECTIVES],
-    templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
+    templateUrl: 'App/ClientSideViews/Owners/AddedProducts.component.html'
 
 })
 export class AddedProducts implements OnInit, OnChanges {

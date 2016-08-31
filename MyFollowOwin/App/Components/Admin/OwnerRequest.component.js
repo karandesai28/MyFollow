@@ -48,7 +48,7 @@ var OwnerRequest = (function () {
         core_1.Component({
             selector: 'owner-requests',
             providers: [Service_1.Service],
-            templateUrl: 'App/Client Side Views/Admin/OwnerRequest.component.html'
+            templateUrl: 'App/ClientSideViews/Admin/OwnerRequest.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], OwnerRequest);

@@ -21,12 +21,7 @@ namespace MyFolllowOwin.Models
         [Required]
         public Media ProductMedia { get; set; }
 
-        public string ImagePath { get; set; }
-       
-        
-        public string VideoUrl { get; set; }
-        
-        public string Gifpath { get; set; }            
+        public string Media { get; set; }  
 
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]

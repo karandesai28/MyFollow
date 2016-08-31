@@ -35,7 +35,7 @@ var OwnerComponent = (function () {
             selector: 'owner-form',
             providers: [Service_1.Service],
             directives: [ProductList_component_1.ProductList, router_1.ROUTER_DIRECTIVES],
-            templateUrl: 'App/Client Side Views/EndUsers/OwnerForm.component.html'
+            templateUrl: 'App/ClientSideViews/EndUsers/OwnerForm.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], OwnerComponent);

@@ -7,7 +7,7 @@ using System.Web;
 namespace MyFollowOwin.Models
 {
     public class AddressInfo
-    {
+    {        
         [Required]
         public string Street1 { get; set; }
 
@@ -25,7 +25,8 @@ namespace MyFollowOwin.Models
         [Required]
         public long Pin { get; set; }
 
-        [Required]        
+        [Required]   
+        [Range(typeof(long),"1000000000","9999999999",ErrorMessage ="Enter contact number of 10 digits")]    
         public long ContactNo { get; set; }
     }
 }

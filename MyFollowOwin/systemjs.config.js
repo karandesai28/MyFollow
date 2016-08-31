@@ -3,24 +3,21 @@
  * Adjust as necessary for your application needs.
  */
 (function(global) {
-  // map tells the System loader where to look for things
-  var map = {
-      'app': 'app', // 'dist',      
-    '@angular':                   'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs': 'node_modules/rxjs' ,
-    'ng2-imageupload': 'node_modules/ng2-imageupload'
+    // map tells the System loader where to look for things
+    var map = {
+        'app': 'app', // 'dist',      
+        '@angular':                   'node_modules/@angular',
+        'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
+        'rxjs': 'node_modules/rxjs' ,
+        'ng2-uploader': 'node_modules/ng2-uploader/'     
    
-  };
-  // packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-     'app': { main: 'main.js', defaultExtension: 'js' },      
-    'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'ng2-imageupload': {
-        main: 'index.js',
-        defaultExtension: 'js'
-    }
+    };
+    // packages tells the System loader how to load when no filename and/or no extension
+    var packages = {
+        'app': { main: 'main.js', defaultExtension: 'js' },      
+        'rxjs':                       { defaultExtension: 'js' },
+        'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+        'ng2-uploader': { main: 'index.js', defaultExtension: 'js' }
   };
   var ngPackageNames = [
     'common',

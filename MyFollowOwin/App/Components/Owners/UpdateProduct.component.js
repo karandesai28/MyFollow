@@ -16,9 +16,6 @@ var UpdateProduct = (function () {
         this.productservice = productservice;
         this.Click = true;
         this.Hide = false;
-        this.uploadpic = false;
-        this.uploadvideo = false;
-        this.uploadgif = false;
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
     }
@@ -27,7 +24,6 @@ var UpdateProduct = (function () {
     UpdateProduct.prototype.onSubmit = function (productupdate) {
         var _this = this;
         this.productupdate.ProductId = this.productId;
-        console.log(this.productupdate.ImagePath);
         this.UpdateProducts();
         this.Hide = true;
         this.Click = false;
@@ -39,23 +35,24 @@ var UpdateProduct = (function () {
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
     UpdateProduct.prototype.UploadPic = function () {
-        this.uploadpic = !this.uploadpic;
         this.productupdate.ProductMedia = Models_1.Media.Pictures;
     };
     UpdateProduct.prototype.UploadVideo = function () {
-        this.uploadvideo = !this.uploadvideo;
-        this.productupdate.ProductMedia = Models_1.Media.videos;
+        this.productupdate.ProductMedia = Models_1.Media.Videos;
     };
-    UpdateProduct.prototype.UploadGif = function () {
-        this.uploadgif = !this.uploadgif;
-        this.productupdate.ProductMedia = Models_1.Media.GIF;
+    UpdateProduct.prototype.UploadAudio = function () {
+        this.productupdate.ProductMedia = Models_1.Media.Audio;
         console.log(this.productupdate);
     };
-    UpdateProduct.prototype.PicUpload = function (path) {
-        this.productupdate.ImagePath = path.target.value;
-    };
-    UpdateProduct.prototype.VidUpload = function (path) {
-        this.productupdate.VideoUrl = btoa(path.dataURL);
+    UpdateProduct.prototype.Selected = function (event) {
+        var _this = this;
+        var file = event.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            _this.productupdate.Media = reader.result;
+        };
+        reader.readAsDataURL(file);
+        console.log(this.productupdate.Media);
     };
     __decorate([
         core_1.Input(), 
@@ -65,7 +62,7 @@ var UpdateProduct = (function () {
         core_1.Component({
             selector: 'update-product',
             providers: [Service_1.Service],
-            templateUrl: 'App/Client Side Views/Owners/UpdateProduct.component.html'
+            templateUrl: 'App/ClientSideViews/Owners/UpdateProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], UpdateProduct);

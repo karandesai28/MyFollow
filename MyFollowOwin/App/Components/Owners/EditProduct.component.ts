@@ -4,7 +4,7 @@ import {ProductModel} from './../Shared/Models';
 @Component({
     selector: 'edit-product',
     providers: [Service],   
-    templateUrl: 'App/Client Side Views/Owners/EditProduct.component.html'
+    templateUrl: 'App/ClientSideViews/Owners/EditProduct.component.html'
 })
 
 export class EditProduct implements OnInit, OnChanges {

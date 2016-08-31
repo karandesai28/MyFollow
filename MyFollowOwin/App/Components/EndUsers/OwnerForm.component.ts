@@ -8,7 +8,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'owner-form',    
     providers: [Service],
     directives: [ProductList, ROUTER_DIRECTIVES],
-    templateUrl:'App/Client Side Views/EndUsers/OwnerForm.component.html'    
+    templateUrl:'App/ClientSideViews/EndUsers/OwnerForm.component.html'    
 })
 
 export class OwnerComponent implements OnInit {   

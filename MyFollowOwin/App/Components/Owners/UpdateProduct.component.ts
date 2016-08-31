@@ -1,12 +1,13 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import {Service} from './../Shared/Service';
 import {ProductUpdate, Media} from './../Shared/Models';
+import {UPLOAD_DIRECTIVES} from 'ng2-uploader/ng2-uploader';
 
 
 @Component({
     selector: 'update-product',
-    providers: [Service],   
-    templateUrl: 'App/Client Side Views/Owners/UpdateProduct.component.html'
+    providers: [Service],
+    templateUrl: 'App/ClientSideViews/Owners/UpdateProduct.component.html'
 })
 
 export class UpdateProduct implements OnInit {
@@ -16,28 +17,27 @@ export class UpdateProduct implements OnInit {
     errorMessage: string;
     productupdate: ProductUpdate;
     productupdates: Array<ProductUpdate>;
-    
+
     constructor(private productservice: Service) {
         this.productupdate = new ProductUpdate();
-        this.productupdates = new Array<ProductUpdate>(); 
-                 
+        this.productupdates = new Array<ProductUpdate>();
+
     }
 
     ngOnInit() {
-       
+
     }
 
     @Input() productId: number;
     onSubmit(productupdate: ProductUpdate) {
-        this.productupdate.ProductId = this.productId;        
-        console.log(this.productupdate.ImagePath);
+        this.productupdate.ProductId = this.productId;
         this.UpdateProducts();
         this.Hide = true;
         this.Click = false;
         this.productupdate = new ProductUpdate();
         setTimeout(() => this.Click = true, 0.5);
     }
-    
+
 
     UpdateProducts() {
         this.productservice.UpdateProduct(this.productupdate)
@@ -47,34 +47,32 @@ export class UpdateProduct implements OnInit {
             () => { })
     }
 
-    uploadpic: boolean = false;
-    uploadvideo: boolean = false;
-    uploadgif: boolean = false;
+
     UploadPic() {
-        this.uploadpic = !this.uploadpic;
+
         this.productupdate.ProductMedia = Media.Pictures;
     }
 
-    UploadVideo() {        
-        this.uploadvideo = !this.uploadvideo;
-        this.productupdate.ProductMedia = Media.videos;       
+    UploadVideo() {
+
+        this.productupdate.ProductMedia = Media.Videos;
     }
 
-    UploadGif() {       
-        this.uploadgif = !this.uploadgif;
-        this.productupdate.ProductMedia = Media.GIF;
-        console.log(this.productupdate);        
-    }
-   
-   
-    PicUpload(path) {       
-        this.productupdate.ImagePath = path.target.value;                 
-          
-    }
+    UploadAudio() {
 
-    VidUpload(path) {        
-        this.productupdate.VideoUrl = btoa(path.dataURL);
+        this.productupdate.ProductMedia = Media.Audio;
+        console.log(this.productupdate);
+    }
+      
+    Selected(event: HTMLInputElement) {     
+        
+            let file = event.files[0];
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                this.productupdate.Media = reader.result;
+            }        
+            reader.readAsDataURL(file);
+            console.log(this.productupdate.Media);    
     }
     
-
 }

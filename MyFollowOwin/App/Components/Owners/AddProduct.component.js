@@ -44,7 +44,7 @@ var AddProduct = (function () {
             selector: 'add-product',
             providers: [Service_1.Service],
             directives: [AddedProducts_component_1.AddedProducts, router_1.ROUTER_DIRECTIVES],
-            templateUrl: 'App/Client Side Views/Owners/AddProduct.component.html'
+            templateUrl: 'App/ClientSideViews/Owners/AddProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], AddProduct);

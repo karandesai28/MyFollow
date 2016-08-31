@@ -5,7 +5,7 @@ import {OwnerModel, OwnerRequestStates} from './../Shared/Models';
 @Component({
     selector: 'owner-requests', 
     providers: [Service],   
-    templateUrl:'App/Client Side Views/Admin/OwnerRequest.component.html' 
+    templateUrl:'App/ClientSideViews/Admin/OwnerRequest.component.html' 
 })
 
 export class OwnerRequest implements OnInit{   

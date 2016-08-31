@@ -7,7 +7,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'view-update',
     directives: [ROUTER_DIRECTIVES],
     providers: [Service],
-    templateUrl: 'App/Client Side Views/EndUsers/ViewUpdates.component.html'
+    templateUrl: 'App/ClientSideViews/EndUsers/ViewUpdates.component.html'
 })
 export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
 
@@ -62,7 +62,7 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);       
-        this.productupdate.ImagePath;
+        this.productupdate.Media;
         this.productId = null;
         this.ngOnDestroy();
     }
@@ -89,8 +89,7 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
                 this.errorMessage = err;
             },
             () => {
-                console.log("Update Found");
-                this.video = atob(this.productupdate.VideoUrl);
+                console.log("Update Found");               
             });
     }
 

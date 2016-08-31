@@ -13,8 +13,8 @@ var OwnerRequestStates = exports.OwnerRequestStates;
 var Platform = exports.Platform;
 (function (Media) {
     Media[Media["Pictures"] = 0] = "Pictures";
-    Media[Media["videos"] = 1] = "videos";
-    Media[Media["GIF"] = 2] = "GIF";
+    Media[Media["Videos"] = 1] = "Videos";
+    Media[Media["Audio"] = 2] = "Audio";
 })(exports.Media || (exports.Media = {}));
 var Media = exports.Media;
 var OwnerModel = (function () {

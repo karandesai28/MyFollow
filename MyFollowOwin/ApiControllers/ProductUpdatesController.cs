@@ -82,8 +82,7 @@ namespace MyFollowOwin.Api_Controllers
         [HttpPost]
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult PostProductUpdates(int id, ProductUpdates productUpdates)
-        {
-                
+        {          
             Products product = db.Products.Find(id);
             if (product != null)
             {              

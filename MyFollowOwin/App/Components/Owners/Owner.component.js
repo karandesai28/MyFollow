@@ -17,7 +17,7 @@ var OwnerComponent = (function () {
         core_1.Component({
             selector: 'owner-component',
             directives: [router_1.ROUTER_DIRECTIVES],
-            templateUrl: 'App/Client Side Views/Owners/Owner.component.html'
+            templateUrl: 'App/ClientSideViews/Owners/Owner.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], OwnerComponent);

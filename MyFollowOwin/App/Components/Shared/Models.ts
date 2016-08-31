@@ -1,6 +1,6 @@
 ﻿export enum OwnerRequestStates { Pending=0, Approved=1, Rejected=2}
 export enum Platform { Mobile, Web, IOT }
-export enum Media { Pictures, videos, GIF }
+export enum Media { Pictures, Videos, Audio }
 
 export class OwnerModel {
     public Id: number;
@@ -50,10 +50,9 @@ export class ProductUpdate {
     public Title: string;
     public Details: string;
     public ProductMedia: Media;
-    public ImagePath: string;
-    public VideoUrl: string;
-    public Gifpath: string;
-    public Dates: CommonProperty;
+    public Media: string;
+    public MediaFile:any;
+    public Dates: CommonProperty;    
 }
 
 export class Followers {

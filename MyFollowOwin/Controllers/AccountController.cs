@@ -161,7 +161,8 @@ namespace MyFollowOwin.Controllers
                         return RedirectToAction("Failed", "Account");
                     }                     
              }
-                    AddErrors(result);                
+
+                AddErrors(result);                
            }
             // If we got this far, something failed, redisplay form
             return View(model);

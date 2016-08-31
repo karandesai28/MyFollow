@@ -45,7 +45,7 @@ var EditProduct = (function () {
         core_1.Component({
             selector: 'edit-product',
             providers: [Service_1.Service],
-            templateUrl: 'App/Client Side Views/Owners/EditProduct.component.html'
+            templateUrl: 'App/ClientSideViews/Owners/EditProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], EditProduct);

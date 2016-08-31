@@ -8,7 +8,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'add-product',
     providers: [Service],
     directives: [AddedProducts, ROUTER_DIRECTIVES],  
-    templateUrl: 'App/Client Side Views/Owners/AddProduct.component.html'
+    templateUrl: 'App/ClientSideViews/Owners/AddProduct.component.html'
 })
 
 export class AddProduct implements OnInit {

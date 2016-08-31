@@ -9,7 +9,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'product-list',
     directives: [ViewUpdates, ROUTER_DIRECTIVES],
     providers: [Service],
-    templateUrl: 'App/Client Side Views/EndUsers/ProductList.component.html'
+    templateUrl: 'App/ClientSideViews/EndUsers/ProductList.component.html'
 })
 export class ProductList implements OnInit{
    

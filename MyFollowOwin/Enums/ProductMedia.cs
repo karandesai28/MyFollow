@@ -9,6 +9,6 @@ namespace MyFolllowOwin.Models
     //I have named enum instance as ProductMedia
     public class ProductMedia
     {
-        public enum Media { Pictures, videos, GIF }
+        public enum Media { Pictures, Videos, Audio }
     }
 }

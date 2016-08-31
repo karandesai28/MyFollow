@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace MyFollowOwin.Models
 {
     public class ExternalLoginConfirmationViewModel
@@ -64,7 +65,7 @@ namespace MyFollowOwin.Models
     }
 
     public class RegisterViewModel
-    {
+    {        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

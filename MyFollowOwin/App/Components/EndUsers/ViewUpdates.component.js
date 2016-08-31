@@ -48,7 +48,7 @@ var ViewUpdates = (function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        this.productupdate.ImagePath;
+        this.productupdate.Media;
         this.productId = null;
         this.ngOnDestroy();
     };
@@ -71,7 +71,6 @@ var ViewUpdates = (function () {
             _this.errorMessage = err;
         }, function () {
             console.log("Update Found");
-            _this.video = atob(_this.productupdate.VideoUrl);
         });
     };
     __decorate([
@@ -83,7 +82,7 @@ var ViewUpdates = (function () {
             selector: 'view-update',
             directives: [router_1.ROUTER_DIRECTIVES],
             providers: [Service_1.Service],
-            templateUrl: 'App/Client Side Views/EndUsers/ViewUpdates.component.html'
+            templateUrl: 'App/ClientSideViews/EndUsers/ViewUpdates.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], ViewUpdates);

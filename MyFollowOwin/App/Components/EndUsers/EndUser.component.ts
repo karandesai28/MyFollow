@@ -7,7 +7,7 @@ import {OwnerComponent} from './../EndUsers/OwnerForm.component';
 @Component({
     selector: 'user-component',
     directives: [ROUTER_DIRECTIVES],
-    templateUrl: 'App/Client Side Views/EndUsers/EndUser.component.html'   
+    templateUrl: 'App/ClientSideViews/EndUsers/EndUser.component.html'   
 })
 
 export class EndUserComponent {

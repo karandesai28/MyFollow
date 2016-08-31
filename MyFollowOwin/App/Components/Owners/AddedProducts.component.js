@@ -164,7 +164,7 @@ var AddedProducts = (function () {
             selector: 'added-products',
             providers: [Service_1.Service],
             directives: [EditProduct_component_1.EditProduct, UpdateProduct_component_1.UpdateProduct, ViewUpdates_component_1.ViewUpdates, router_1.ROUTER_DIRECTIVES],
-            templateUrl: 'App/Client Side Views/Owners/AddedProducts.component.html'
+            templateUrl: 'App/ClientSideViews/Owners/AddedProducts.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])
     ], AddedProducts);

@@ -7,7 +7,7 @@ import {AddedProducts} from './../Owners/AddedProducts.component';
 @Component({
     selector: 'owner-component',
     directives: [ROUTER_DIRECTIVES],
-    templateUrl: 'App/Client Side Views/Owners/Owner.component.html'   
+    templateUrl: 'App/ClientSideViews/Owners/Owner.component.html'   
 })
 
 export class OwnerComponent {

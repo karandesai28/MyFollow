@@ -44,15 +44,14 @@
         <dd>{{productupdate.Details}}</dd>
 
         <dt>Media</dt>
-        <dd>{{productupdate.ImagePath}}</dd>
-
-        <dd>{{productupdate.VideoUrl}}</dd>
-        <dd>{{productupdate.Gifpath}}</dd>
+        <dd>{{productupdate.Media}}</dd>
+     
     </dl>
-    <img src={{productupdate.ImagePath}} />
-    <br/>   
+    <img src={{productupdate.Media}} />
+    <br/>
+    <video controls>
+        <source src={{productupdate.Media}} type="video/mp4">
+    </video>   
 </div>
-
-<video width="320" height="240" controls><source src={{video}} type="video/mp4"></video>
 
 <div class="lead" [hidden]="!show">{{message}}</div>

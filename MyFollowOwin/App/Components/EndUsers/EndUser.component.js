@@ -17,7 +17,7 @@ var EndUserComponent = (function () {
         core_1.Component({
             selector: 'user-component',
             directives: [router_1.ROUTER_DIRECTIVES],
-            templateUrl: 'App/Client Side Views/EndUsers/EndUser.component.html'
+            templateUrl: 'App/ClientSideViews/EndUsers/EndUser.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], EndUserComponent);
