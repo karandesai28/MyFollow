@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel} from './../Shared/Models';
+import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel,Media} from './../Shared/Models';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import {DomSanitizationService} from '@angular/platform-browser';
 
 @Component({
     selector: 'view-update',
@@ -22,12 +23,13 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
     product: ProductModel;
     productupdate: ProductUpdate;
     productupdates: Array<ProductUpdate>;
-
-    constructor(private productservice: Service) {
+   
+    constructor(private productservice: Service, private sanitizer: DomSanitizationService) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
         this.productupdate = new ProductUpdate();
         this.productupdates = new Array<ProductUpdate>();
+        this.sanitizer = sanitizer;     
     }
 
     ngOnChanges() {
@@ -54,17 +56,28 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy() { console.log("destroyed") }
 
     ngOnInit() {
-
+        this.videoUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(this.productupdate.Media);
     }
-
+    videoUrl: any;
+    showVideo: boolean = false;;
     @Input() productId: number;
     public ViewData() {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
-        this.getUpdates(this.productId);       
-        this.productupdate.Media;
+        this.getUpdates(this.productId);
+        if (this.productupdate.ProductMedia == Media.Videos) {
+            this.showVideo = true;
+           // this.allowVideo(this.productupdate.Media);
+           
+        }
         this.productId = null;
         this.ngOnDestroy();
+    }
+
+    allowVideo(productmedia) {
+       
+          return this.sanitizer.bypassSecurityTrustResourceUrl(productmedia);
     }
 
 

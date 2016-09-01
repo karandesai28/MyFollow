@@ -47,11 +47,9 @@
         <dd>{{productupdate.Media}}</dd>
      
     </dl>
-    <img src={{productupdate.Media}} />
-    <br/>
-    <video controls>
-        <source src={{productupdate.Media}} type="video/mp4">
-    </video>   
+    <img *ngIf="!showVideo" src={{productupdate.Media}} /> 
+    <iframe  *ngIf="showVideo" width="560" height="315" [src]='allowVideo(productupdate.Media)' frameborder="0" allowfullscreen></iframe>
+    
 </div>
 
 <div class="lead" [hidden]="!show">{{message}}</div>

@@ -16,6 +16,8 @@ var UpdateProduct = (function () {
         this.productservice = productservice;
         this.Click = true;
         this.Hide = false;
+        this.video = false;
+        this.pic = false;
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
     }
@@ -35,12 +37,20 @@ var UpdateProduct = (function () {
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
     UpdateProduct.prototype.UploadPic = function () {
+        this.pic = true;
+        this.video = false;
+        this.picDom = true;
         this.productupdate.ProductMedia = Models_1.Media.Pictures;
     };
     UpdateProduct.prototype.UploadVideo = function () {
+        this.videoDom = true;
+        this.pic = false;
+        this.video = true;
         this.productupdate.ProductMedia = Models_1.Media.Videos;
     };
     UpdateProduct.prototype.UploadAudio = function () {
+        this.pic = false;
+        this.video = false;
         this.productupdate.ProductMedia = Models_1.Media.Audio;
         console.log(this.productupdate);
     };

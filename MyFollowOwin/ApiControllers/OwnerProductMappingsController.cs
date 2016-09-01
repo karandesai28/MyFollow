@@ -36,6 +36,9 @@ namespace MyFollowOwin.Api_Controllers
                 }
             }
 
+            //var ownerId = db.Owners.ToList().LastOrDefault(e=>e.UserId==user.Id).Id;
+            //var addedproducts = db.AddedProducts.Where(e => e.OwnerId == ownerId);
+
             foreach (var item in db.AddedProducts)
             {
                 if (item.OwnerId == ownerId)

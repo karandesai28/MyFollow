@@ -18,11 +18,23 @@
         <label for="ProductMedia">Select Media Types to upload:</label>
 
         <div class="radio">
-            <label><input type="radio" (click)="UploadPic()" value="Pictures" id="Pictures" name="rb">Upload Pics</label>
+            <label><input type="radio" (click)="UploadPic()" value="Pictures" id="Pictures" name="rb">Add Pics</label>
+            <div class="form-inline" [hidden]="!pic" *ngIf="picDom">
+                <label for="Media">Upload Image</label>
+                <!--<input class="form-control"  type="file" image-upload (imageSelected)="Selected($event)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" />-->
+                <input class="form-control" type="file" (change)="Selected($event.target)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" multiple="multiple" required />         
+            </div>
         </div>
 
         <div class="radio">
-            <label><input type="radio" (click)="UploadVideo()" value="Videos" id="Videos" name="rb">Upload videos</label>
+            <label><input type="radio" (click)="UploadVideo()" value="Videos" id="Videos" name="rb">Add Video</label>
+            <div class="form-inline" [hidden]="!video" *ngIf="videoDom">
+                <label for="Media">Add Youtube Link</label>               
+                <input class="form-control"  type="text" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" required pattern="^(https?\:\/\/)?(www\.)?(youtube\.com\/)?(embed\/).+$" />
+                <div [hidden]="Media.valid || Media.pristine" class="alert alert-danger">
+                    Enter valid Youtube Url: Remember, the url format is https://www.youtube.com/embed/video_id
+                </div>    
+            </div>
         </div>      
   
         <div class="radio">
@@ -30,12 +42,6 @@
         </div>
         <br />         
 
-        <div>
-            <label for="Media">Upload Image</label>           
-            <!--<input class="form-control"  type="file" image-upload (imageSelected)="Selected($event)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" />-->
-            <input class="form-control" type="file" (change)="Selected($event.target)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="/*"/>
-        </div>
-  
         <input class="btn btn-default" type="submit" value="Submit" />
 </form>
 </div>

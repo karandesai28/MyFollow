@@ -46,25 +46,33 @@ export class UpdateProduct implements OnInit {
             function (error) { console.log("Error happened" + error) },
             () => { })
     }
-
-
+    picDom: boolean;
+    videoDom: boolean;
+    video: boolean = false;
+    pic: boolean = false;
     UploadPic() {
-
+        this.pic = true;
+        this.video = false;
+        this.picDom = true;
         this.productupdate.ProductMedia = Media.Pictures;
     }
 
-    UploadVideo() {
 
+    UploadVideo() {
+        this.videoDom = true;
+        this.pic = false;
+        this.video = true;       
         this.productupdate.ProductMedia = Media.Videos;
     }
 
     UploadAudio() {
-
+        this.pic = false;
+        this.video = false;        
         this.productupdate.ProductMedia = Media.Audio;
         console.log(this.productupdate);
     }
-      
-    Selected(event: HTMLInputElement) {     
+    
+    Selected(event: HTMLInputElement) {  
         
             let file = event.files[0];
             var reader = new FileReader();
@@ -72,7 +80,7 @@ export class UpdateProduct implements OnInit {
                 this.productupdate.Media = reader.result;
             }        
             reader.readAsDataURL(file);
-            console.log(this.productupdate.Media);    
+            console.log(this.productupdate.Media);           
     }
     
 }

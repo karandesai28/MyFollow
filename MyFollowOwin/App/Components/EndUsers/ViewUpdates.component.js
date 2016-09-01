@@ -12,15 +12,19 @@ var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
 var router_1 = require('@angular/router');
+var platform_browser_1 = require('@angular/platform-browser');
 var ViewUpdates = (function () {
-    function ViewUpdates(productservice) {
+    function ViewUpdates(productservice, sanitizer) {
         this.productservice = productservice;
+        this.sanitizer = sanitizer;
         this.show = false;
         this.productplatform = Models_1.Platform;
+        this.showVideo = false;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
+        this.sanitizer = sanitizer;
     }
     ViewUpdates.prototype.ngOnChanges = function () {
         if (this.productId != null) {
@@ -43,14 +47,22 @@ var ViewUpdates = (function () {
     };
     ViewUpdates.prototype.ngOnDestroy = function () { console.log("destroyed"); };
     ViewUpdates.prototype.ngOnInit = function () {
+        this.videoUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(this.productupdate.Media);
     };
+    ;
     ViewUpdates.prototype.ViewData = function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        this.productupdate.Media;
+        if (this.productupdate.ProductMedia == Models_1.Media.Videos) {
+            this.showVideo = true;
+        }
         this.productId = null;
         this.ngOnDestroy();
+    };
+    ViewUpdates.prototype.allowVideo = function (productmedia) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(productmedia);
     };
     ViewUpdates.prototype.getProducts = function (productId) {
         var _this = this;
@@ -84,7 +96,7 @@ var ViewUpdates = (function () {
             providers: [Service_1.Service],
             templateUrl: 'App/ClientSideViews/EndUsers/ViewUpdates.component.html'
         }), 
-        __metadata('design:paramtypes', [Service_1.Service])
+        __metadata('design:paramtypes', [Service_1.Service, platform_browser_1.DomSanitizationService])
     ], ViewUpdates);
     return ViewUpdates;
 }());
