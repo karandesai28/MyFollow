@@ -13,35 +13,11 @@
         <input class="form-control" #Details="ngForm" type="text" [(ngModel)]="productupdate.Details" ngControl="Details" id="Details" required/><br />        
         <div [hidden]="Details.valid || Details.pristine" class="alert alert-danger">
             This is required field
-        </div>
-
-        <label for="ProductMedia">Select Media Types to upload:</label>
-
-        <div class="radio">
-            <label><input type="radio" (click)="UploadPic()" value="Pictures" id="Pictures" name="rb">Add Pics</label>
-            <div class="form-inline" [hidden]="!pic" *ngIf="picDom">
-                <label for="Media">Upload Image</label>
-                <!--<input class="form-control"  type="file" image-upload (imageSelected)="Selected($event)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" />-->
-                <input class="form-control" type="file" (change)="Selected($event.target)" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" accept="image/*" multiple="multiple" required />         
-            </div>
-        </div>
-
-        <div class="radio">
-            <label><input type="radio" (click)="UploadVideo()" value="Videos" id="Videos" name="rb">Add Video</label>
-            <div class="form-inline" [hidden]="!video" *ngIf="videoDom">
-                <label for="Media">Add Youtube Link</label>               
-                <input class="form-control"  type="text" id="Media" #Media="ngForm" [(ngModel)]="productupdate.Media" ngControl="Media" required pattern="^(https?\:\/\/)?(www\.)?(youtube\.com\/)?(embed\/).+$" />
-                <div [hidden]="Media.valid || Media.pristine" class="alert alert-danger">
-                    Enter valid Youtube Url: Remember, the url format is https://www.youtube.com/embed/video_id
-                </div>    
-            </div>
-        </div>      
-  
-        <div class="radio">
-            <label><input type="radio" (click)="UploadAudio()" value="Audio" id="Audio" name="rb">Upload Audio</label>
-        </div>
-        <br />         
+        </div>     
+        <input type="checkbox" (click)="Yes($event)" name="Media" value="Media">Attach Media<br>
+        <p class="alert-info">If you check the checkbox, the form for adding media will open after submitting this form.</p><br/>
 
         <input class="btn btn-default" type="submit" value="Submit" />
 </form>
 </div>
+<add-media *ngIf="showmediaform" id="Media"></add-media> 

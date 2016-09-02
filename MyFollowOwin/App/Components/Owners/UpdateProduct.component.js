@@ -11,15 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Service_1 = require('./../Shared/Service');
 var Models_1 = require('./../Shared/Models');
+var AddMedia_Component_1 = require('./../Owners/AddMedia.Component');
 var UpdateProduct = (function () {
     function UpdateProduct(productservice) {
         this.productservice = productservice;
         this.Click = true;
         this.Hide = false;
-        this.video = false;
-        this.pic = false;
+        this.addmedia = false;
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
+        this.addMedia = new Models_1.AddMedia();
+        this.addMedias = new Array();
     }
     UpdateProduct.prototype.ngOnInit = function () {
     };
@@ -29,6 +31,7 @@ var UpdateProduct = (function () {
         this.UpdateProducts();
         this.Hide = true;
         this.Click = false;
+        this.showmediaform = this.addmedia;
         this.productupdate = new Models_1.ProductUpdate();
         setTimeout(function () { return _this.Click = true; }, 0.5);
     };
@@ -36,33 +39,10 @@ var UpdateProduct = (function () {
         this.productservice.UpdateProduct(this.productupdate)
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
-    UpdateProduct.prototype.UploadPic = function () {
-        this.pic = true;
-        this.video = false;
-        this.picDom = true;
-        this.productupdate.ProductMedia = Models_1.Media.Pictures;
-    };
-    UpdateProduct.prototype.UploadVideo = function () {
-        this.videoDom = true;
-        this.pic = false;
-        this.video = true;
-        this.productupdate.ProductMedia = Models_1.Media.Videos;
-    };
-    UpdateProduct.prototype.UploadAudio = function () {
-        this.pic = false;
-        this.video = false;
-        this.productupdate.ProductMedia = Models_1.Media.Audio;
-        console.log(this.productupdate);
-    };
-    UpdateProduct.prototype.Selected = function (event) {
-        var _this = this;
-        var file = event.files[0];
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            _this.productupdate.Media = reader.result;
-        };
-        reader.readAsDataURL(file);
-        console.log(this.productupdate.Media);
+    UpdateProduct.prototype.Yes = function (value) {
+        if (value.target.checked == true) {
+            this.addmedia = true;
+        }
     };
     __decorate([
         core_1.Input(), 
@@ -72,6 +52,7 @@ var UpdateProduct = (function () {
         core_1.Component({
             selector: 'update-product',
             providers: [Service_1.Service],
+            directives: [AddMedia_Component_1.AddMediaComponent],
             templateUrl: 'App/ClientSideViews/Owners/UpdateProduct.component.html'
         }), 
         __metadata('design:paramtypes', [Service_1.Service])

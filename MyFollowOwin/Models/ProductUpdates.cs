@@ -17,11 +17,11 @@ namespace MyFolllowOwin.Models
 
         [MaxLength(1000)]
         public string Details { get; set; }
-
-        [Required]
-        public Media ProductMedia { get; set; }
-
-        public string Media { get; set; }  
+        
+        public ProductUpdates()
+        {
+            var MediaList = new List<AddMedia>();
+        }       
 
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]

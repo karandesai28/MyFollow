@@ -24,6 +24,8 @@ var ViewUpdates = (function () {
         this.product = new Models_1.ProductModel();
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
+        this.addMedia = new Models_1.AddMedia();
+        this.addMedias = new Array();
         this.sanitizer = sanitizer;
     }
     ViewUpdates.prototype.ngOnChanges = function () {
@@ -48,14 +50,14 @@ var ViewUpdates = (function () {
     ViewUpdates.prototype.ngOnDestroy = function () { console.log("destroyed"); };
     ViewUpdates.prototype.ngOnInit = function () {
         this.videoUrl =
-            this.sanitizer.bypassSecurityTrustResourceUrl(this.productupdate.Media);
+            this.sanitizer.bypassSecurityTrustResourceUrl(this.addMedia.Path);
     };
     ;
     ViewUpdates.prototype.ViewData = function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        if (this.productupdate.ProductMedia == Models_1.Media.Videos) {
+        if (this.addMedia.ProductMedia == Models_1.Media.Videos) {
             this.showVideo = true;
         }
         this.productId = null;

@@ -59,4 +59,10 @@ var Followers = (function () {
     return Followers;
 }());
 exports.Followers = Followers;
+var AddMedia = (function () {
+    function AddMedia() {
+    }
+    return AddMedia;
+}());
+exports.AddMedia = AddMedia;
 //# sourceMappingURL=Models.js.map

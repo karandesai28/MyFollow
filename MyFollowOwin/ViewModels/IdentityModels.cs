@@ -32,6 +32,7 @@ namespace MyFollowOwin.Models
         public DbSet<OwnerProductMapping> AddedProducts { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductUpdates> ProductUpdates { get; set; }
+        public DbSet<AddMedia> Media { get; set; }
         public object AspNetUsers { get; internal set; }
 
         //public System.Data.Entity.DbSet<MyFollowOwin.Models.ApplicationUser> ApplicationUsers { get; set; }

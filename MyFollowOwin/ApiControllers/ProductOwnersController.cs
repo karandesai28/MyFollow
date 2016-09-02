@@ -11,44 +11,27 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyFollowOwin.Api_Controllers
 {
-    [RoutePrefix("api/[controller]")]  
-     
+    [RoutePrefix("api/[controller]")]
+
     public class ProductOwnersController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();        
-        
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: api/ProductOwners/
         [HttpGet]
         [Route]
-        public ProductOwners[] GetOwners()
+        public IHttpActionResult GetOwners()
         {
-            int i=0,n = 0;
-            int ownerlen = db.Owners.Count();
-            
-            foreach (var row in db.Owners)
-            {
-                if (row.OwnerStates == OwnerRequestStates.States.Pending)
-                {                   
-                    i++;
-                }
-            }
-            ProductOwners[] productOwners = new ProductOwners[i];
-
-            foreach (var row in db.Owners)
-            {
-                if (row.OwnerStates == OwnerRequestStates.States.Pending)
-                {
-                    productOwners[n] = row;
-                    n++;                    
-                }
-            }            
-            return productOwners;                       
+            var PendingOwners = from records in db.Owners
+                                where records.OwnerStates == OwnerRequestStates.States.Pending
+                                select records;
+            return Ok(PendingOwners);
         }
 
         // POST: api/ProductOwners
         [ResponseType(typeof(ProductOwners))]
         [HttpPost]
-        [Route]        
+        [Route]
         public IHttpActionResult PostProductOwners(ProductOwners productOwners)
         {
             var id = User.Identity.GetUserId();
@@ -57,7 +40,7 @@ namespace MyFollowOwin.Api_Controllers
             productOwners.UserId = user.Id;
             productOwners.CreateDate = DateTime.Today;
             productOwners.ModifiedDate = DateTime.Today;
-          
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -69,27 +52,27 @@ namespace MyFollowOwin.Api_Controllers
             return CreatedAtRoute("DefaultApi", new { id = productOwners.Id }, productOwners);
         }
 
-        
+
         // PUT: api/ProductOwners1/5
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route]
         public IHttpActionResult PutProductOwners(int id, ProductOwners productOwners)
-        {           
-            var state=db.Owners.FirstOrDefault(x => x.Id == id);            
+        {
+            var state = db.Owners.FirstOrDefault(x => x.Id == id);
 
             if (state != null)
             {
                 state.OwnerStates = productOwners.OwnerStates;
                 if (productOwners.OwnerStates == OwnerRequestStates.States.Approved)
-                {                    
-                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));                   
-                    ProductOwners po = db.Owners.Find(id);                    
+                {
+                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                    ProductOwners po = db.Owners.Find(id);
                     ApplicationUser user = db.Users.Find(po.UserId);
                     UserManager.RemoveFromRole(user.Id, "EndUsers");
                     UserManager.AddToRole(user.Id, "ProductOwners");
                 }
-            }           
+            }
 
             try
             {
@@ -108,8 +91,8 @@ namespace MyFollowOwin.Api_Controllers
             }
 
             return StatusCode(HttpStatusCode.OK);
-        }  
-                  
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

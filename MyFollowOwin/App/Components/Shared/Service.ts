@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import {OwnerModel, ProductModel, ProductUpdate} from './Models';
+import {OwnerModel, ProductModel, ProductUpdate,AddMedia} from './Models';
 import 'rxjs/add/operator/map';
 
 
@@ -14,6 +14,7 @@ export class Service {
     private addedproductUrl = 'api/OwnerProductMappings/';   
     private updateUrl = 'api/ProductUpdates/';
     private userUrl = 'api/ApplicationUsers/';
+    private mediaUrl = 'api/AddMedias';
     constructor(private http: Http) { }    
 
     getPendingOwners(){
@@ -102,4 +103,17 @@ export class Service {
     DeleteFollower(productId:number) {
         return this.http.delete(this.followUrl + productId);
     }
+
+    getCount() {
+        return this.http.get(this.mediaUrl)
+            .map(response => response.json());
+    }
+
+    PostMedia(media:AddMedia) {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.mediaUrl, JSON.stringify(media), { headers: headers });
+    }
+        
 }

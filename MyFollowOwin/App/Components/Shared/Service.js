@@ -20,6 +20,7 @@ var Service = (function () {
         this.addedproductUrl = 'api/OwnerProductMappings/';
         this.updateUrl = 'api/ProductUpdates/';
         this.userUrl = 'api/ApplicationUsers/';
+        this.mediaUrl = 'api/AddMedias';
     }
     Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
@@ -90,6 +91,16 @@ var Service = (function () {
     };
     Service.prototype.DeleteFollower = function (productId) {
         return this.http.delete(this.followUrl + productId);
+    };
+    Service.prototype.getCount = function () {
+        return this.http.get(this.mediaUrl)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.PostMedia = function (media) {
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(this.mediaUrl, JSON.stringify(media), { headers: headers });
     };
     Service = __decorate([
         core_1.Injectable(), 

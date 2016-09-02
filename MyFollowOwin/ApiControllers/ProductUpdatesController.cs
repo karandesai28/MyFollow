@@ -19,12 +19,6 @@ namespace MyFollowOwin.Api_Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //// GET: api/ProductUpdates        
-        //public IQueryable<ProductUpdates> GetProductUpdates()
-        //{
-        //    return db.ProductUpdates;
-        //}
-
         // GET: api/ProductUpdates/5
         [Route]
         [HttpGet]
@@ -85,27 +79,7 @@ namespace MyFollowOwin.Api_Controllers
         [ResponseType(typeof(ProductUpdates))]
         public IHttpActionResult PostProductUpdates(int id, ProductUpdates productUpdates)
         {
-            if (productUpdates.ProductMedia == ProductMedia.Media.Pictures)
-            {
-                string convert = productUpdates.Media.Substring(productUpdates.Media.IndexOf(",") + 1);
-                byte[] bytes = Convert.FromBase64String(convert);
-                var extension = ImageFormat.Jpeg;
-                var assignImageName = string.Concat("Img", productUpdates.Id, ".", extension);
-
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-                    image = Image.FromStream(ms);
-                    image.Save(@"D:\Karan\MyFollow\MyFollowOwin\ImageDatabase\" + assignImageName, extension);                }
-              
-                productUpdates.Media = "ImageDatabase/" + assignImageName;
-            }
-            if (productUpdates.ProductMedia == ProductMedia.Media.Videos)
-            {
-
-            }
-
-           
+                            
             Products product = db.Products.Find(id);
             if (product != null)
             {              

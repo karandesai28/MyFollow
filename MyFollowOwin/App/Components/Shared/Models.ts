@@ -48,14 +48,17 @@ export class ProductUpdate {
     public UpdateId: number;
     public ProductId: number;
     public Title: string;
-    public Details: string;
-    public ProductMedia: Media;
-    public Media: string;
-    public MediaFile:any;
+    public Details: string;     
     public Dates: CommonProperty;    
 }
 
 export class Followers {
     public ProductId: number;
     public UserId: string;  
+}
+
+export class AddMedia {
+    public ProductMedia: Media;
+    public Path: string;
+    public UpdateId: number;
 }

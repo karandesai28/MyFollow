@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyFolllowOwin.Models;
@@ -23,55 +20,27 @@ namespace MyFollowOwin.Api_Controllers
         [Route]
         [HttpGet]
         [ResponseType(typeof(Products))]
-        public Products[] GetAddedProducts()
+        public IHttpActionResult GetAddedProducts()
         {
             var id = User.Identity.GetUserId();
             ApplicationUser user = db.Users.Find(id);
-            int k = 0, n = 0, i = 0, ownerId = 0;
-            foreach (var item in db.Owners)
+            if (db.Owners != null)
             {
-                if (item.UserId == user.Id)
-                {
-                    ownerId = item.Id;
-                }
+                var ownerId = db.Owners.ToList().LastOrDefault(e => e.UserId == user.Id).Id;
+                var addedproducts = db.AddedProducts.Where(e => e.OwnerId == ownerId);
+
+                var product = from item in db.Products
+                              from record in addedproducts
+                              where item.Id == record.ProductId
+                              select item;
+                return Ok(product);
             }
 
-            //var ownerId = db.Owners.ToList().LastOrDefault(e=>e.UserId==user.Id).Id;
-            //var addedproducts = db.AddedProducts.Where(e => e.OwnerId == ownerId);
-
-            foreach (var item in db.AddedProducts)
-            {
-                if (item.OwnerId == ownerId)
-                {
-                    i++;
-                }
-            }
-            OwnerProductMapping[] ownerProductMapping = new OwnerProductMapping[i];
-            foreach (var row in db.AddedProducts)
-            {
-                if (row.OwnerId == ownerId)
-                {
-                    ownerProductMapping[n] = row;
-                    n++;
-                }
-            }
-            Products[] product = new Products[n];
-            foreach (var row in db.Products)
-            {
-                foreach (var item in ownerProductMapping)
-                {
-                    if (item.ProductId == row.Id)
-                    {
-                        product[k] = row;
-                        k++;
-                    }
-                }
-            }
-            return product;
+            return null;
 
         }
 
-        
+
         // PUT: api/OwnerProductMappings/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutOwnerProductMapping(int id, OwnerProductMapping ownerProductMapping)
@@ -111,21 +80,12 @@ namespace MyFollowOwin.Api_Controllers
         [ResponseType(typeof(OwnerProductMapping))]
         public IHttpActionResult PostOwnerProductMapping(int productId)
         {
-            OwnerProductMapping ownerProductMapping=new OwnerProductMapping();
-            int len = db.Owners.Count();
-            ProductOwners[] productOwners = new ProductOwners[len];
+
+            OwnerProductMapping ownerProductMapping = new OwnerProductMapping();
             var id = User.Identity.GetUserId();
             ApplicationUser user = db.Users.Find(id);
-
-            foreach(var item in db.Owners)
-            {
-                if (item.UserId == user.Id)
-                {
-                    ownerProductMapping.OwnerId = item.Id;
-                }
-            }
-            
-          
+            var OwnerId = db.Owners.ToList().LastOrDefault(e => e.UserId == user.Id).Id;
+            ownerProductMapping.OwnerId = OwnerId;
             ownerProductMapping.ProductId = productId;
             ownerProductMapping.CreateDate = DateTime.Today;
             ownerProductMapping.ModifiedDate = DateTime.Today;

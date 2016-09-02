@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import {Service} from './../Shared/Service';
-import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel,Media} from './../Shared/Models';
+import {ProductModel, Platform, ProductUpdate, UserModel, OwnerModel, Media, AddMedia} from './../Shared/Models';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import {DomSanitizationService} from '@angular/platform-browser';
 
@@ -23,12 +23,16 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
     product: ProductModel;
     productupdate: ProductUpdate;
     productupdates: Array<ProductUpdate>;
+    addMedia: AddMedia;
+    addMedias: Array<AddMedia>;
    
     constructor(private productservice: Service, private sanitizer: DomSanitizationService) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
         this.productupdate = new ProductUpdate();
         this.productupdates = new Array<ProductUpdate>();
+        this.addMedia = new AddMedia();
+        this.addMedias = new Array<AddMedia>();
         this.sanitizer = sanitizer;     
     }
 
@@ -57,7 +61,7 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.videoUrl =
-            this.sanitizer.bypassSecurityTrustResourceUrl(this.productupdate.Media);
+            this.sanitizer.bypassSecurityTrustResourceUrl(this.addMedia.Path);
     }
     videoUrl: any;
     showVideo: boolean = false;;
@@ -66,7 +70,7 @@ export class ViewUpdates implements OnInit, OnChanges, OnDestroy {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        if (this.productupdate.ProductMedia == Media.Videos) {
+        if (this.addMedia.ProductMedia == Media.Videos) {
             this.showVideo = true;
            // this.allowVideo(this.productupdate.Media);
            
