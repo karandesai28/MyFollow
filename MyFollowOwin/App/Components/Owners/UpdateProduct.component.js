@@ -15,9 +15,9 @@ var AddMedia_Component_1 = require('./../Owners/AddMedia.Component');
 var UpdateProduct = (function () {
     function UpdateProduct(productservice) {
         this.productservice = productservice;
-        this.Click = true;
-        this.Hide = false;
-        this.addmedia = false;
+        this.Click = true; //Variable to show hide form
+        this.Hide = false; //Variable to hide form on submit button click
+        this.addmedia = false; //Variable that saves state of user's permission of whether he wants to add media or not
         this.productupdate = new Models_1.ProductUpdate();
         this.productupdates = new Array();
         this.addMedia = new Models_1.AddMedia();
@@ -35,16 +35,19 @@ var UpdateProduct = (function () {
         this.productupdate = new Models_1.ProductUpdate();
         setTimeout(function () { return _this.Click = true; }, 0.5);
     };
+    //Service method that saves updates
     UpdateProduct.prototype.UpdateProducts = function () {
         this.productservice.UpdateProduct(this.productupdate)
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
     };
+    //Method which handles the checkbox click event that ask users whether they want to attach media or not
     UpdateProduct.prototype.Yes = function (value) {
         if (value.target.checked == true) {
             this.addmedia = true;
         }
     };
     __decorate([
+        //Variable to invoke media form component
         core_1.Input(), 
         __metadata('design:type', Number)
     ], UpdateProduct.prototype, "productId", void 0);

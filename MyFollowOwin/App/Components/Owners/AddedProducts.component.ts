@@ -14,21 +14,24 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 })
 export class AddedProducts implements OnInit, OnChanges {
-    ProductId: number;
+    
     productplatform = Platform;   
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
     productupdate: ProductUpdate;
-    follower: Followers;
+    follower: Followers;        
     followers: Array<Followers>;
-    hidebutton: any[] = []; 
-    update: any[] = [];
-    urowner: any[] = [];
     productobject: ProductModel;
     productobjects: Array<ProductModel>;
-    productupdates : Array<ProductUpdate>;
+    productupdates: Array<ProductUpdate>;
     productupdateobj: ProductUpdate;
+
+    ProductId: number;              //Variable which invokes property binding and ngOnChanges in CRUD components
+    hidebutton: any[] = [];         //Array whose value will decide the 'follow' or 'unfollow' button to stay on view.
+    update: any[] = [];             //Variable to show/hide Update button from view
+    urowner: any[] = [];            //Array whose value will print "Your Product" for owners viewing their own products in product list
+    
     updateclicked: boolean = false;
 
     constructor(private productservice: Service) {
@@ -43,6 +46,7 @@ export class AddedProducts implements OnInit, OnChanges {
         this.productupdateobj = new ProductUpdate();        
     }
 
+    //This is invoked due to property binding in the parent component and input parameter is productId.
     @Input() productobj: ProductModel;    
     ngOnChanges() {
         if (this.productobj != null) {
@@ -53,47 +57,60 @@ export class AddedProducts implements OnInit, OnChanges {
             console.log("first time loading");
         }      
     }
-        
-    Click: Boolean = false;
-    clicked() {
-        this.Click = true;       
-    }
 
+    //Method to handle Edit button click
     Edit: Boolean = false;
     EditClicked(Product:ProductModel) {
         this.Edit = true;
         this.product = Product;        
     }
 
+    //Method to handle Delete button click
     DeleteClicked(ProductId: number) {
         this.product.Id = ProductId;
-        this.DeleteProducts()
-        
+        this.DeleteProducts();       
     }
 
+    //Method to handle View Update button click
     ViewUpdateClicked(ProductId: number) {
         this.product.Id = ProductId;
         this.ProductId = ProductId;
         this.UpdateClicked[ProductId] = true;
-        this.updateclicked = true;
-      
-
+        this.updateclicked = true;  
     }
 
-    Update: boolean = false;
+
+    //Method to handle update button click
+    Update: boolean = false; //Boolean variable to invoke update form component
     UpdateClicked(ProductId: number) {
         this.ProductId = ProductId;
         this.Update = true;
-        this.productupdate.ProductId = ProductId;
-        
+        this.productupdate.ProductId = ProductId;       
         
     }
-    
+
+    //Method to handle Follow Button Click
+    Follow(productobj: ProductModel) {
+        this.hidebutton[productobj.Id] = true;
+        this.update[productobj.Id] = true;
+        this.FollowProducts(productobj);
+        this.product = productobj;
+    }
+
+    //Method to handle Unfollow button click
+    Unfollow(productobj: ProductModel) {
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
+        this.update[productobj.Id] = false;
+    }
+
+
     ngOnInit() {
         this.getProducts();
         this.getProductsToFollow();
     }
 
+    //Service method to get Products.
     getProducts() {
        this.productservice.getAddedProduct()
             .subscribe((products) => {
@@ -109,7 +126,7 @@ export class AddedProducts implements OnInit, OnChanges {
     }
 
     
-
+    //Service method to delete products
     DeleteProducts() {
         this.productservice.DeleteProduct(this.product)
             .subscribe(function (response) {
@@ -122,6 +139,7 @@ export class AddedProducts implements OnInit, OnChanges {
             });
     }
 
+    //Service method to get list of products
     getProductsToFollow() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
@@ -140,6 +158,7 @@ export class AddedProducts implements OnInit, OnChanges {
             });
     }
 
+    //Service method to get the records of followed products of logged in user
     getFollowProducts() {
         this.productservice.getFollowBit()
             .subscribe((followers) => {
@@ -156,15 +175,9 @@ export class AddedProducts implements OnInit, OnChanges {
                 }
             });
     }
+   
 
-    Follow(productobj: ProductModel) {
-        //this.follower.StatusBit = true;
-        this.hidebutton[productobj.Id] = true;
-        this.update[productobj.Id] = true;
-        this.FollowProducts(productobj);
-        this.product = productobj;
-    }
-
+    //Service Method invoked on click of follow button
     FollowProducts(productobj: ProductModel) {
         this.productservice.FollowProduct(productobj)
             .subscribe(
@@ -176,12 +189,8 @@ export class AddedProducts implements OnInit, OnChanges {
             })
     }
 
-    Unfollow(productobj: ProductModel) {
-        this.hidebutton[productobj.Id] = false;
-        this.UnfollowFollowers(productobj.Id);
-        this.update[productobj.Id] = false;
-    }
-
+    
+    //Service method invoked on click of Unfollow button
     UnfollowFollowers(productId: number) {
         this.productservice.DeleteFollower(productId)
             .subscribe(function (response) {

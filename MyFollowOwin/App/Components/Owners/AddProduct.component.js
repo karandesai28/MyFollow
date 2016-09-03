@@ -16,13 +16,14 @@ var router_1 = require('@angular/router');
 var AddProduct = (function () {
     function AddProduct(productservice) {
         this.productservice = productservice;
-        this.refreshform = false;
+        this.refreshform = false; //Variable to show success message of form submit and refresh form
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
     AddProduct.prototype.ngOnInit = function () {
         this.product = new Models_1.ProductModel();
     };
+    //Method to handle submit button click
     AddProduct.prototype.onSubmit = function (product) {
         var _this = this;
         this.AddProductData();
@@ -30,6 +31,7 @@ var AddProduct = (function () {
         this.product = new Models_1.ProductModel();
         setTimeout(function () { return _this.refreshform = false; }, 500);
     };
+    //Service method to save products.
     AddProduct.prototype.AddProductData = function () {
         var _this = this;
         this.productservice.AddProduct(this.product)

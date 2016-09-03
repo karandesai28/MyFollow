@@ -14,10 +14,11 @@ export class Service {
     private addedproductUrl = 'api/OwnerProductMappings/';   
     private updateUrl = 'api/ProductUpdates/';
     private userUrl = 'api/ApplicationUsers/';
-    private mediaUrl = 'api/AddMedias';
+    private mediaUrl = 'api/AddMedias/';
     constructor(private http: Http) { }    
 
-    getPendingOwners(){
+    
+    getPendingOwners() {
       return this.http.get(this.ownerUrl)
             .map(response => response.json());        
     }  
@@ -106,6 +107,11 @@ export class Service {
 
     getCount() {
         return this.http.get(this.mediaUrl)
+            .map(response => response.json());
+    }
+
+    getMedia(UpdateId: number) {
+        return this.http.get(this.mediaUrl + UpdateId)
             .map(response => response.json());
     }
 

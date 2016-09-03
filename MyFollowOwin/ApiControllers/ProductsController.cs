@@ -28,6 +28,7 @@ namespace MyFollowOwin.Api_Controllers
         }
 
         // GET: api/Products/5
+        //Get Product By ProductId returns specific records in update view.
         [Route]
         [HttpGet]
         [ResponseType(typeof(Products))]
@@ -44,7 +45,6 @@ namespace MyFollowOwin.Api_Controllers
         }
 
 
-
         // POST: api/Products
         [Route]        
         [ResponseType(typeof(Products))]
@@ -59,6 +59,7 @@ namespace MyFollowOwin.Api_Controllers
             products.ModifiedDate = DateTime.Today;
             db.Products.Add(products);           
             db.SaveChanges();
+            //Saving of product simultaneously invokes OwnerProductMappings table's post method.
             OwnerProductMappingsController addedproducts = new OwnerProductMappingsController();
             addedproducts.PostOwnerProductMapping(products.Id);
             return CreatedAtRoute("DefaultApi", new { id = products.Id }, products);
@@ -68,6 +69,7 @@ namespace MyFollowOwin.Api_Controllers
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route]
+        //Edit operation is handled here.
         public IHttpActionResult PutProducts(int id, Products products)
         {
             var state = db.Products.FirstOrDefault(x => x.Id == id);
@@ -84,7 +86,7 @@ namespace MyFollowOwin.Api_Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
                 if (!ProductsExists(id))
                 {
@@ -92,7 +94,7 @@ namespace MyFollowOwin.Api_Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 

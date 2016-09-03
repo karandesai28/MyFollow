@@ -12,12 +12,13 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 
 export class AddProduct implements OnInit {
-    refreshform: Boolean = false;
+    refreshform: Boolean = false; //Variable to show success message of form submit and refresh form
     Product: ProductModel;
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
     addedproducts: AddedProducts;
+
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
@@ -25,19 +26,20 @@ export class AddProduct implements OnInit {
 
 
     ngOnInit() {
-        this.product = new ProductModel();       
+        this.product = new ProductModel();      
 
     }
 
-   
+   //Method to handle submit button click
     onSubmit(product: ProductModel) {         
         this.AddProductData();
         this.refreshform = true;
         this.product = new ProductModel();
-        setTimeout(() => this.refreshform = false, 500);   
+        setTimeout(() => this.refreshform = false, 500);  
        
     }
     
+    //Service method to save products.
     AddProductData() {
         this.productservice.AddProduct(this.product)
             .subscribe(

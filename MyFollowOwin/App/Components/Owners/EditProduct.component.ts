@@ -8,15 +8,20 @@ import {ProductModel} from './../Shared/Models';
 })
 
 export class EditProduct implements OnInit, OnChanges {
-    Hide: boolean = false;
+
+    Hide: boolean = false;  //Variable to show/hide form
     products: Array<ProductModel>;
     errorMessage: string;
     product: ProductModel;
+
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
         this.product = new ProductModel();
-    }  
+    } 
+     
     ngOnInit() { }
+
+    //Invoked from property binding with parent component where input parameter is productobj
     @Input() productobj: ProductModel;
     ngOnChanges() {
         if ((this.productobj) != null) {
@@ -27,7 +32,8 @@ export class EditProduct implements OnInit, OnChanges {
         }
 
     }  
-       
+
+    //Method invoked on submit button clicked
     onSubmit(product: ProductModel) {
         this.Hide = true;         
         console.log(this.product);       
@@ -35,6 +41,7 @@ export class EditProduct implements OnInit, OnChanges {
         alert("Product Edited");                   
     }
 
+    //Service method to save edits
     EditProductData() {
         this.productservice.EditProduct(this.product)
             .subscribe(

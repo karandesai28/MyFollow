@@ -14,21 +14,34 @@ var Models_1 = require('./../Shared/Models');
 var AddMediaComponent = (function () {
     function AddMediaComponent(productservice) {
         this.productservice = productservice;
-        this.addmedia = false;
-        this.alert = false;
-        this.video = false;
-        this.pic = false;
-        this.responsecame = false;
+        this.addmedia = false; //Variable to show/hide form     
+        this.alert = false; //Variable to display message if media uploaded is greather than 5
+        this.responsecame = false; //Variable to show/hide message which tells user how many uploads are left.
+        this.video = false; //Variable to show hide inner linked video radio button element
+        this.pic = false; //Variable to show hide inner linked pic radio button element
+        this.close = false;
         this.addMedia = new Models_1.AddMedia();
         this.addMedias = new Array();
     }
     AddMediaComponent.prototype.ngOnInit = function () {
-        this.findMedia();
     };
+    //Method to handle submit button click
     AddMediaComponent.prototype.onSubmit = function () {
         this.findMedia();
     };
-    AddMediaComponent.prototype.SubmitMedia = function (addmedia) {
+    //Method invokes on successful response of FindMedia() service method
+    AddMediaComponent.prototype.submitMedia = function () {
+        this.responsecame = true;
+        if (this.count >= 5) {
+            this.addmedia = !this.addmedia;
+            this.alert = true;
+        }
+        else {
+            this.AddMedia(this.addMedia);
+        }
+    };
+    //Service method to save the attached media
+    AddMediaComponent.prototype.AddMedia = function (addmedia) {
         var _this = this;
         this.productservice.PostMedia(addmedia)
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () {
@@ -39,23 +52,31 @@ var AddMediaComponent = (function () {
             setTimeout(function () { return _this.addmedia = false; }, 0.1);
         });
     };
-    AddMediaComponent.prototype.UploadPic = function () {
-        this.pic = true;
-        this.video = false;
-        this.picDom = true;
-        this.addMedia.ProductMedia = Models_1.Media.Pictures;
+    //Method handling the click event of Pic Radio button
+    AddMediaComponent.prototype.UploadPic = function (event) {
+        if (event.target.checked == true) {
+            this.pic = true;
+            this.video = false;
+            this.picDom = true;
+            this.addMedia.ProductMedia = Models_1.Media.Pictures;
+        }
     };
-    AddMediaComponent.prototype.UploadVideo = function () {
-        this.videoDom = true;
-        this.pic = false;
-        this.video = true;
-        this.addMedia.ProductMedia = Models_1.Media.Videos;
+    //Method handling the click event of Video Radio Button
+    AddMediaComponent.prototype.UploadVideo = function (event) {
+        if (event.target.checked == true) {
+            this.videoDom = true;
+            this.pic = false;
+            this.video = true;
+            this.addMedia.ProductMedia = Models_1.Media.Videos;
+        }
     };
+    //Method handling the click event of Audio Radio button-PROTOTYPED-Demonstrational only!
     AddMediaComponent.prototype.UploadAudio = function () {
         this.pic = false;
         this.video = false;
         this.addMedia.ProductMedia = Models_1.Media.Audio;
     };
+    //Method invoke on Image Upload.
     AddMediaComponent.prototype.Selected = function (event) {
         var _this = this;
         var file = event.files[0];
@@ -66,6 +87,7 @@ var AddMediaComponent = (function () {
         reader.readAsDataURL(file);
         console.log(this.addMedia);
     };
+    //Service method to get number of attachments occured in current update. 
     AddMediaComponent.prototype.findMedia = function () {
         var _this = this;
         this.productservice.getCount()
@@ -74,14 +96,12 @@ var AddMediaComponent = (function () {
         }, function (err) {
             _this.errorMessage = err;
         }, function () {
-            if (_this.count > 5) {
-                _this.addmedia = !_this.addmedia;
-                _this.alert = true;
-            }
-            else {
-                _this.SubmitMedia(_this.addMedia);
-            }
+            _this.submitMedia();
         });
+    };
+    //Method to close the form if the user dont want to add more media.
+    AddMediaComponent.prototype.Close = function () {
+        this.close = true;
     };
     AddMediaComponent = __decorate([
         core_1.Component({

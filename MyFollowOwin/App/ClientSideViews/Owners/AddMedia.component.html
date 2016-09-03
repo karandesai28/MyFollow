@@ -1,9 +1,11 @@
-﻿<form *ngIf="!addmedia" (ngSubmit)="onSubmit(addMedia)" role="form" #AddForm="ngForm" novalidate>
+﻿<br/>
+<button [hidden]="close" (click)="Close()">Close</button>
+<form *ngIf="!addmedia" [hidden]="close" (ngSubmit)="onSubmit(addMedia)" role="form" #AddForm="ngForm" novalidate>
 
     <label for="Media">Select Media Types to upload:</label>
-
-    <div class="radio">
-        <label><input type="radio" (click)="UploadPic()" value="Pictures" id="Media" name="rb">Add Pics</label>
+    <h3 class="text-info" *ngIf="responsecame">You can add {{4-count}} medias more.</h3>
+        <div class="radio">
+        <label><input type="radio" (click)="UploadPic($event)" value="Pictures" id="Media" name="rb">Add Pics</label>
         <div class="form-inline" [hidden]="!pic" *ngIf="picDom">
             <label for="Media">Upload Image</label>
             <input class="form-control" type="file" (change)="Selected($event.target)" id="Media" #Path="ngForm" [(ngModel)]="addMedia.Path" ngControl="Path" accept="image/*" required />
@@ -11,7 +13,7 @@
     </div>
 
     <div class="radio">
-        <label><input type="radio" (click)="UploadVideo()" value="Videos" id="Media" name="rb">Add Video</label>
+        <label><input type="radio" (click)="UploadVideo($event)" value="Videos" id="Media" name="rb">Add Video</label>
         <div class="form-inline" [hidden]="!video" *ngIf="videoDom">
             <label for="Media">Add Youtube Link</label>
             <input class="form-control" type="text" id="Media" #Path="ngForm" [(ngModel)]="addMedia.Path" ngControl="Path" required pattern="^(https?\:\/\/)?(www\.)?(youtube\.com\/)?(embed\/).+$" />
@@ -22,12 +24,10 @@
     </div>
 
     <div class="radio">
-        <label><input type="radio" (click)="UploadAudio()" value="Audio" id="Media" name="rb">Upload Audio</label>
+        <label><input type="radio" (click)="UploadAudio($event)" value="Audio" id="Media" name="rb">Upload Audio</label>
     </div>
-    <br />
-    <!--<input type="checkbox" (click)="Yes($event)" name="Media" value="Media">Want to add again?<br>-->
-    <!--<p class="alert-info">If you check the checkbox, the form for adding media will re-open after submitting this form.</p><br />-->
+    <br />   
     <input class="btn btn-default" type="submit" value="Attach Media" />
+   
 </form>
-<p class="alert-danger" *ngIf="alert">You Have Already Uploaded 5 medias for this product. You Cannot Add More products!</p>
-
+<p class="alert alert-danger" *ngIf="alert">Sorry this media will not be saved.You Have Already Uploaded 5 medias for this product. You Cannot Add More products!</p>

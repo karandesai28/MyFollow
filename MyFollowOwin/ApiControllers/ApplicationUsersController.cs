@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Description;
 using MyFollowOwin.Models;
 
 namespace MyFollowOwin.Api_Controllers
@@ -19,10 +11,24 @@ namespace MyFollowOwin.Api_Controllers
 
         // GET: api/ApplicationUsers
         [HttpGet]
+        //Return the data of Users who has requested to become owner.
         [Route]
-        public IQueryable<ApplicationUser> GetApplicationUsers()
+        public IHttpActionResult GetApplicationUsers()
         {
-            return db.Users;
+            var PendingOwners = from records in db.Owners
+                                where records.OwnerStates == OwnerRequestStates.States.Pending
+                                select records.UserId;
+
+            var relatedUserRecords = from records in db.Users
+                                     from items in PendingOwners
+                                     where records.Id == items
+                                     select records;
+
+            var users = from values in relatedUserRecords
+                        select new { values.Name, values.Email };
+
+
+            return Ok(users);
         }
 
         

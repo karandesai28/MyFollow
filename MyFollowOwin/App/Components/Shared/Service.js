@@ -20,7 +20,7 @@ var Service = (function () {
         this.addedproductUrl = 'api/OwnerProductMappings/';
         this.updateUrl = 'api/ProductUpdates/';
         this.userUrl = 'api/ApplicationUsers/';
-        this.mediaUrl = 'api/AddMedias';
+        this.mediaUrl = 'api/AddMedias/';
     }
     Service.prototype.getPendingOwners = function () {
         return this.http.get(this.ownerUrl)
@@ -94,6 +94,10 @@ var Service = (function () {
     };
     Service.prototype.getCount = function () {
         return this.http.get(this.mediaUrl)
+            .map(function (response) { return response.json(); });
+    };
+    Service.prototype.getMedia = function (UpdateId) {
+        return this.http.get(this.mediaUrl + UpdateId)
             .map(function (response) { return response.json(); });
     };
     Service.prototype.PostMedia = function (media) {

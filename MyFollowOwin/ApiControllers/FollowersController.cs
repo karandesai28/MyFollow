@@ -21,7 +21,8 @@ namespace MyFollowOwin.Api_Controllers
         
         [HttpGet]
         [Route]
-        // GET: api/Followers/5
+        // GET: api/Followers/
+        //Returns the list of products logged in user is following.
         [ResponseType(typeof(Followers))]
         public IHttpActionResult GetFollowers()
         {
@@ -34,42 +35,8 @@ namespace MyFollowOwin.Api_Controllers
             }
             return Ok(record);
         }
-
-        // PUT: api/Followers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutFollowers(int id, Followers followers)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != followers.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(followers).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FollowersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
+        
+        //Saves the followers in Followers table
         // POST: api/Followers/S
         [ResponseType(typeof(Followers))]
         [Route]
@@ -99,6 +66,7 @@ namespace MyFollowOwin.Api_Controllers
             return CreatedAtRoute("DefaultApi", new { id = followers.Id }, followers);
         }
 
+        //On Unfollow, deleting the entry from Followers table.
         // DELETE: api/Followers/5
         [HttpDelete]
         [Route]

@@ -21,17 +21,19 @@ export class OwnerComponent implements OnInit {
        this.owner = new OwnerModel();      
    }
  
-   hideownerform: Boolean=false;
+   hideownerform: Boolean=false;  //Variable to hide the form and display message
    
    ngOnInit() {
              
    } 
 
-  
+   //Handles form submission
    onSubmit(owner: OwnerModel) { 
        this.hideownerform = true;       
         this.AddOwnerData();           
    }
+
+    //Service method to post request of owner
     AddOwnerData() {
         this.ownerservice.AddOwner(this.owner)
             .subscribe(

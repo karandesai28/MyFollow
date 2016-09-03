@@ -19,13 +19,14 @@ var AddedProducts = (function () {
     function AddedProducts(productservice) {
         this.productservice = productservice;
         this.productplatform = Models_1.Platform;
-        this.hidebutton = [];
-        this.update = [];
-        this.urowner = [];
+        this.hidebutton = []; //Array whose value will decide the 'follow' or 'unfollow' button to stay on view.
+        this.update = []; //Variable to show/hide Update button from view
+        this.urowner = []; //Array whose value will print "Your Product" for owners viewing their own products in product list
         this.updateclicked = false;
-        this.Click = false;
+        //Method to handle Edit button click
         this.Edit = false;
-        this.Update = false;
+        //Method to handle update button click
+        this.Update = false; //Boolean variable to invoke update form component
         this.products = new Array();
         this.product = new Models_1.ProductModel();
         this.productupdate = new Models_1.ProductUpdate();
@@ -45,17 +46,16 @@ var AddedProducts = (function () {
             console.log("first time loading");
         }
     };
-    AddedProducts.prototype.clicked = function () {
-        this.Click = true;
-    };
     AddedProducts.prototype.EditClicked = function (Product) {
         this.Edit = true;
         this.product = Product;
     };
+    //Method to handle Delete button click
     AddedProducts.prototype.DeleteClicked = function (ProductId) {
         this.product.Id = ProductId;
         this.DeleteProducts();
     };
+    //Method to handle View Update button click
     AddedProducts.prototype.ViewUpdateClicked = function (ProductId) {
         this.product.Id = ProductId;
         this.ProductId = ProductId;
@@ -67,10 +67,24 @@ var AddedProducts = (function () {
         this.Update = true;
         this.productupdate.ProductId = ProductId;
     };
+    //Method to handle Follow Button Click
+    AddedProducts.prototype.Follow = function (productobj) {
+        this.hidebutton[productobj.Id] = true;
+        this.update[productobj.Id] = true;
+        this.FollowProducts(productobj);
+        this.product = productobj;
+    };
+    //Method to handle Unfollow button click
+    AddedProducts.prototype.Unfollow = function (productobj) {
+        this.hidebutton[productobj.Id] = false;
+        this.UnfollowFollowers(productobj.Id);
+        this.update[productobj.Id] = false;
+    };
     AddedProducts.prototype.ngOnInit = function () {
         this.getProducts();
         this.getProductsToFollow();
     };
+    //Service method to get Products.
     AddedProducts.prototype.getProducts = function () {
         var _this = this;
         this.productservice.getAddedProduct()
@@ -83,6 +97,7 @@ var AddedProducts = (function () {
             _this.getProductsToFollow();
         });
     };
+    //Service method to delete products
     AddedProducts.prototype.DeleteProducts = function () {
         var _this = this;
         this.productservice.DeleteProduct(this.product)
@@ -92,6 +107,7 @@ var AddedProducts = (function () {
             _this.getProducts();
         });
     };
+    //Service method to get list of products
     AddedProducts.prototype.getProductsToFollow = function () {
         var _this = this;
         var displayOwner = this.productservice.getProduct()
@@ -111,6 +127,7 @@ var AddedProducts = (function () {
             }
         });
     };
+    //Service method to get the records of followed products of logged in user
     AddedProducts.prototype.getFollowProducts = function () {
         var _this = this;
         this.productservice.getFollowBit()
@@ -126,13 +143,7 @@ var AddedProducts = (function () {
             }
         });
     };
-    AddedProducts.prototype.Follow = function (productobj) {
-        //this.follower.StatusBit = true;
-        this.hidebutton[productobj.Id] = true;
-        this.update[productobj.Id] = true;
-        this.FollowProducts(productobj);
-        this.product = productobj;
-    };
+    //Service Method invoked on click of follow button
     AddedProducts.prototype.FollowProducts = function (productobj) {
         var _this = this;
         this.productservice.FollowProduct(productobj)
@@ -141,11 +152,7 @@ var AddedProducts = (function () {
             _this.getProducts();
         });
     };
-    AddedProducts.prototype.Unfollow = function (productobj) {
-        this.hidebutton[productobj.Id] = false;
-        this.UnfollowFollowers(productobj.Id);
-        this.update[productobj.Id] = false;
-    };
+    //Service method invoked on click of Unfollow button
     AddedProducts.prototype.UnfollowFollowers = function (productId) {
         var _this = this;
         this.productservice.DeleteFollower(productId)

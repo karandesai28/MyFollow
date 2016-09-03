@@ -13,10 +13,9 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 export class ProductList implements OnInit{
    
-    ProductId: number;
-    hidebutton: any[] = []; 
-    urowner: any[] = [];
-    len: number;
+    ProductId: number;          //Variable which invokes property binding and ngOnChanges in CRUD components
+    hidebutton: any[] = [];     //Array whose value will decide the 'follow' or 'unfollow' button to stay on view.
+    urowner: any[] = [];        //Array whose value will print "Your Product" for owners viewing their own products in product list
     productplatform = Platform;
     products: Array<ProductModel>;    
     errorMessage: string;
@@ -24,8 +23,7 @@ export class ProductList implements OnInit{
     follower: Followers;
     followers: Array<Followers>;
     addedproduct: ProductModel;
-    addedproducts: Array<ProductModel>;
-       
+    addedproducts: Array<ProductModel>;       
 
     constructor(private productservice: Service) {
         this.products = new Array<ProductModel>();
@@ -41,11 +39,11 @@ export class ProductList implements OnInit{
        
     }
    
-    update: any[] = [];
+    update: any[] = [];         //Variable to show/hide Update button from view
 
-   
-    Follow(productobj: ProductModel) {
-        //this.follower.StatusBit = true;
+
+    //Method which handles follow button click
+    Follow(productobj: ProductModel) {       
         this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
@@ -53,21 +51,23 @@ export class ProductList implements OnInit{
     }
 
   
-
+    //Method which handles unfollow button click
     Unfollow(productobj: ProductModel) {       
         this.hidebutton[productobj.Id] = false;
         this.UnfollowFollowers(productobj.Id);
         this.update[productobj.Id] = false;      
     }
 
-    updateclicked: boolean = false;
+    updateclicked: boolean = false;         //Variable which invoke ViewUpdate's component selector on true.
+
+    //Method which handles View update button
     ProductUpdates(productobj: ProductModel) {
         this.updateclicked = true;
         this.ProductId = productobj.Id; 
               
     }
     
-
+    //Service method which gets product list
     getProducts() {
         var displayOwner = this.productservice.getProduct()
             .subscribe((products) => {
@@ -80,6 +80,7 @@ export class ProductList implements OnInit{
                 
     }
 
+    //If user is logged in as owner, this service method will give his added products as "Your Product" in list
     getAddedProducts() {
         this.productservice.getAddedProduct()
             .subscribe((products) => {
@@ -100,6 +101,7 @@ export class ProductList implements OnInit{
             );
     }
 
+    //Service method invoked when user clicks follow button
     FollowProducts(productobj: ProductModel) {        
         this.productservice.FollowProduct(productobj)
             .subscribe(
@@ -111,7 +113,7 @@ export class ProductList implements OnInit{
             })  
     }
 
-
+    //Service method invoked to get the earlier records of followed products of current logged in users 
     getFollowProducts() {
         this.productservice.getFollowBit()
             .subscribe((followers) => {
@@ -122,8 +124,7 @@ export class ProductList implements OnInit{
             }, err => {
                 this.errorMessage = err;
             },
-            () => {
-                //alert(this.followers);
+            () => {               
                 for (let follower of this.followers) {               
                     this.hidebutton[follower.ProductId] = true;
                     this.update[follower.ProductId] = true;
@@ -131,6 +132,8 @@ export class ProductList implements OnInit{
             });
     }
 
+
+    //Service method invoked when unfollow button is clicked.
     UnfollowFollowers(productId: number) {
         this.productservice.DeleteFollower(productId)
             .subscribe(function (response) {

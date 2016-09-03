@@ -12,9 +12,11 @@ import {AddMediaComponent} from './../Owners/AddMedia.Component';
 })
 
 export class UpdateProduct implements OnInit {
-    Click: boolean = true;
-    Hide: boolean = false;
-    media: Media;
+
+    Click: boolean = true;  //Variable to show hide form
+    Hide: boolean = false;  //Variable to hide form on submit button click
+
+    media: Media;           
     errorMessage: string;
     productupdate: ProductUpdate;
     productupdates: Array<ProductUpdate>;
@@ -31,7 +33,10 @@ export class UpdateProduct implements OnInit {
     ngOnInit() {
 
     }
-    showmediaform: boolean;
+
+    showmediaform: boolean; //Variable to invoke media form component
+
+    //Method that handles submit button click
     @Input() productId: number;
     onSubmit(productupdate: ProductUpdate) {
         this.productupdate.ProductId = this.productId;
@@ -43,7 +48,7 @@ export class UpdateProduct implements OnInit {
         setTimeout(() => this.Click = true, 0.5);
     }
 
-
+    //Service method that saves updates
     UpdateProducts() {
         this.productservice.UpdateProduct(this.productupdate)
             .subscribe(
@@ -53,47 +58,12 @@ export class UpdateProduct implements OnInit {
     }
 
    
-    addmedia: boolean=false;
+    addmedia: boolean=false;    //Variable that saves state of user's permission of whether he wants to add media or not
+
+    //Method which handles the checkbox click event that ask users whether they want to attach media or not
     Yes(value) {
         if (value.target.checked==true) {
             this.addmedia = true;
         }
-    }
-    //picDom: boolean;
-    //videoDom: boolean;
-    //video: boolean = false;
-    //pic: boolean = false;
-    //UploadPic() {
-    //    this.pic = true;
-    //    this.video = false;
-    //    this.picDom = true;
-    //    this.addMedia.ProductMedia = Media.Pictures;
-    //}
-
-
-    //UploadVideo() {
-    //    this.videoDom = true;
-    //    this.pic = false;
-    //    this.video = true;       
-    //    this.addMedia.ProductMedia = Media.Videos;
-    //}
-
-    //UploadAudio() {
-    //    this.pic = false;
-    //    this.video = false;        
-    //    this.addMedia.ProductMedia = Media.Audio;
-    //    console.log(this.productupdate);
-    //}
-    
-    //Selected(event: HTMLInputElement) {  
-        
-    //        let file = event.files[0];
-    //        var reader = new FileReader();
-    //        reader.onload = (e) => {
-    //            this.addMedia = reader.result;
-    //        }        
-    //        reader.readAsDataURL(file);
-    //        console.log(this.addMedia);           
-    //}
-    
+    }   
 }

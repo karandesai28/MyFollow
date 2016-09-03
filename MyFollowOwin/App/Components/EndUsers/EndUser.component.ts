@@ -11,5 +11,5 @@ import {OwnerComponent} from './../EndUsers/OwnerForm.component';
 })
 
 export class EndUserComponent {
-   
+   //Master component whose template file contains button elements of routes.
 }   

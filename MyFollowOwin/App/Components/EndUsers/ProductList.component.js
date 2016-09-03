@@ -16,11 +16,11 @@ var router_1 = require('@angular/router');
 var ProductList = (function () {
     function ProductList(productservice) {
         this.productservice = productservice;
-        this.hidebutton = [];
-        this.urowner = [];
+        this.hidebutton = []; //Array whose value will decide the 'follow' or 'unfollow' button to stay on view.
+        this.urowner = []; //Array whose value will print "Your Product" for owners viewing their own products in product list
         this.productplatform = Models_1.Platform;
-        this.update = [];
-        this.updateclicked = false;
+        this.update = []; //Variable to show/hide Update button from view
+        this.updateclicked = false; //Variable which invoke ViewUpdate's component selector on true.
         this.products = new Array();
         this.product = new Models_1.ProductModel();
         this.follower = new Models_1.Followers();
@@ -31,22 +31,25 @@ var ProductList = (function () {
     ProductList.prototype.ngOnInit = function () {
         this.getProducts();
     };
+    //Method which handles follow button click
     ProductList.prototype.Follow = function (productobj) {
-        //this.follower.StatusBit = true;
         this.hidebutton[productobj.Id] = true;
         this.update[productobj.Id] = true;
         this.FollowProducts(productobj);
         this.product = productobj;
     };
+    //Method which handles unfollow button click
     ProductList.prototype.Unfollow = function (productobj) {
         this.hidebutton[productobj.Id] = false;
         this.UnfollowFollowers(productobj.Id);
         this.update[productobj.Id] = false;
     };
+    //Method which handles View update button
     ProductList.prototype.ProductUpdates = function (productobj) {
         this.updateclicked = true;
         this.ProductId = productobj.Id;
     };
+    //Service method which gets product list
     ProductList.prototype.getProducts = function () {
         var _this = this;
         var displayOwner = this.productservice.getProduct()
@@ -57,6 +60,7 @@ var ProductList = (function () {
             _this.errorMessage = err;
         }, function () { });
     };
+    //If user is logged in as owner, this service method will give his added products as "Your Product" in list
     ProductList.prototype.getAddedProducts = function () {
         var _this = this;
         this.productservice.getAddedProduct()
@@ -76,6 +80,7 @@ var ProductList = (function () {
             }
         });
     };
+    //Service method invoked when user clicks follow button
     ProductList.prototype.FollowProducts = function (productobj) {
         var _this = this;
         this.productservice.FollowProduct(productobj)
@@ -84,6 +89,7 @@ var ProductList = (function () {
             _this.getProducts();
         });
     };
+    //Service method invoked to get the earlier records of followed products of current logged in users 
     ProductList.prototype.getFollowProducts = function () {
         var _this = this;
         this.productservice.getFollowBit()
@@ -93,7 +99,6 @@ var ProductList = (function () {
         }, function (err) {
             _this.errorMessage = err;
         }, function () {
-            //alert(this.followers);
             for (var _i = 0, _a = _this.followers; _i < _a.length; _i++) {
                 var follower = _a[_i];
                 _this.hidebutton[follower.ProductId] = true;
@@ -101,6 +106,7 @@ var ProductList = (function () {
             }
         });
     };
+    //Service method invoked when unfollow button is clicked.
     ProductList.prototype.UnfollowFollowers = function (productId) {
         var _this = this;
         this.productservice.DeleteFollower(productId)

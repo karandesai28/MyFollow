@@ -16,16 +16,18 @@ var router_1 = require('@angular/router');
 var OwnerComponent = (function () {
     function OwnerComponent(ownerservice) {
         this.ownerservice = ownerservice;
-        this.hideownerform = false;
+        this.hideownerform = false; //Variable to hide the form and display message
         this.owners = new Array();
         this.owner = new Models_1.OwnerModel();
     }
     OwnerComponent.prototype.ngOnInit = function () {
     };
+    //Handles form submission
     OwnerComponent.prototype.onSubmit = function (owner) {
         this.hideownerform = true;
         this.AddOwnerData();
     };
+    //Service method to post request of owner
     OwnerComponent.prototype.AddOwnerData = function () {
         this.ownerservice.AddOwner(this.owner)
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });

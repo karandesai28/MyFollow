@@ -11,5 +11,7 @@ import {AddedProducts} from './../Owners/AddedProducts.component';
 })
 
 export class OwnerComponent {
+
+    //Master component whose template file contains button elements of routes.
    
 }   

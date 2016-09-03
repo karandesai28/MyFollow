@@ -4,7 +4,7 @@ import {OwnerComponent} from './../EndUsers/OwnerForm.component';
 import {AddedProducts} from './../Owners/AddedProducts.component';
 import {AddProduct} from './../Owners/AddProduct.component';
 
-
+//Routes for End Users.
 const userroutes: RouterConfig = [
     {
         path: 'Home/Index',
@@ -21,6 +21,7 @@ export const appUserRoutes = [
     provideRouter(userroutes)
 ];
 
+//Routes for Owners.
 const ownerroutes: RouterConfig = [
     {
         path: 'Owner/Index',

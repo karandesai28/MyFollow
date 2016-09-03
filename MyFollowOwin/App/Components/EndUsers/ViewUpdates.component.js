@@ -17,9 +17,12 @@ var ViewUpdates = (function () {
     function ViewUpdates(productservice, sanitizer) {
         this.productservice = productservice;
         this.sanitizer = sanitizer;
-        this.show = false;
         this.productplatform = Models_1.Platform;
+        //Method to display updates and call media if that update had media.
         this.showVideo = false;
+        this.i = 0;
+        //Service method to get medias if any.
+        this.length = 0;
         this.products = new Array();
         this.product = new Models_1.ProductModel();
         this.productupdate = new Models_1.ProductUpdate();
@@ -37,35 +40,38 @@ var ViewUpdates = (function () {
             console.log("Invalid");
         }
     };
+    //Invokes when the response comes from getUpdates() and getProducts() methods.
     ViewUpdates.prototype.checkUpdates = function (productId, update) {
         if (update != null) {
             this.ViewData();
         }
         else {
             this.getProducts(this.productId);
-            this.message = "Owner has not added any updates for this product yet!";
-            this.show = true;
         }
     };
-    ViewUpdates.prototype.ngOnDestroy = function () { console.log("destroyed"); };
     ViewUpdates.prototype.ngOnInit = function () {
         this.videoUrl =
             this.sanitizer.bypassSecurityTrustResourceUrl(this.addMedia.Path);
     };
-    ;
     ViewUpdates.prototype.ViewData = function () {
         this.product.Id = this.productId;
         this.getProducts(this.productId);
         this.getUpdates(this.productId);
-        if (this.addMedia.ProductMedia == Models_1.Media.Videos) {
-            this.showVideo = true;
+        for (this.i = 0; this.i < length; this.i++) {
+            if (this.addMedias[this.i].ProductMedia == Models_1.Media.Videos) {
+                this.showVideo = true;
+            }
+            else if (this.addMedias[this.i].ProductMedia == Models_1.Media.Pictures) {
+                this.showVideo = false;
+            }
         }
         this.productId = null;
-        this.ngOnDestroy();
     };
+    //Getting the link from HTML view, by passing security.
     ViewUpdates.prototype.allowVideo = function (productmedia) {
         return this.sanitizer.bypassSecurityTrustResourceUrl(productmedia);
     };
+    //Service method to get product by ID.
     ViewUpdates.prototype.getProducts = function (productId) {
         var _this = this;
         this.productservice.getProductById(productId)
@@ -74,17 +80,31 @@ var ViewUpdates = (function () {
             _this.product = products;
         }, function (err) {
             _this.errorMessage = err;
-        });
+        }, function () { });
     };
+    //Service method to get Updates corresponding to product Id.
     ViewUpdates.prototype.getUpdates = function (productId) {
         var _this = this;
         this.productservice.getProductUpdates(productId)
             .subscribe(function (productupdates) {
             _this.productupdate = productupdates;
+            _this.getMedias(productupdates.Id);
         }, function (err) {
             _this.errorMessage = err;
         }, function () {
             console.log("Update Found");
+        });
+    };
+    ViewUpdates.prototype.getMedias = function (updateId) {
+        var _this = this;
+        this.productservice.getMedia(updateId)
+            .subscribe(function (medias) {
+            _this.addMedias = medias;
+        }, function (err) {
+            _this.errorMessage = err;
+        }, function () {
+            _this.length = _this.getMedias.length;
+            console.log("Media Found");
         });
     };
     __decorate([

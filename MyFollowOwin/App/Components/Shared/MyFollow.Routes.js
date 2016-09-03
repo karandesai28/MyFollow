@@ -4,6 +4,7 @@ var ProductList_component_1 = require('./../EndUsers/ProductList.component');
 var OwnerForm_component_1 = require('./../EndUsers/OwnerForm.component');
 var AddedProducts_component_1 = require('./../Owners/AddedProducts.component');
 var AddProduct_component_1 = require('./../Owners/AddProduct.component');
+//Routes for End Users.
 var userroutes = [
     {
         path: 'Home/Index',
@@ -17,6 +18,7 @@ var userroutes = [
 exports.appUserRoutes = [
     router_1.provideRouter(userroutes)
 ];
+//Routes for Owners.
 var ownerroutes = [
     {
         path: 'Owner/Index',

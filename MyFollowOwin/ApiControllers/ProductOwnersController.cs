@@ -54,6 +54,7 @@ namespace MyFollowOwin.Api_Controllers
 
 
         // PUT: api/ProductOwners1/5
+        //Changes the request states based on admin's approve/reject. If approved, role of user changes to owner.
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route]

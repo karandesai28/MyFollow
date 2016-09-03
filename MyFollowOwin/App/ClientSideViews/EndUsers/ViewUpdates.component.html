@@ -32,7 +32,7 @@
 </div>
     
 
-<div [hidden]="show" class="container">
+<div [hidden]="show" *ngIf="productupdate.Title!=null" class="container">
     <h2>Recent Product Update:</h2>
     <p class="lead">The product was created on:{{productupdate.CreateDate|date:'fullDate'}} at {{productupdate.CreateDate|date:'shortTime'}}</p>
 
@@ -41,15 +41,19 @@
         <dd>{{productupdate.Title}}</dd>
 
         <dt>Details</dt>
-        <dd>{{productupdate.Details}}</dd>
-
-        <dt>Media</dt>
-        <dd>{{productupdate.Media}}</dd>
+        <dd>{{productupdate.Details}}</dd>        
      
     </dl>
-    <img *ngIf="!showVideo" src={{productupdate.Media}} /> 
-    <iframe  *ngIf="showVideo" width="560" height="315" [src]='allowVideo(productupdate.Media)' frameborder="0" allowfullscreen></iframe>
-    
+    <div>
+        <div *ngFor='let media of addMedias'>
+            <div style="float:right;clear:both" *ngIf="media.ProductMedia==0">
+                <img class="img-thumbnail img-responsive" src={{media.Path}} /><br/><br/>
+            </div>
+            <div style="float:left;clear:both" *ngIf="media.ProductMedia==1">        
+                <iframe class="glyphicon-hd-video" width="560" height="315" [src]='allowVideo(media.Path)' frameborder="0" allowfullscreen></iframe><br/><br/>
+            </div>
+        </div>    
+    </div>
 </div>
 
-<div class="lead" [hidden]="!show">{{message}}</div>
+<div class="lead alert text-info" *ngIf="productupdate.Title==null">Owner has not updated this product!</div>

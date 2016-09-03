@@ -30,11 +30,6 @@ var CommonProperty = (function () {
     return CommonProperty;
 }());
 exports.CommonProperty = CommonProperty;
-var Address = (function () {
-    function Address() {
-    }
-    return Address;
-}());
 var UserModel = (function () {
     function UserModel() {
     }

@@ -16,20 +16,10 @@ export class CommonProperty {
     public CreateDate: Date;
     public ModifiedDate: Date; 
 }
-class Address {
-    public Street1: string;
-    public Street2: string;
-    public City: string;
-    public State: string;
-    public Country: string;
-    public Pin: number;
-    public ContactNo: number;
-}
 
 export class UserModel {
     public Id: string;
-    public Name: string;
-    public Address: Address;
+    public Name: string;  
     public Email: string;
 }
 

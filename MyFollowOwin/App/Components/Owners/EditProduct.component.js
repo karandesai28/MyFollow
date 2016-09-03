@@ -14,7 +14,7 @@ var Models_1 = require('./../Shared/Models');
 var EditProduct = (function () {
     function EditProduct(productservice) {
         this.productservice = productservice;
-        this.Hide = false;
+        this.Hide = false; //Variable to show/hide form
         this.products = new Array();
         this.product = new Models_1.ProductModel();
     }
@@ -27,12 +27,14 @@ var EditProduct = (function () {
             console.log("First time loading");
         }
     };
+    //Method invoked on submit button clicked
     EditProduct.prototype.onSubmit = function (product) {
         this.Hide = true;
         console.log(this.product);
         this.EditProductData();
         alert("Product Edited");
     };
+    //Service method to save edits
     EditProduct.prototype.EditProductData = function () {
         this.productservice.EditProduct(this.product)
             .subscribe(function (response) { console.log("Success Response" + response); }, function (error) { console.log("Error happened" + error); }, function () { });
